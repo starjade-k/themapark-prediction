@@ -1,0 +1,13 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": false,
+    "python.linting.pydocstyleEnabled": false,
+    "python.linting.pylintArgs": [
+        "--init-hook",
+        "import sys; sys.path.append('/home/big/study/corona_etl')",
+        "--rcfile",
+        "pylint.config",
+        "--disable",
+        "missing-docstring"
+    ]
+}
