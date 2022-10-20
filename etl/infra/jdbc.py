@@ -4,14 +4,14 @@ from infra.spark_session import get_spark_session
 class DataWarehouse(Enum):
     URL ='jdbc:oracle:thin:@themapark_high?TNS_ADMIN=/home/big/pj/db/Wallet_themapark'
     PROPS={
-        'user':'dw_de'
+        'user':'dw_themapark'
        ,'password':'123qwe!@#QWE'
     }
 
 class DataMart(Enum):
     URL ='jdbc:oracle:thin:@themapark_high?TNS_ADMIN=/home/big/pj/db/Wallet_themapark'
     PROPS={
-        'user':'dm_de'
+        'user':'dm_themapark'
        ,'password':'123qwe!@#QWE'
     }
 

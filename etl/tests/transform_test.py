@@ -4,15 +4,17 @@ from datajob.etl.extract.corona_vaccine import CoronaVaccineExtractor
 from datajob.etl.transform.corona_patient import CoronaPatientTransformer
 from datajob.etl.transform.corona_vaccine import CoronaVaccineTransformer
 from datajob.etl.transform.loc import LocTransformer
+from datajob.etl.transform.navi_search import NaviSearchTransformer
+from datajob.etl.transform.themepark_event import ThemeParkEventTransformer
 
 
 class MTest(unittest.TestCase):
 
     def test1(self):
-        CoronaPatientTransformer.transform()
+        NaviSearchTransformer.transform()
 
     def test2(self):
-        CoronaVaccineTransformer.transform()
+        ThemeParkEventTransformer.transform()
 
     def test3(self):
         LocTransformer.transform()

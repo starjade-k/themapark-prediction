@@ -37,15 +37,15 @@ if __name__ == "__main__":
 
     # main.py 작업(extract, transform, datamart) 저장할 위치(테이블)
     # 매개변수 2개
-    if len(args) != 3:
-        raise Exception('2개의 전달인자가 필요합니다.')
+    # if len(args) != 3:
+    #     raise Exception('2개의 전달인자가 필요합니다.')
 
-    if args[1] not in works.keys():
-        raise Exception('첫번째 전달인자가 이상함 >> ' + str(works.keys()))
+    # if args[1] not in works.keys():
+    #     raise Exception('첫번째 전달인자가 이상함 >> ' + str(works.keys()))
 
-    if args[2] not in works[args[1]].keys():
-        raise Exception('두번째 전달인자가 이상함 >> ' + str(works[args[1]].keys()))
+    # if args[2] not in works[args[1]].keys():
+    #     raise Exception('두번째 전달인자가 이상함 >> ' + str(works[args[1]].keys()))
 
-    work = works[args[1]][args[2]]
-    work()
+    # work = works[args[1]][args[2]]
+    # work()
   
