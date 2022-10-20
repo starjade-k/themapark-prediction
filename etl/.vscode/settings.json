@@ -1,6 +1,6 @@
 {
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
     "python.linting.pydocstyleEnabled": false,
     "python.linting.pylintArgs": [
         "--init-hook",
@@ -9,5 +9,6 @@
         "pylint.config",
         "--disable",
         "missing-docstring"
-    ]
+    ],
+    "python.linting.pylamaEnabled": true
 }
