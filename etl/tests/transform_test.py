@@ -1,17 +1,15 @@
 import unittest
-from datajob.etl.transform.transform_dust import DustTransformer
-
-from datajob.etl.transform.transform_weather import WeatherTransformer
-
+from datajob.etl.transform.navi_search import NaviSearchTransformer
+from datajob.etl.transform.themepark_event import ThemeParkEventTransformer
 
 
 class MTest(unittest.TestCase):
 
     def test1(self):
-        WeatherTransformer.transform()
+        NaviSearchTransformer.transform()
 
     def test2(self):
-        DustTransformer.transform()
+        ThemeParkEventTransformer.transform()
 
 
 
