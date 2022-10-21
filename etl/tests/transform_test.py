@@ -1,5 +1,6 @@
 import unittest
 from datajob.etl.transform.navi_search import NaviSearchTransformer
+from datajob.etl.transform.past_airdata import PastAirDataTransformer
 from datajob.etl.transform.themepark_event import ThemeParkEventTransformer
 
 
@@ -12,7 +13,7 @@ class MTest(unittest.TestCase):
         ThemeParkEventTransformer.transform()
 
     def test3(self):
-        LocTransformer.transform()
+        PastAirDataTransformer.transform()
 
 
 

@@ -27,11 +27,10 @@ class EventSeoulParkExtractor:
         log_dict_base = cls.__create_log_dict(base_params)
         mores = []
         mh_nos = []
-        try:
+        try:  # 각 행사들의 페이지 번호 가져옴
             for i in range(1, 8):
                 base_params['pageIndex'] = str(i)
                 response = execute_rest_api('get', cls.BASE_URL, {}, base_params)
-                #response = requests.get(base_url, params=base_params)
                 bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
                 mores += bs_obj.findAll('a', {'class': 'more-button'})
             for more in mores:
@@ -40,12 +39,11 @@ class EventSeoulParkExtractor:
             cls.__dump_log(log_dict_base, e)
         
         log_dict_detail = cls.__create_log_dict(detail_params)
-        try:
+        try:   # 각 행사 페이지에서 행사명과 날짜 가져옴
             seoulpark = set()
             for i in range(len(mh_nos)):
                 detail_params['mh_no'] = mh_nos[i]
                 response = execute_rest_api('get', cls.DETAIL_URL, {}, detail_params)
-                #response = requests.get(detail_url, params=detail_params)
                 bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
                 title = bs_obj.find('div', {'class': 'view-header'}).find('h5').text.replace('\t', '').replace('\r\n', '')
                 tmp_date = bs_obj.find('div', {'class': 'view-header'}).find('li').text.replace('\t', '').replace('\r\n', '')
