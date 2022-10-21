@@ -1,21 +1,18 @@
 import unittest
-from datajob.etl.extract.corona_api import CoronaApiExtractor
-from datajob.etl.extract.corona_vaccine import CoronaVaccineExtractor
-from datajob.etl.transform.corona_patient import CoronaPatientTransformer
-from datajob.etl.transform.corona_vaccine import CoronaVaccineTransformer
-from datajob.etl.transform.loc import LocTransformer
+from datajob.etl.transform.transform_dust import DustTransformer
+
+from datajob.etl.transform.transform_weather import WeatherTransformer
+
 
 
 class MTest(unittest.TestCase):
 
     def test1(self):
-        CoronaPatientTransformer.transform()
+        WeatherTransformer.transform()
 
     def test2(self):
-        CoronaVaccineTransformer.transform()
+        DustTransformer.transform()
 
-    def test3(self):
-        LocTransformer.transform()
 
 
 

@@ -1,14 +1,16 @@
 import unittest
-from datajob.etl.extract.corona_api import CoronaApiExtractor
-from datajob.etl.extract.corona_vaccine import CoronaVaccineExtractor
+from datajob.etl.extract.extract_dust import DustExtractor
+from datajob.etl.extract.extract_weather import WeatherExtractor
+
 
 class MTest(unittest.TestCase):
 
     def test1(self):
-        CoronaApiExtractor.extract_data()
+        WeatherExtractor.extract_data()
 
     def test2(self):
-        CoronaVaccineExtractor.extract_data()
+        DustExtractor.extract_data()
+
 
 
 if __name__ == "__main__":
