@@ -37,13 +37,14 @@ class PastAirDataExtractor:
 
             data = cls.__append_202206_data(data, cls.STATION_NAME[i])
         
-            df = pd.DataFrame(list(set(data)), columns=['STD_DATE', 'PM10', 'PM2.5'])
+            df = pd.DataFrame(list(set(data)), columns=['STD_DATE', 'PM10', 'PM25'])
             df = df.sort_values(by=['STD_DATE'])  # 날짜순으로 정렬
             print(df)
             # hdfs에 쓰기
             file_name = cls.FILE_DIR + cls.STATION_NAME[i] + '_air_2017_202206.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
-                df.to_csv(writer, header=['STD_DATE', 'PM10', 'PM2.5'], index=False)
+                df.to_csv(writer, header=['STD_DATE', 'PM10', 'PM25'], index=False)
+
 
     # 2022년 6월 데이터 수동으로 추가
     @classmethod
@@ -67,7 +68,7 @@ class PastAirDataExtractor:
             loc_pm25 = cls.chuncheon_202206_pm25    
 
         k = 0
-        for i in range(141, 111, -1):  # 20220601 ~ 20220630
+        for i in range(142, 112, -1):  # 20220601 ~ 20220630
             tmp_date = cal_std_day(i)
             date = cls.__create_date(tmp_date[:4], tmp_date[4:6], tmp_date[6:8])
             tmp_data = (date, loc_pm10[k], loc_pm25[k])
