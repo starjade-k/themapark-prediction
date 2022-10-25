@@ -5,7 +5,7 @@ from infra.jdbc import DataWarehouse, find_data, save_data
 from infra.spark_session import get_spark_session
 
 
-class NaviSearchTransformer:
+class PastNaviSearchTransformer:
     FILE_DIR = '/theme_park/navigation/'
     @classmethod
     def transform(cls):

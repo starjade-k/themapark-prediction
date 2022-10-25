@@ -3,6 +3,8 @@ from infra.hdfs_client import get_client
 from infra.util import cal_std_day, cal_std_month, execute_rest_api
 
 
+# 131201_별양동_경기 과천시 코오롱로 53 문원초등학교_199422_435759
+
 class PastAirDataExtractor:
     URL = 'https://www.airkorea.or.kr/web/pollution/getPastChart'
     FILE_DIR = '/theme_park/past_weather/'
@@ -68,7 +70,7 @@ class PastAirDataExtractor:
             loc_pm25 = cls.chuncheon_202206_pm25    
 
         k = 0
-        for i in range(142, 112, -1):  # 20220601 ~ 20220630
+        for i in range(146, 116, -1):  # 20220601 ~ 20220630
             tmp_date = cal_std_day(i)
             date = cls.__create_date(tmp_date[:4], tmp_date[4:6], tmp_date[6:8])
             tmp_data = (date, loc_pm10[k], loc_pm25[k])
