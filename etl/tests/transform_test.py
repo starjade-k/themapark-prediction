@@ -4,10 +4,9 @@ from datajob.etl.transform.past_navi_search import PastNaviSearchTransformer
 from datajob.etl.transform.past_airdata import PastAirDataTransformer
 from datajob.etl.transform.past_themepark_event import PastThemeParkEventTransformer
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
-from datajob.etl.transform.transform_event_childpark import EventChildParkTransformer
-from datajob.etl.transform.transform_event_seoulpark import EventSeoulParkTransformer
 
 
+# python3 -W ignore -m unittest tests.transform_test.MTest.test1
 class MTest(unittest.TestCase):
 
     def test1(self):

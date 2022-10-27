@@ -1,7 +1,11 @@
 import sys
 from datajob.datamart.pre_themepark_event import PreThemeParkEvent
+from datajob.datamart.themepark_hol_fac import ThemeparkHolFac
+from datajob.datamart.themepark_time import ThemeparkTime
 from datajob.etl.extract.event_childpark import EventChildParkExtractor
 from datajob.etl.extract.event_seoulpark import EventSeoulParkExtractor
+from datajob.etl.extract.everland_info import EverlandInfoExtractor
+from datajob.etl.extract.lotteworld_info import LotteworldInfoExtractor
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
 
 
@@ -10,11 +14,15 @@ def transfrom_execute():
 
 def datamart_execute():
     PreThemeParkEvent.save()
+    ThemeparkTime.save()
+    ThemeparkHolFac.save()
 
 works = {
     'extract':{
         'event_childpark': EventChildParkExtractor.extract_data
         ,'event_seoulpark': EventSeoulParkExtractor.extract_data
+        , 'everland_info' : EverlandInfoExtractor.extract_data
+        , 'lotteworld_info' : LotteworldInfoExtractor.extract_data
     }
     ,'transform':{
         'execute': transfrom_execute
@@ -23,6 +31,8 @@ works = {
     ,'datamart':{
         'execute': datamart_execute
         ,'pre_themepark_event': PreThemeParkEvent.save
+        ,'themepark_time' : ThemeparkTime.save
+        ,'themepark_hol_fac' : ThemeparkHolFac.save
     }
 }
 

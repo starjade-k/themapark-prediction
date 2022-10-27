@@ -25,10 +25,12 @@ class NaviSearchExtractor:
         }
         log_dict = cls.__create_log_dict(params)
         data = {'날짜': [], '에버랜드': [], '서울대공원': [], '서울어린이대공원': [], '롯데월드': []}
+
         try:
             df = cls.__get_nav_data(params, data)
             print(df)
-            file_name = cls.FILE_DIR + 'navi_search_' + params['BASE_YM1'] + '.csv'
+            #file_name = cls.FILE_DIR + 'navi_search_' + params['BASE_YM1'] + '.csv'
+            file_name = cls.FILE_DIR + 'navi_search_202207_20221025.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['날짜', '에버랜드', '서울대공원',  '서울어린이대공원', '롯데월드'], index=False)
         except Exception as e:
@@ -36,7 +38,7 @@ class NaviSearchExtractor:
 
     @classmethod
     def __get_nav_data(cls, params, data):
-        for i in range(1752, 110, -1):  # 1752, 110, -1
+        for i in range(118, 1, -1):  # 1752, 110, -1
             day = cal_std_day(i)
             revised_day = cls.__create_date(day[:4], day[4:6], day[6:8])
             data['날짜'].append(revised_day)
