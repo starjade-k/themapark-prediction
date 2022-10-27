@@ -3,7 +3,7 @@ import bs4
 import pandas as pd
 from infra.hdfs_client import get_client
 from infra.logger import get_logger
-from infra.util import execute_rest_api
+from infra.util import cal_std_day, cal_std_day_after, execute_rest_api
 
 
 class EventSeoulParkExtractor:
@@ -12,7 +12,7 @@ class EventSeoulParkExtractor:
     FILE_DIR = '/theme_park/event/seoulpark/'
 
     @classmethod
-    def extract_data(cls):
+    def extract_data(cls, after_cnt=10):
         base_params = {
             'pageIndex': '1',
             'searchgubun': '',
@@ -25,10 +25,44 @@ class EventSeoulParkExtractor:
             'searchWord': ''
         }
         log_dict_base = cls.__create_log_dict(base_params)
+        page_nums = cls.__get_event_pagenum(base_params, log_dict_base)
+        
+        log_dict_detail = cls.__create_log_dict(detail_params)
+        try:
+            df = cls.__get_event_data(detail_params, page_nums)
+            print(df)
+            file_name = cls.FILE_DIR + 'event_seoulpark_' + cal_std_day(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+            #file_name = cls.FILE_DIR + 'event_seoulpark_2017_202206.csv'
+            with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
+                df.to_csv(writer, header=['행사명', '시작날짜', '종료날짜'], index=False)
+        except Exception as e:
+            cls.__dump_log(log_dict_detail, e)
+
+    # 각 행사 페이지에서 행사명과 날짜 가져옴
+    @classmethod
+    def __get_event_data(cls, detail_params, page_nums):
+        seoulpark = set()
+        for i in range(len(page_nums)):
+            detail_params['mh_no'] = page_nums[i]
+            response = execute_rest_api('get', cls.DETAIL_URL, {}, detail_params)
+            bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
+            title = bs_obj.find('div', {'class': 'view-header'}).find('h5').text.replace('\t', '').replace('\r\n', '')
+            tmp_date = bs_obj.find('div', {'class': 'view-header'}).find('li').text.replace('\t', '').replace('\r\n', '')
+            tmp_date = tmp_date.split(' ')
+            start_date = tmp_date[1].replace('.', '')
+            end_date = tmp_date[3].replace('.', '')
+            res = (title, start_date, end_date)
+            seoulpark.add(res)
+        df = pd.DataFrame(list(seoulpark))
+        return df
+
+    # 각 행사들의 페이지 번호 가져옴
+    @classmethod
+    def __get_event_pagenum(cls, base_params, log_dict_base):
         mores = []
         mh_nos = []
-        try:  # 각 행사들의 페이지 번호 가져옴
-            for i in range(1, 8):
+        try:
+            for i in range(1, 2):
                 base_params['pageIndex'] = str(i)
                 response = execute_rest_api('get', cls.BASE_URL, {}, base_params)
                 bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
@@ -37,29 +71,7 @@ class EventSeoulParkExtractor:
                 mh_nos.append(more['onclick'].split("'")[3])
         except Exception as e:
             cls.__dump_log(log_dict_base, e)
-        
-        log_dict_detail = cls.__create_log_dict(detail_params)
-        try:   # 각 행사 페이지에서 행사명과 날짜 가져옴
-            seoulpark = set()
-            for i in range(len(mh_nos)):
-                detail_params['mh_no'] = mh_nos[i]
-                response = execute_rest_api('get', cls.DETAIL_URL, {}, detail_params)
-                bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
-                title = bs_obj.find('div', {'class': 'view-header'}).find('h5').text.replace('\t', '').replace('\r\n', '')
-                tmp_date = bs_obj.find('div', {'class': 'view-header'}).find('li').text.replace('\t', '').replace('\r\n', '')
-                tmp_date = tmp_date.split(' ')
-                start_date = tmp_date[1].replace('.', '')
-                end_date = tmp_date[3].replace('.', '')
-                res = (title, start_date, end_date)
-                seoulpark.add(res)
-            df = pd.DataFrame(list(seoulpark))
-            print(df)
-            #file_name = cls.FILE_DIR + 'event_seoulpark_' + cal_std_day(1) + '.csv'
-            file_name = cls.FILE_DIR + 'event_seoulpark_2017_202206.csv'
-            with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
-                df.to_csv(writer, header=['행사명', '시작날짜', '종료날짜'], index=False)
-        except Exception as e:
-            cls.__dump_log(log_dict_detail, e)
+        return mh_nos
 
     # 로그 dump
     @classmethod

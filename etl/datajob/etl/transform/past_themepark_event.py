@@ -5,7 +5,7 @@ from infra.spark_session import get_spark_session
 from infra.util import cal_std_day
 
 
-class ThemeParkEventTransformer:
+class PastThemeParkEventTransformer:
     FILE_DIR = '/theme_park/event/'
 
     @classmethod
