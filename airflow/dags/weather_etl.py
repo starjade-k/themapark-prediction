@@ -20,7 +20,7 @@ with DAG(
     },
     description='Themapark ETL Project',
     schedule=timedelta(days=1), # 반복날짜 - 1일마다
-    start_date=datetime(2022, 10, 26, 4, 20),  # 시작날짜
+    start_date=datetime(2022, 10, 29, 4, 20),  # 시작날짜
     catchup=False,
     tags=['themapark_etl'],
 ) as dag:
@@ -64,29 +64,13 @@ with DAG(
         bash_command='python3 main.py transform today_dust',
     )
 
-    # t7 = BashOperator(
-    #     task_id='transform_pre_weather',
-    #     cwd='/home/big/pj/ETL',
-    #     bash_command='python3 main.py transform pre_weather',
-    # )
 
-    t8 = BashOperator(
+    t7 = BashOperator(
         task_id='transform_pre_air_weather',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py transform pre_air_weather',
     )    
 
-    # t9 = BashOperator(
-    #     task_id='datamart_today_weather',
-    #     cwd='/home/big/pj/ETL',
-    #     bash_command='python3 main.py datamart today_weather',
-    # )
-
-    # t10 = BashOperator(
-    #     task_id='datamart_pre_air_weather',
-    #     cwd='/home/big/pj/ETL',
-    #     bash_command='python3 main.py datamart pre_air_weather',
-    # )
 
     t1.doc_md = dedent(
         """\
@@ -115,6 +99,9 @@ with DAG(
     # 태스크 우선순위 설정
     # extract는 병렬로, transform과 datamart는 직렬로
     
+    t1 >> t5
+    t2 >> t6
+    t3 >> t4 >> t7
     # t9 >> t10
 
   

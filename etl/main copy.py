@@ -26,6 +26,33 @@ def transfrom_execute():
     TodustTransformer.transform()
     PreweatherTransformer.transform()
     PreairweatherTransformer.transform()
+
+def datamart_execute():
+    TodayWeather.save()
+    PreAirWeather.save()
+
+works = {
+    'extract':{
+        'today_weather': ToweatherExtractor.extract_data
+        ,'today_dust':TodustExtractor.extract_data
+        ,'pre_weather': PreweatherExtractor.extract_data
+        ,'pre_dust':PredustExtractor.extract_data
+    }
+    ,'transform':{
+        'execute':transfrom_execute
+        ,'today_weather':ToweatherTransformer.transform
+        ,'today_dust':TodustTransformer.transform
+        ,'pre_weather': PreweatherTransformer.transform
+        ,'pre_air_weather':PreairweatherTransformer.transform
+    }
+    ,'datamart':{
+        'execute':datamart_execute
+        ,'today_weather':TodayWeather.save
+        ,'pre_air_weather':PreAirWeather.save
+
+
+
+def transfrom_execute():
     ThemeParkEventTransformer.transform()
     NaviSearchTransformer.transform()
 
@@ -34,30 +61,21 @@ def datamart_execute():
     ThemeparkTime.save()
     ThemeparkHolFac.save()
 
-
 works = {
     'extract':{
-        'today_weather': ToweatherExtractor.extract_data
-        ,'today_dust':TodustExtractor.extract_data
-        ,'pre_weather': PreweatherExtractor.extract_data
-        ,'pre_dust':PredustExtractor.extract_data
-        ,'navi_search': NaviSearchExtractor.extract_data
+        'navi_search': NaviSearchExtractor.extract_data
         ,'event_childpark': EventChildParkExtractor.extract_data
         ,'event_seoulpark': EventSeoulParkExtractor.extract_data
-        ,'everland_info' : EverlandInfoExtractor.extract_data
-        ,'lotteworld_info' : LotteworldInfoExtractor.extract_data
+        , 'everland_info' : EverlandInfoExtractor.extract_data
+        , 'lotteworld_info' : LotteworldInfoExtractor.extract_data
     }
     ,'transform':{
-        'execute':transfrom_execute
-        ,'today_weather':ToweatherTransformer.transform
-        ,'today_dust':TodustTransformer.transform
-        ,'pre_weather': PreweatherTransformer.transform
-        ,'pre_air_weather':PreairweatherTransformer.transform
+        'execute': transfrom_execute
         ,'transform_event': ThemeParkEventTransformer.transform
         ,'navi_search': NaviSearchTransformer.transform
     }
     ,'datamart':{
-        'execute':datamart_execute
+        'execute': datamart_execute
         ,'pre_themepark_event': PreThemeParkEvent.save
         ,'themepark_time' : ThemeparkTime.save
         ,'themepark_hol_fac' : ThemeparkHolFac.save

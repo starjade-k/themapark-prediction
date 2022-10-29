@@ -1,4 +1,4 @@
-from etl.infra.jdbc import OperationDB
+from infra.jdbc import OperationDB
 from infra.jdbc import DataMart, DataWarehouse, OperationDB, save_data
 from pyspark.sql import Row
 from infra.spark_session import get_spark_session

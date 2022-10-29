@@ -77,4 +77,4 @@ class PredustExtractor:
             },
         'data':data
         }
-        get_client().write(cls.file_dir+cls.file_name, json.dumps(result, ensure_ascii=False), encoding='utf-8')
+        get_client().write(cls.file_dir+cls.file_name, json.dumps(result, ensure_ascii=False), encoding='utf-8',overwrite=True)
