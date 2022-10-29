@@ -15,6 +15,13 @@ class DataMart(Enum):
        ,'password':'123qwe!@#QWE'
     }
 
+class OperationDB(Enum):
+    URL ='jdbc:oracle:thin:@themapark_high?TNS_ADMIN=/home/big/pj/db/Wallet_themapark'
+    PROPS={
+        'user':'op_themapark'
+       ,'password':'123qwe!@#QWE'
+    }
+
 def save_data(config, dataframe, table_name):
     dataframe.write.jdbc(url=config.URL.value
                         , table=table_name
