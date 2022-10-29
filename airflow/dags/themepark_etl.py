@@ -15,7 +15,7 @@ with DAG(
         'email': ['qkqhdksi0@gmail.com'],
         'email_on_failure': False,
         'email_on_retry': False,
-        'retries': 2,  # 재시도 횟수
+        'retries': 4,  # 재시도 횟수
         'retry_delay': timedelta(minutes=3),  # 재시도 딜레이 - 3분
     },
     description='Themapark ETL Project',
@@ -25,8 +25,8 @@ with DAG(
     tags=['themapark_etl'],
 ) as dag:
 
-    # t1, t2 and t3 are examples of tasks created by instantiating operators
     # 태스크들 추가
+    # ㅡㅡㅡㅡㅡㅡ EXTRACT ㅡㅡㅡㅡㅡㅡ
     t1 = BashOperator(
         task_id='extract_today_weather',
         cwd='/home/big/pj/ETL',
@@ -50,27 +50,87 @@ with DAG(
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py extract pre_dust',
     )
-    
 
     t5 = BashOperator(
+        task_id='extract_navi_search',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract navi_search',
+    )
+    
+    t6 = BashOperator(
+        task_id='extract_event_childpark',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract event_childpark',
+    )
+
+    t7 = BashOperator(
+        task_id='extract_event_seoulpark',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract event_seoulpark',
+    )
+
+    t8 = BashOperator(
+        task_id='extract_everland_info',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract everland_info',
+    )
+
+    t9 = BashOperator(
+        task_id='extract_lotteworld_info',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract lotteworld_info',
+    )
+
+    # ㅡㅡㅡㅡㅡㅡ TRANSFORM ㅡㅡㅡㅡㅡㅡ
+    t10 = BashOperator(
         task_id='transform_today_weather',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py transform today_weather',
     )
 
-    t6 = BashOperator(
+    t11 = BashOperator(
         task_id='transform_today_dust',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py transform today_dust',
     )
 
+    t12 = BashOperator(
+        task_id='transform_themepark_event',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py transform themepark_event',
+    )
 
-    t7 = BashOperator(
-        task_id='transform_pre_air_weather',
+    t13 = BashOperator(
+        task_id='transform_navi_search',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py transform navi_search',
+    )
+
+    # ㅡㅡㅡㅡㅡㅡ DATAMART ㅡㅡㅡㅡㅡㅡ
+    t14 = BashOperator(
+        task_id='datamart_pre_air_weather',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py transform pre_air_weather',
     )    
 
+    t15 = BashOperator(
+        task_id='datamart_pre_themepark_event',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py datamart pre_themepark_event',
+    )
+
+    # ㅡㅡㅡㅡㅡㅡ OPERATION ㅡㅡㅡㅡㅡㅡ    
+    t16 = BashOperator(
+        task_id='operation_themepark_time',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py operation themepark_time',
+    )
+
+    t17 = BashOperator(
+        task_id='operation_themepark_hol_fac',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py operation themepark_hol_fac',
+    )
 
     t1.doc_md = dedent(
         """\
@@ -99,9 +159,12 @@ with DAG(
     # 태스크 우선순위 설정
     # extract는 병렬로, transform과 datamart는 직렬로
     
-    t1 >> t5
-    t2 >> t6
-    t3 >> t4 >> t7
+    t1 >> t10
+    t2 >> t11
+    t3 >> t4 >> t14
+    t5 >> t13
+    [t6, t7] >> t12 >> t15
+    [t8, t9] >> t16 >> t17
     # t9 >> t10
 
   

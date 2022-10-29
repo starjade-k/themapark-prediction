@@ -3,7 +3,7 @@ import bs4
 import pandas as pd
 from infra.hdfs_client import get_client
 from infra.logger import get_logger
-from infra.util import cal_std_day, cal_std_day_after, execute_rest_api
+from infra.util import cal_std_day2, cal_std_day_after, execute_rest_api
 
 
 class EventChildParkExtractor:
@@ -23,7 +23,7 @@ class EventChildParkExtractor:
         try:
             df = cls.__get_event_data(after_cnt, params, childrenpark)
             print(df)
-            file_name = cls.FILE_DIR + 'event_childpark_' + cal_std_day(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+            file_name = cls.FILE_DIR + 'event_childpark_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
             #file_name = cls.FILE_DIR + 'event_childpark_2017_202206.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['행사명', '시작날짜', '종료날짜'], index=False)

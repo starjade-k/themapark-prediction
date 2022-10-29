@@ -2,7 +2,7 @@ import json
 import requests
 import pandas as pd
 from infra.hdfs_client import get_client
-from infra.util import cal_std_day, execute_rest_api
+from infra.util import cal_std_day2, execute_rest_api
 from infra.logger import get_logger
 
 
@@ -39,7 +39,7 @@ class NaviSearchExtractor:
     @classmethod
     def __get_nav_data(cls, params, data, before_cnt):
         for i in range(before_cnt, before_cnt + 1):  # 1752, 110, -1
-            day = cal_std_day(i)
+            day = cal_std_day2(i)
             revised_day = cls.__create_date(day[:4], day[4:6], day[6:8])
             data['날짜'].append(revised_day)
             params['BASE_YM1'] = day

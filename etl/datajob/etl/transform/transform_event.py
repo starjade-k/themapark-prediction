@@ -2,7 +2,7 @@ import datetime as dt
 from pyspark.sql.functions import col, to_date
 from infra.jdbc import DataWarehouse, find_data, save_data
 from infra.spark_session import get_spark_session
-from infra.util import cal_std_day, cal_std_day_after
+from infra.util import cal_std_day2, cal_std_day_after
 
 
 class ThemeParkEventTransformer:
@@ -25,7 +25,7 @@ class ThemeParkEventTransformer:
 
     @classmethod
     def __parse_and_get_df(cls, themepark, themepark_num, after_cnt):
-        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
         df_event = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
         event_list = df_event.collect()
         df_fin = cls.__create_df_with_eventdata(themepark_num, event_list)
@@ -38,7 +38,7 @@ class ThemeParkEventTransformer:
         data = []
         for i in range(0, 1):  # 오늘날짜만
             tmp_dict = {}
-            day = cal_std_day(i)
+            day = cal_std_day2(i)
 
             tmp_dict['THEME_NUM'] = int(theme_num)
             tmp_dict['STD_DATE'] = cls.__create_date(day[:4], day[4:6], day[6:8])

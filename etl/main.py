@@ -10,8 +10,8 @@ from datajob.etl.transform.pre_weather import PreweatherTransformer
 from datajob.etl.transform.today_dust import TodustTransformer
 from datajob.etl.transform.today_weather import ToweatherTransformer
 from datajob.datamart.pre_themepark_event import PreThemeParkEvent
-from datajob.datamart.themepark_hol_fac import ThemeparkHolFac
-from datajob.datamart.themepark_time import ThemeparkTime
+from datajob.operation.themepark_hol_fac import ThemeparkHolFac
+from datajob.operation.themepark_time import ThemeparkTime
 from datajob.etl.extract.event_childpark import EventChildParkExtractor
 from datajob.etl.extract.event_seoulpark import EventSeoulParkExtractor
 from datajob.etl.extract.everland_info import EverlandInfoExtractor
@@ -36,31 +36,33 @@ def datamart_execute():
 
 
 works = {
-    'extract':{
+    'extract': {
         'today_weather': ToweatherExtractor.extract_data
-        ,'today_dust':TodustExtractor.extract_data
+        ,'today_dust': TodustExtractor.extract_data
         ,'pre_weather': PreweatherExtractor.extract_data
-        ,'pre_dust':PredustExtractor.extract_data
+        ,'pre_dust': PredustExtractor.extract_data
         ,'navi_search': NaviSearchExtractor.extract_data
         ,'event_childpark': EventChildParkExtractor.extract_data
         ,'event_seoulpark': EventSeoulParkExtractor.extract_data
-        ,'everland_info' : EverlandInfoExtractor.extract_data
-        ,'lotteworld_info' : LotteworldInfoExtractor.extract_data
+        ,'everland_info': EverlandInfoExtractor.extract_data
+        ,'lotteworld_info': LotteworldInfoExtractor.extract_data
     }
-    ,'transform':{
-        'execute':transfrom_execute
-        ,'today_weather':ToweatherTransformer.transform
-        ,'today_dust':TodustTransformer.transform
+    ,'transform': {
+        'execute': transfrom_execute
+        ,'today_weather': ToweatherTransformer.transform
+        ,'today_dust': TodustTransformer.transform
         ,'pre_weather': PreweatherTransformer.transform
-        ,'pre_air_weather':PreairweatherTransformer.transform
-        ,'transform_event': ThemeParkEventTransformer.transform
+        ,'pre_air_weather': PreairweatherTransformer.transform
+        ,'themepark_event': ThemeParkEventTransformer.transform
         ,'navi_search': NaviSearchTransformer.transform
     }
-    ,'datamart':{
-        'execute':datamart_execute
+    ,'datamart': {
+        'execute': datamart_execute
         ,'pre_themepark_event': PreThemeParkEvent.save
-        ,'themepark_time' : ThemeparkTime.save
-        ,'themepark_hol_fac' : ThemeparkHolFac.save
+    }
+    ,'operation': {
+        'themepark_time': ThemeparkTime.save
+        ,'themepark_hol_fac': ThemeparkHolFac.save
     }
 }
 

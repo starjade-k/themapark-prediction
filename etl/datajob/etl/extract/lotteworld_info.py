@@ -2,7 +2,7 @@ import json
 import bs4
 import pandas as pd
 from infra.hdfs_client import get_client
-from infra.util import cal_std_day, execute_rest_api
+from infra.util import cal_std_day2, execute_rest_api
 from infra.logger import get_logger
 
 
@@ -21,7 +21,7 @@ class LotteworldInfoExtractor:
             op_time = bs_obj.find('div', {'class': 'mainTodayArea'}).find('p', {'class': 'txt'}).text.strip().split(' - ')
             df = pd.DataFrame(dict({'시작시간': [op_time[0]], '종료시간': [op_time[1]]}))
             print(df)
-            file_name = cls.FILE_DIR + 'time_lotteworld_' + cal_std_day(0) + '.csv'
+            file_name = cls.FILE_DIR + 'time_lotteworld_' + cal_std_day2(0) + '.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['시작시간', '종료시간'], index=False)
         except Exception as e:
@@ -31,7 +31,7 @@ class LotteworldInfoExtractor:
         params_fac = {
             'oprtDt': '20221026'
         }
-        params_fac['oprtDt'] = cal_std_day(0)
+        params_fac['oprtDt'] = cal_std_day2(0)
         log_dict = cls.__create_log_dict(params_fac)
         try:
             response = execute_rest_api('get', cls.HOL_URL, {}, params=params_fac)
@@ -42,7 +42,7 @@ class LotteworldInfoExtractor:
                 holiday_area_list.append(holiday.text)
             df = pd.DataFrame(holiday_area_list)
             print(df)
-            file_name = cls.FILE_DIR + 'holiday_area_lotteworld_' + cal_std_day(0) + '.csv'
+            file_name = cls.FILE_DIR + 'holiday_area_lotteworld_' + cal_std_day2(0) + '.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['운휴시설'], index=False)
         except Exception as e:

@@ -2,7 +2,7 @@ import datetime as dt
 from pyspark.sql.functions import col, lit, to_date
 from infra.jdbc import DataWarehouse, find_data, save_data
 from infra.spark_session import get_spark_session
-from infra.util import cal_std_day
+from infra.util import cal_std_day2
 
 
 class PastThemeParkEventTransformer:
@@ -61,7 +61,7 @@ class PastThemeParkEventTransformer:
         data = []
         for i in range(2118, 111, -1):  # 1753, 111, -1   / 2118, 111, -1
             tmp_dict = {}
-            day = cal_std_day(i)
+            day = cal_std_day2(i)
 
             tmp_dict['THEME_NUM'] = int(theme_num)
             tmp_dict['STD_DATE'] = cls.__create_date(day[:4], day[4:6], day[6:8])
