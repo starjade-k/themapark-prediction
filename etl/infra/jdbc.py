@@ -15,7 +15,7 @@ class DataMart(Enum):
        ,'password':'123qwe!@#QWE'
     }
 
-class OpData(Enum):
+class OperationDB(Enum):
     URL ='jdbc:oracle:thin:@themapark_high?TNS_ADMIN=/home/big/pj/db/Wallet_themapark'
     PROPS={
         'user':'op_themapark'

@@ -1,4 +1,4 @@
-from infra.jdbc import DataMart, DataWarehouse, OpData, save_data
+from infra.jdbc import DataMart, DataWarehouse, OperationDB, save_data
 from pyspark.sql import Row
 from infra.spark_session import get_spark_session
 from pyspark.sql.functions import col
@@ -18,5 +18,5 @@ class ChildpriceTransformer:
                 ,col('TICKET_GUBUN').cast(StringType()))
         p_data.printSchema()
 
-        save_data(OpData,p_data , 'CHILDPARK_PRC')
+        save_data(OperationDB,p_data , 'CHILDPARK_PRC')
         

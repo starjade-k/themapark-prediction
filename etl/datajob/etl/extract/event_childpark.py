@@ -3,7 +3,7 @@ import bs4
 import pandas as pd
 from infra.hdfs_client import get_client
 from infra.logger import get_logger
-from infra.util import cal_std_day, execute_rest_api
+from infra.util import cal_std_day, cal_std_day_after, execute_rest_api
 
 
 class EventChildParkExtractor:
@@ -11,8 +11,7 @@ class EventChildParkExtractor:
     FILE_DIR = '/theme_park/event/childpark/'
 
     @classmethod
-    def extract_data(cls):
-
+    def extract_data(cls, after_cnt=10):
         params = {
             'year': '2018',
             'month': '04',
@@ -22,34 +21,38 @@ class EventChildParkExtractor:
         log_dict = cls.__create_log_dict(params)
         childrenpark = set()
         try:
-            for i in range(2117, 110, -1):  # 2117, 110, -1
-                tmp_date = cal_std_day(i)
-                params['year'] = tmp_date[:4]
-                params['month'] = tmp_date[4:6]
-                params['day'] = tmp_date[6:8]
-                response = execute_rest_api('post', cls.URL, {}, params)
-                #response = requests.get(url, params=params)
-                bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
-                
-                tits = bs_obj.findAll('p', {'class':'tit'})
-                for tit in tits:
-                    tmp = tit.text.strip().replace('\r\n', '').replace('\t', '')
-                    print(tmp)
-                    if tmp != '선택한 일의 일정이 없습니다.':
-                        tmp_date_list = tmp[:25][1:-1].split(' ~ ')
-                        start_date = tmp_date_list[0].replace('.', '')
-                        end_date = tmp_date_list[1].replace('.', '')
-                        title = tmp[25:]
-                        res = (title, start_date, end_date)
-                        childrenpark.add(res)
-            df = pd.DataFrame(list(childrenpark))
+            df = cls.__get_event_data(after_cnt, params, childrenpark)
             print(df)
-            #file_name = cls.FILE_DIR + 'event_childpark_' + cal_std_day(1) + '.csv'
-            file_name = cls.FILE_DIR + 'event_childpark_2017_202206.csv'
+            file_name = cls.FILE_DIR + 'event_childpark_' + cal_std_day(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+            #file_name = cls.FILE_DIR + 'event_childpark_2017_202206.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['행사명', '시작날짜', '종료날짜'], index=False)
         except Exception as e:
             cls.__dump_log(log_dict, e)
+
+    @classmethod
+    def __get_event_data(cls, after_cnt, params, childrenpark):
+        for i in range(0, after_cnt):  # 2117, 110, -1 : 과거데이터
+            tmp_date = cal_std_day_after(i)
+            params['year'] = tmp_date[:4]
+            params['month'] = tmp_date[4:6]
+            params['day'] = tmp_date[6:8]
+            response = execute_rest_api('post', cls.URL, {}, params)
+            bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
+                
+            tits = bs_obj.findAll('p', {'class': 'tit'})
+            for tit in tits:
+                tmp = tit.text.strip().replace('\r\n', '').replace('\t', '')
+                print(tmp)
+                if tmp != '선택한 일의 일정이 없습니다.':
+                    tmp_date_list = tmp[:25][1:-1].split(' ~ ')
+                    start_date = tmp_date_list[0].replace('.', '')
+                    end_date = tmp_date_list[1].replace('.', '')
+                    title = tmp[25:]
+                    res = (title, start_date, end_date)
+                    childrenpark.add(res)
+        df = pd.DataFrame(list(childrenpark))
+        return df
 
     # 로그 dump
     @classmethod

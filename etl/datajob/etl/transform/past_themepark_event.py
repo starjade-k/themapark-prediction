@@ -5,7 +5,7 @@ from infra.spark_session import get_spark_session
 from infra.util import cal_std_day
 
 
-class ThemeParkEventTransformer:
+class PastThemeParkEventTransformer:
     FILE_DIR = '/theme_park/event/'
 
     @classmethod
@@ -47,13 +47,13 @@ class ThemeParkEventTransformer:
         # save_data(DataWarehouse, df_childpark_fin, 'THEME_EVENT')
 
         #ㅡㅡㅡㅡㅡㅡㅡ서울대공원 과거 데이터ㅡㅡㅡㅡㅡㅡㅡ
-        seoulpark_file_name = cls.FILE_DIR + 'seoulpark/' + 'event_seoulpark_2017_202206.csv'
-        df_seoulpark = get_spark_session().read.csv(seoulpark_file_name, encoding='CP949', header=True)
-        seoulpark_list = df_seoulpark.collect()
-        df_seoulpark_fin = cls.__create_df_with_eventdata(seoulpark_num, seoulpark_list)
-        df_seoulpark_fin = df_seoulpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
-                                                col('EVENT_OX'), col('EVENT_NAME'))                                          
-        save_data(DataWarehouse, df_seoulpark_fin, 'THEME_EVENT')
+        # seoulpark_file_name = cls.FILE_DIR + 'seoulpark/' + 'event_seoulpark_2017_202206.csv'
+        # df_seoulpark = get_spark_session().read.csv(seoulpark_file_name, encoding='CP949', header=True)
+        # seoulpark_list = df_seoulpark.collect()
+        # df_seoulpark_fin = cls.__create_df_with_eventdata(seoulpark_num, seoulpark_list)
+        # df_seoulpark_fin = df_seoulpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
+        #                                         col('EVENT_OX'), col('EVENT_NAME'))                                          
+        # save_data(DataWarehouse, df_seoulpark_fin, 'THEME_EVENT')
 
 
     @classmethod
