@@ -1,5 +1,5 @@
 import unittest
-
+from datajob.datamart.ever_lotte_entrance import LotteEverEntrance
 from datajob.datamart.pre_themepark_event import PreThemeParkEvent
 from datajob.datamart.themepark_hol_fac import ThemeparkHolFac
 from datajob.datamart.themepark_time import ThemeparkTime
@@ -15,6 +15,9 @@ class MTest(unittest.TestCase):
 
     def test3(self):
         ThemeparkHolFac.save()
+
+    def test4(self):
+        LotteEverEntrance.save()
 
     
 

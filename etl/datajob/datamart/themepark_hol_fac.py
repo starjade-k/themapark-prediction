@@ -1,5 +1,5 @@
 from pyspark.sql.functions import col, to_date
-from infra.jdbc import DataMart, DataWarehouse, find_data, overwrite_trunc_data
+from infra.jdbc import OperationDB, overwrite_trunc_data
 from infra.spark_session import get_spark_session
 from infra.util import cal_std_day
 
@@ -33,4 +33,4 @@ class ThemeparkHolFac:
         # DM에 저장
         df_fin = get_spark_session().createDataFrame(data)
         df_fin = df_fin.select(col('THEME_NAME'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'), col('FAC_NAME'))
-        overwrite_trunc_data(DataMart, df_fin, "THEMEPARK_HOLFAC")
+        overwrite_trunc_data(OperationDB, df_fin, "THEMEPARK_HOLFAC")

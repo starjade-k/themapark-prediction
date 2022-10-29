@@ -6,11 +6,14 @@ from datajob.etl.extract.event_childpark import EventChildParkExtractor
 from datajob.etl.extract.event_seoulpark import EventSeoulParkExtractor
 from datajob.etl.extract.everland_info import EverlandInfoExtractor
 from datajob.etl.extract.lotteworld_info import LotteworldInfoExtractor
+from datajob.etl.extract.navi_search import NaviSearchExtractor
+from datajob.etl.transform.navi_search import NaviSearchTransformer
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
 
 
 def transfrom_execute():
     ThemeParkEventTransformer.transform()
+    NaviSearchTransformer.transform()
 
 def datamart_execute():
     PreThemeParkEvent.save()
@@ -19,7 +22,8 @@ def datamart_execute():
 
 works = {
     'extract':{
-        'event_childpark': EventChildParkExtractor.extract_data
+        'navi_search': NaviSearchExtractor.extract_data
+        ,'event_childpark': EventChildParkExtractor.extract_data
         ,'event_seoulpark': EventSeoulParkExtractor.extract_data
         , 'everland_info' : EverlandInfoExtractor.extract_data
         , 'lotteworld_info' : LotteworldInfoExtractor.extract_data
@@ -27,6 +31,7 @@ works = {
     ,'transform':{
         'execute': transfrom_execute
         ,'transform_event': ThemeParkEventTransformer.transform
+        ,'navi_search': NaviSearchTransformer.transform
     }
     ,'datamart':{
         'execute': datamart_execute

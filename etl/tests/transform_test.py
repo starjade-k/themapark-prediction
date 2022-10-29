@@ -1,6 +1,7 @@
 import unittest
 from datajob.etl.extract.event_seoulpark import EventSeoulParkExtractor
-from datajob.etl.transform.past_navi_search import PastNaviSearchTransformer
+from datajob.etl.transform.ever_lotte_entrance import EverLotteEntrance
+from datajob.etl.transform.navi_search import NaviSearchTransformer
 from datajob.etl.transform.past_airdata import PastAirDataTransformer
 from datajob.etl.transform.past_themepark_event import PastThemeParkEventTransformer
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
@@ -10,7 +11,7 @@ from datajob.etl.transform.transform_event import ThemeParkEventTransformer
 class MTest(unittest.TestCase):
 
     def test1(self):
-        PastNaviSearchTransformer.transform()
+        NaviSearchTransformer.transform()
 
     def test2(self):
         PastThemeParkEventTransformer.transform()
@@ -20,6 +21,9 @@ class MTest(unittest.TestCase):
 
     def test4(self):
         ThemeParkEventTransformer.transform()
+    
+    def test5(self):
+        EverLotteEntrance.transform()
 
 
 if __name__ == "__main__":

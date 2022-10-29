@@ -2,12 +2,13 @@ from pyspark.sql.functions import col, lit, to_date, concat
 from pyspark.sql.types import IntegerType
 from infra.jdbc import DataWarehouse, find_data, save_data
 from infra.spark_session import get_spark_session
+from infra.util import cal_std_day
 
 
-class PastNaviSearchTransformer:
+class NaviSearchTransformer:
     FILE_DIR = '/theme_park/navigation/'
     @classmethod
-    def transform(cls):
+    def transform(cls, before_cnt=2):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
         df_themepark.show()
 
@@ -18,7 +19,7 @@ class PastNaviSearchTransformer:
         lotteworld_num = df_themepark.where(col('THEME_NAME') == '롯데월드').first()[0]
 
         # hdfs 읽어오기
-        file_name = cls.FILE_DIR + 'navi_search_' + '202207_20221025' + '.csv'
+        file_name = cls.FILE_DIR + 'navi_search_' + cal_std_day(before_cnt) + '.csv'
         df_navi = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
         df_navi.show(5)
 
