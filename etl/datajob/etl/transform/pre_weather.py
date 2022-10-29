@@ -1,15 +1,15 @@
-from infra.jdbc import DataWarehouse, save_data
+from infra.jdbc import DataMart, DataWarehouse, overwrite_data, overwrite_trunc_data, save_data
 from pyspark.sql import Row
 from infra.spark_session import get_spark_session
 from infra.util import cal_std_day
 from pyspark.sql.functions import col
 from pyspark.sql.types import *
 
-class WeatherTransformer:
+class PreweatherTransformer:
 
     @classmethod
     def transform(cls):
-        path = '/themapark/weather/weather' + cal_std_day(0) + '.json'
+        path = '/themapark/weather/pre_weather' + cal_std_day(0) + '.json'
         code_json = get_spark_session().read.json(path, encoding='UTF-8')
         data = []
 
@@ -37,4 +37,4 @@ class WeatherTransformer:
 
             w_data.printSchema()
 
-            save_data(DataWarehouse,w_data , 'DAILY_WEATHER')
+            overwrite_trunc_data(DataMart,w_data , 'DAILY_WEATHER')

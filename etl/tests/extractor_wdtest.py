@@ -1,15 +1,24 @@
 import unittest
-from datajob.etl.extract.extract_dust import DustExtractor
-from datajob.etl.extract.extract_weather import WeatherExtractor
+from datajob.etl.extract.pre_dust import PredustExtractor
+from datajob.etl.extract.pre_weather import PreweatherExtractor
+from datajob.etl.extract.today_dust import TodustExtractor
+from datajob.etl.extract.today_weather import ToweatherExtractor
 
 
 class MTest(unittest.TestCase):
 
     def test1(self):
-        WeatherExtractor.extract_data()
+        ToweatherExtractor.extract_data()
 
     def test2(self):
-        DustExtractor.extract_data()
+        TodustExtractor.extract_data()
+
+    def test3(self):
+        PredustExtractor.extract_data()
+
+    def test4(self):
+        PreweatherExtractor.extract_data()
+    
 
 
 

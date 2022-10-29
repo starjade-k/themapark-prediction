@@ -11,15 +11,15 @@ import time
 from pyspark.sql.types import *
 from pyspark.sql.functions import col
 
-class WeatherExtractor:
+class PreweatherExtractor:
     file_dir = '/themapark/weather/'
-    file_name = 'weather' + cal_std_day(0) + '.json'
+    file_name = 'pre_weather' + cal_std_day(0) + '.json'
     
     @classmethod
     def extract_data(cls):
         data = []
         cols =['지역','날짜','최고기온','최저기온','일교차','강수량','바람','최대풍속']
-        ld = ['0201010202','0203020106','0101010000','0301030101','0101010000 ']
+        ld = ['0201010202','0203020106','0101010000','0101010000 ']
 
         for n in ld:
             url = 'http://www.weatheri.co.kr/forecast/forecast01.php?rid={}&k=1&a_name=용인'.format(n)
@@ -31,6 +31,7 @@ class WeatherExtractor:
             temlow = soup.findAll('font',{'color':'blue'})
             rw = soup.findAll('font',{'color':'7F7F7F'})
             topwind = soup.findAll('font',{'color':'#7F7F7F'})
+            #일자 별 풍속 리스트 생성
             wind_top1 =[]
             wind_top2 =[]
             wind_top3 =[]
@@ -41,7 +42,8 @@ class WeatherExtractor:
             wind_top8 =[]
             wind_top9 =[]
             wind_top10 =[]
-            for w in range(0,8):
+            # 일자 별로 시간 별 풍속 리스트에 넣기
+            for w in range(0,7):
                 wind_top1.append(topwind[1:9][w].text.strip())
                 wind_top2.append(topwind[19:27][w].text.strip())
                 wind_top3.append(topwind[37:45][w].text.strip())
@@ -61,8 +63,6 @@ class WeatherExtractor:
                     rows.append('4')
                 elif n == '0101010000':
                     rows.append('3')
-                elif n == '0301030101':
-                    rows.append('5')
                 elif n == '0101010000 ':
                     rows.append('2')        
                 #날짜 0~9

@@ -8,14 +8,14 @@ from infra.hdfs_client import get_client
 from infra.logger import get_logger
 import time
 
-class DustExtractor:
+class PredustExtractor:
     file_dir = '/themapark/dust/'
-    file_name = 'dust' + cal_std_day(0) + '.json'
+    file_name = 'pre_dust' + cal_std_day(0) + '.json'
     
     @classmethod
     def extract_data(cls):
         data=[]
-        base_url=['4129000000','1171000000','4146100000','1121500000','4211000000']
+        base_url=['4129000000','1171000000','4146100000','1121500000']
         cols=['지역','날짜','미세먼지','초미세먼지']
         rows_list = []
         for l in base_url:
@@ -24,6 +24,7 @@ class DustExtractor:
             res = response.json()
             rows = []
             day = cal_std_day(0)
+
             #지역
             if l == '4129000000':
                 rows.append('1')
@@ -32,16 +33,15 @@ class DustExtractor:
             elif l =='4146100000':
                 rows.append('4')
             elif l =='1121500000':
-                rows.append('2')
-            elif l =='4211000000':
-                rows.append('5')    
+                rows.append('2')        
             #날짜
             rows.append(day)
             #미세먼지
-            rows.append(int(res['pm']['history'][-1]['pm10']))
+            rows.append(res['pm']['history'][-1]['pm10'])
             #초미세먼지
-            rows.append(int(res['pm']['history'][-1]['pm25']))
+            rows.append(res['pm']['history'][-1]['pm25'])
             rows_list.append(rows)
+            
             for i in range(0,10):
                 rows = []
                 #지역
@@ -52,9 +52,7 @@ class DustExtractor:
                 elif l =='4146100000':
                     rows.append('4')
                 elif l =='1121500000':
-                    rows.append('2')
-                elif l =='4211000000':
-                    rows.append('5')    
+                    rows.append('2') 
                 #날짜
                 rows.append(str(res['pm']['forcast']['daily'][i]['year']) +'-'+ str(res['pm']['forcast']['daily'][i]['mon']) +'-' + str(res['pm']['forcast']['daily'][i]['day']))
                 #미세먼지

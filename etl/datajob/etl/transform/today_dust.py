@@ -5,11 +5,11 @@ from infra.util import cal_std_day
 from pyspark.sql.functions import col
 from pyspark.sql.types import *
 
-class DustTransformer:
+class TodustTransformer:
 
     @classmethod
     def transform(cls):
-        path = '/themapark/dust/dust' + cal_std_day(0) + '.json'
+        path = '/themapark/dust/today_dust' + cal_std_day(0) + '.json'
         code_json = get_spark_session().read.json(path, encoding='UTF-8')
         data = []
 
