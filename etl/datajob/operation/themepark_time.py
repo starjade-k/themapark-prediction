@@ -9,7 +9,6 @@ class ThemeparkTime:
     @classmethod
     def save(cls):
         today = cal_std_day(0)
-        today = today[:4] + '-' + today[4:6] + '-' + today[6:8]
 
         data = []
         # 에버랜드 이용시간
@@ -28,7 +27,7 @@ class ThemeparkTime:
 
         # 서울대공원 이용시간
         tmp_dict = {'THEME_NAME': '서울대공원', 'STD_DATE': today, 'START_TIME': '09:00'}
-        today_month = int(cal_std_day(0)[4:6])
+        today_month = int(today[4:6])
         if today_month >= 5 and today_month <= 8:
             tmp_dict['END_TIME'] = '19:00'
         elif today_month >= 11 and today_month <= 2:

@@ -2,7 +2,7 @@ import datetime as dt
 from pyspark.sql.functions import col, to_date
 from infra.jdbc import DataMart, DataWarehouse, find_data, overwrite_trunc_data
 from infra.spark_session import get_spark_session
-from infra.util import cal_std_day, cal_std_day_after
+from infra.util import cal_std_day2, cal_std_day_after
 
 
 class PreThemeParkEvent:
@@ -32,7 +32,7 @@ class PreThemeParkEvent:
 
     @classmethod
     def __parse_and_get_df(cls, themepark, themepark_num, after_cnt):
-        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
         df_event = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
         event_list = df_event.collect()
         df_fin = cls.__create_df_with_eventdata(themepark_num, event_list, after_cnt)

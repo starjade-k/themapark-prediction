@@ -9,7 +9,6 @@ class ThemeparkHolFac:
     @classmethod
     def save(cls):
         today = cal_std_day(0)
-        today = today[:4] + '-' + today[4:6] + '-' + today[6:8]
 
         data = []
         # 에버랜드 운휴시설

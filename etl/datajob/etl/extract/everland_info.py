@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import bs4
 from infra.hdfs_client import get_client
-from infra.util import cal_std_day, execute_rest_api
+from infra.util import cal_std_day2, execute_rest_api
 from infra.logger import get_logger
 
 
@@ -20,13 +20,13 @@ class EverlandInfoExtractor:
         }
         log_dict = cls.__create_log_dict(params_time)
         try:
-            params_time['baseDate'] = cal_std_day(0)
+            params_time['baseDate'] = cal_std_day2(0)
             response = execute_rest_api('get', cls.URL, {}, params=params_time)
             bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
             op_time = bs_obj.find('p', {'class': 'usetime'}).find('strong').text.split(' ~ ')
             df = pd.DataFrame(dict({'시작시간': [op_time[0]], '종료시간': [op_time[1]]}))
             print(df)
-            file_name = cls.FILE_DIR + 'time_everland_' + cal_std_day(0) + '.csv'
+            file_name = cls.FILE_DIR + 'time_everland_' + cal_std_day2(0) + '.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['시작시간', '종료시간'], index=False)
         except Exception as e:
@@ -39,7 +39,7 @@ class EverlandInfoExtractor:
             'siteCode': 'CT00101',
             'baseDate': '20221026'
         }
-        params_hol['baseDate'] = cal_std_day(0)
+        params_hol['baseDate'] = cal_std_day2(0)
         log_dict = cls.__create_log_dict(params_hol)
         try:
             response = execute_rest_api('post', cls.URL, {}, params=params_hol)
@@ -55,7 +55,7 @@ class EverlandInfoExtractor:
                         data.append(attr_info[k].text)
             df = pd.DataFrame(data)
             print(df)
-            file_name = cls.FILE_DIR + 'holiday_area_everland_' + cal_std_day(0) + '.csv'
+            file_name = cls.FILE_DIR + 'holiday_area_everland_' + cal_std_day2(0) + '.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['운휴시설'], index=False)
         except Exception as e:
