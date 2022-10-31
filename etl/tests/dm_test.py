@@ -1,8 +1,8 @@
 import unittest
 from datajob.datamart.ever_lotte_entrance import LotteEverEntrance
 from datajob.datamart.pre_themepark_event import PreThemeParkEvent
-from datajob.datamart.themepark_hol_fac import ThemeparkHolFac
-from datajob.datamart.themepark_time import ThemeparkTime
+from datajob.operation.themepark_hol_fac import ThemeparkHolFac
+from datajob.operation.themepark_time import ThemeparkTime
 
 # test command : python3 -W ignore -m unittest tests.dm_test.MTest.test1
 class MTest(unittest.TestCase):

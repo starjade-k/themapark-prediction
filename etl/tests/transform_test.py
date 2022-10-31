@@ -4,6 +4,7 @@ from datajob.etl.transform.ever_lotte_entrance import EverLotteEntrance
 from datajob.etl.transform.navi_search import NaviSearchTransformer
 from datajob.etl.transform.past_airdata import PastAirDataTransformer
 from datajob.etl.transform.past_themepark_event import PastThemeParkEventTransformer
+from datajob.etl.transform.pre_seoulpark import PreSeoulParkTransformer
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
 
 
@@ -24,6 +25,9 @@ class MTest(unittest.TestCase):
     
     def test5(self):
         EverLotteEntrance.transform()
+
+    def test6(self):
+        PreSeoulParkTransformer.transform()
 
 
 if __name__ == "__main__":
