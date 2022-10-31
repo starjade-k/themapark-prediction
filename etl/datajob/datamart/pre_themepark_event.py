@@ -8,7 +8,7 @@ from infra.util import cal_std_day2, cal_std_day_after
 class PreThemeParkEvent:
     FILE_DIR = '/theme_park/event/'
     @classmethod
-    def save(cls, after_cnt=10):
+    def save(cls, after_cnt=7):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
 
         # db에서 테마파크 번호 가져오기
@@ -41,7 +41,7 @@ class PreThemeParkEvent:
     @classmethod
     def __create_df_with_eventdata(cls, theme_num, events_data, after_cnt):
         data = []
-        for i in range(0, after_cnt):  # 오늘날짜 포함 10일치
+        for i in range(0, after_cnt):  # 오늘날짜 포함 7일치
             tmp_dict = {}
             day = cal_std_day_after(i)
 
