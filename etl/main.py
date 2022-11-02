@@ -1,6 +1,8 @@
 import sys
+from datajob.datamart.holiday import Holiday
 from datajob.datamart.pre_air_weather import PreAirWeather
 from datajob.datamart.today_weather import TodayWeather
+from datajob.etl.extract.holiday import HolidayExtractor
 from datajob.etl.extract.pre_dust import PredustExtractor
 from datajob.etl.extract.pre_weather import PreweatherExtractor
 from datajob.etl.extract.today_dust import TodustExtractor
@@ -46,6 +48,7 @@ works = {
         ,'event_seoulpark': EventSeoulParkExtractor.extract_data
         ,'everland_info': EverlandInfoExtractor.extract_data
         ,'lotteworld_info': LotteworldInfoExtractor.extract_data
+        ,'holiday': HolidayExtractor.extract_data
     }
     ,'transform': {
         'execute': transfrom_execute
@@ -59,6 +62,7 @@ works = {
     ,'datamart': {
         'execute': datamart_execute
         ,'pre_themepark_event': PreThemeParkEvent.save
+        ,'holiday': Holiday.save
     }
     ,'operation': {
         'themepark_time': ThemeparkTime.save

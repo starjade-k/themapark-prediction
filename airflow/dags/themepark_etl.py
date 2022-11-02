@@ -68,7 +68,7 @@ with DAG(
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py extract event_seoulpark',
     )
-
+    
     t8 = BashOperator(
         task_id='extract_everland_info',
         cwd='/home/big/pj/ETL',
@@ -79,6 +79,12 @@ with DAG(
         task_id='extract_lotteworld_info',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py extract lotteworld_info',
+    )
+
+    t18 = BashOperator(
+        task_id='extract_holiday',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract holiday',
     )
 
     # ㅡㅡㅡㅡㅡㅡ TRANSFORM ㅡㅡㅡㅡㅡㅡ
@@ -117,6 +123,12 @@ with DAG(
         task_id='datamart_pre_themepark_event',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py datamart pre_themepark_event',
+    )
+
+    t19 = BashOperator(
+        task_id='datamart_holiday',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py datamart holiday',
     )
 
     # ㅡㅡㅡㅡㅡㅡ OPERATION ㅡㅡㅡㅡㅡㅡ    
@@ -163,8 +175,10 @@ with DAG(
     t2 >> t11
     t3 >> t4 >> t14
     t5 >> t13
+    t18 >> t19
     [t6, t7] >> t12 >> t15
     [t8, t9] >> t16 >> t17
+    
     # t9 >> t10
 
   

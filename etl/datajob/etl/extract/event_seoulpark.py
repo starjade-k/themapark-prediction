@@ -12,7 +12,7 @@ class EventSeoulParkExtractor:
     FILE_DIR = '/theme_park/event/seoulpark/'
 
     @classmethod
-    def extract_data(cls, after_cnt=10):
+    def extract_data(cls, after_cnt=7):
         base_params = {
             'pageIndex': '1',
             'searchgubun': '',
