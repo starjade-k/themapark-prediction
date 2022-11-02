@@ -2,6 +2,7 @@ import unittest
 from datajob.etl.extract.event_childpark import EventChildParkExtractor
 from datajob.etl.extract.event_seoulpark import EventSeoulParkExtractor
 from datajob.etl.extract.everland_info import EverlandInfoExtractor
+from datajob.etl.extract.holiday import HolidayExtractor
 from datajob.etl.extract.lotteworld_info import LotteworldInfoExtractor
 from datajob.etl.extract.navi_search import NaviSearchExtractor
 from datajob.etl.extract.past_airdata import PastAirDataExtractor
@@ -26,6 +27,9 @@ class MTest(unittest.TestCase):
 
     def test6(self):
         EverlandInfoExtractor.extract_data()
+
+    def test7(self):
+        HolidayExtractor.extract_data()
 
 
 if __name__ == "__main__":

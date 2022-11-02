@@ -8,7 +8,7 @@ from infra.util import cal_std_day2, cal_std_day_after
 class ThemeParkEventTransformer:
     FILE_DIR = '/theme_park/event/'
     @classmethod
-    def transform(cls, after_cnt=10):
+    def transform(cls, after_cnt=7):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
 
         # db에서 테마파크 번호 가져오기

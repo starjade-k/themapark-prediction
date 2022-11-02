@@ -11,7 +11,7 @@ class EventChildParkExtractor:
     FILE_DIR = '/theme_park/event/childpark/'
 
     @classmethod
-    def extract_data(cls, after_cnt=10):
+    def extract_data(cls, after_cnt=7):
         params = {
             'year': '2018',
             'month': '04',
