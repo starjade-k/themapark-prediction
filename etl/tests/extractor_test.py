@@ -6,6 +6,7 @@ from datajob.etl.extract.holiday import HolidayExtractor
 from datajob.etl.extract.lotteworld_info import LotteworldInfoExtractor
 from datajob.etl.extract.navi_search import NaviSearchExtractor
 from datajob.etl.extract.past_airdata import PastAirDataExtractor
+from datajob.etl.extract.subway_inout import SubwayInOutExtractor
 
 # test command : python3 -W ignore -m unittest tests.extractor_test.MTest.test1
 class MTest(unittest.TestCase):
@@ -30,6 +31,9 @@ class MTest(unittest.TestCase):
 
     def test7(self):
         HolidayExtractor.extract_data()
+
+    def test8(self):
+        SubwayInOutExtractor.extract_data()
 
 
 if __name__ == "__main__":

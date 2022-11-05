@@ -5,10 +5,12 @@ from datajob.datamart.today_weather import TodayWeather
 from datajob.etl.extract.holiday import HolidayExtractor
 from datajob.etl.extract.pre_dust import PredustExtractor
 from datajob.etl.extract.pre_weather import PreweatherExtractor
+from datajob.etl.extract.subway_inout import SubwayInOutExtractor
 from datajob.etl.extract.today_dust import TodustExtractor
 from datajob.etl.extract.today_weather import ToweatherExtractor
 from datajob.etl.transform.pre_air_weather import PreairweatherTransformer
 from datajob.etl.transform.pre_weather import PreweatherTransformer
+from datajob.etl.transform.subway_inout import SubwayInOutTransformer
 from datajob.etl.transform.today_dust import TodustTransformer
 from datajob.etl.transform.today_weather import ToweatherTransformer
 from datajob.datamart.pre_themepark_event import PreThemeParkEvent
@@ -49,6 +51,7 @@ works = {
         ,'everland_info': EverlandInfoExtractor.extract_data
         ,'lotteworld_info': LotteworldInfoExtractor.extract_data
         ,'holiday': HolidayExtractor.extract_data
+        ,'subway_inout': SubwayInOutExtractor.extract_data
     }
     ,'transform': {
         'execute': transfrom_execute
@@ -58,6 +61,7 @@ works = {
         ,'pre_air_weather': PreairweatherTransformer.transform
         ,'themepark_event': ThemeParkEventTransformer.transform
         ,'navi_search': NaviSearchTransformer.transform
+        ,'subway_inout': SubwayInOutTransformer.transform
     }
     ,'datamart': {
         'execute': datamart_execute
