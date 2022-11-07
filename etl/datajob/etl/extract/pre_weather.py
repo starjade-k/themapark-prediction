@@ -55,7 +55,7 @@ class PreweatherExtractor:
                 wind_top9.append(topwind[145:153][w].text.strip())
                 wind_top10.append(topwind[163:171][w].text.strip())
 
-            for i in range(0,10):
+            for i in range(0, 7):
                 rows=[]
                 if n == '0201010202':
                     rows.append('1')

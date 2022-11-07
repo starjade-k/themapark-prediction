@@ -42,7 +42,7 @@ class PredustExtractor:
             rows.append(res['pm']['history'][-1]['pm25'])
             rows_list.append(rows)
             
-            for i in range(0,10):
+            for i in range(0, 7):
                 rows = []
                 #지역
                 if l == '4129000000':

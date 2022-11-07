@@ -1,4 +1,4 @@
-from pyspark.sql.functions import col, lit, to_date, concat
+from pyspark.sql.functions import col, lit, to_date
 from pyspark.sql.types import IntegerType
 from infra.jdbc import DataWarehouse, find_data, save_data
 from infra.spark_session import get_spark_session

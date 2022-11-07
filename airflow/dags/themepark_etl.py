@@ -20,7 +20,7 @@ with DAG(
     },
     description='Themapark ETL Project',
     schedule=timedelta(days=1), # 반복날짜 - 1일마다
-    start_date=datetime(2022, 10, 29, 4, 20),  # 시작날짜
+    start_date=datetime(2022, 10, 29, 2, 20),  # 시작날짜
     catchup=False,
     tags=['themapark_etl'],
 ) as dag:
@@ -87,6 +87,12 @@ with DAG(
         bash_command='python3 main.py extract holiday',
     )
 
+    t20 = BashOperator(
+        task_id='extract_subway_inout',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py extract subway_inout',
+    )
+
     # ㅡㅡㅡㅡㅡㅡ TRANSFORM ㅡㅡㅡㅡㅡㅡ
     t10 = BashOperator(
         task_id='transform_today_weather',
@@ -110,6 +116,12 @@ with DAG(
         task_id='transform_navi_search',
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py transform navi_search',
+    )
+
+    t21 = BashOperator(
+        task_id='transform_subway_inout',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py transform subway_inout',
     )
 
     # ㅡㅡㅡㅡㅡㅡ DATAMART ㅡㅡㅡㅡㅡㅡ
@@ -144,6 +156,13 @@ with DAG(
         bash_command='python3 main.py operation themepark_hol_fac',
     )
 
+    t22 = BashOperator(
+        task_id='operation_pre_air_weather',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py operation pre_air_weather',
+    )
+    
+
     t1.doc_md = dedent(
         """\
     #### Task Documentation
@@ -173,11 +192,12 @@ with DAG(
     
     t1 >> t10
     t2 >> t11
-    t3 >> t4 >> t14
+    t3 >> t4 >> t14 >> t22
     t5 >> t13
     t18 >> t19
     [t6, t7] >> t12 >> t15
     [t8, t9] >> t16 >> t17
+    t20 >> t21
     
     # t9 >> t10
 
