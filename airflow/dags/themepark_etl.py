@@ -156,6 +156,13 @@ with DAG(
         bash_command='python3 main.py operation themepark_hol_fac',
     )
 
+    t22 = BashOperator(
+        task_id='operation_pre_air_weather',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py operation pre_air_weather',
+    )
+    
+
     t1.doc_md = dedent(
         """\
     #### Task Documentation
@@ -185,7 +192,7 @@ with DAG(
     
     t1 >> t10
     t2 >> t11
-    t3 >> t4 >> t14
+    t3 >> t4 >> t14 >> t22
     t5 >> t13
     t18 >> t19
     [t6, t7] >> t12 >> t15

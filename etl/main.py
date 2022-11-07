@@ -71,6 +71,7 @@ works = {
     ,'operation': {
         'themepark_time': ThemeparkTime.save
         ,'themepark_hol_fac': ThemeparkHolFac.save
+        ,'pre_air_weather': PreAirWeather.save
     }
 }
 

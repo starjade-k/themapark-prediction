@@ -9,6 +9,7 @@ from datajob.etl.transform.pre_childpark import PreChildParkTransformer
 from datajob.etl.transform.pre_seoulpark import PreSeoulParkTransformer
 from datajob.etl.transform.subway_inout import SubwayInOutTransformer
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
+from datajob.operation.pre_air_weather import PreairweatherOperation
 
 
 # python3 -W ignore -m unittest tests.transform_test.MTest.test1
@@ -40,6 +41,9 @@ class MTest(unittest.TestCase):
 
     def test9(self):
         SubwayInOutTransformer.transform()
+
+    def test10(self):
+        PreairweatherOperation.save()
 
 
 if __name__ == "__main__":

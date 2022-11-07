@@ -17,19 +17,19 @@ class ChildParkModeling:
     @classmethod
     def exec(cls):
         df = find_data(DataMart, "PRE_CHILDPARK")
+        df = df.drop('PC_IDX', 'SBW_IN_NUM')
         df = df.toPandas()
         df = df.astype({'DAY': 'int32', 'HOLIDAY_OX': 'int32', 'ENT_NUM': 'int32', 'HIGH_TEMP': 'float',
                         'LOW_TEMP': 'float', 'RAIN_AMOUNT': 'float', 'AVG_WIND': 'float', 'HIGH_WIND': 'float',
-                        'PM10': 'int32', 'PM25': 'int32', 'SBW_IN_NUM': 'int32', 'SBW_OUT_NUM': 'int32',
+                        'PM10': 'int32', 'PM25': 'int32', 'SBW_OUT_NUM': 'int32',
                         'EVENT_OX': 'int32', 'NAVI_SRC_NUM': 'int32', 'CORONA_PAT': 'int32',})
         
         df = cls.child_grand_park(df)
-        print(df)
-        print(df.dtypes)
         y_train = df['ENT_NUM']
         X_train = df.drop(['ENT_NUM'], axis=1, inplace=False)
         
         # ㅡㅡㅡㅡㅡㅡㅡ testX 만들기 ㅡㅡㅡㅡㅡㅡㅡ
+
         # db에서 테마파크 번호 가져오기
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
         childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
@@ -67,13 +67,10 @@ class ChildParkModeling:
         df_test = df_hol.join(df_weather, on=['STD_DATE'])
         df_test = df_test.join(df_event, on=['STD_DATE'])
         df_test = df_test.join(df_weekday, on=['STD_DATE'])
-        df_test = df_test.join(df_navi, on=['STD_DATE'])
         df_test = df_test.join(df_sbwout, on=['STD_DATE'])
+        df_test = df_test.join(df_navi, on=['STD_DATE'])
         df_test = df_test.withColumn('CORONA_PAT', lit(0))
         df_test = df_test.withColumn('ENT_NUM', lit(0))
-
-        df_test.show()
-        print(df_test.dtypes)
 
         df_test = df_test.toPandas()
         df_test = df_test.astype({'DAY': 'int32', 'HOLIDAY_OX': 'int32', 'ENT_NUM': 'int32', 'HIGH_TEMP': 'float',
@@ -81,14 +78,14 @@ class ChildParkModeling:
                         'PM10': 'int32', 'PM25': 'int32', 'SBW_OUT_NUM': 'int32',
                         'EVENT_OX': 'int32', 'NAVI_SRC_NUM': 'int32', 'CORONA_PAT': 'int32'})
         
+        print(df_test)
         df_test = cls.child_grand_park(df_test)
+        print(df_test)
 
         X_test = df_test.drop(['ENT_NUM'], axis=1, inplace=False)
         y_test = df_test['ENT_NUM']
 
-        print(df_test)
-        print(df_test.dtypes)
-
+        # ㅡㅡㅡㅡㅡㅡ train 함수 실행 ㅡㅡㅡㅡㅡㅡ
         print(cls.train_by_xgbm(X_train, y_train, X_test))
 
 

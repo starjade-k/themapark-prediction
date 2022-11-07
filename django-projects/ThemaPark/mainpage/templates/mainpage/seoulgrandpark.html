@@ -92,7 +92,12 @@
   <div class="py-5" style="">
     <div class="container text-center text-capitalize">
       <div class="row text-center text-capitalize">
-        <div class="col-md-1 mx-auto px-0" style="">
+        {% for item in entrance %}
+          <div class="col-md-1 mx-auto px-0" style="">
+            <h4 class="">{{ item.std_date|date:"M j일 D" }}</h4>
+          </div>
+        {% endfor %}
+        <!-- <div class="col-md-1 mx-auto px-0" style="">
           <h4 class="">11월 7일 월요일</h4>
         </div>
         <div class="col-md-1 mx-auto px-0" style="">
@@ -112,16 +117,27 @@
         </div>
         <div class="col-md-1 mx-auto px-0" style="">
           <h4 class="">11월 13일 일요일</h4>
-        </div>
+        </div> -->
       </div>
       <div class="row text-center text-capitalize">
-        <div class="col-md-1 mx-auto" style=""><img class="d-block mx-auto img-fluid" src="{% static '/images/level3.png' %}"></div>
+        {% for item in entrance %}
+          {% if item.ent_num < 5000 %}
+            <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level1.png' %}"></div>
+          {% elif item.ent_num < 10000 %}
+            <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level2.png' %}"></div>
+          {% elif item.ent_num < 15000 %}
+            <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level3.png' %}"></div>
+          {% elif item.ent_num < 20000 %}
+            <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></div>
+          {% endif %}
+        {% endfor %}
+        <!-- <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level3.png' %}"></div>
         <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level2.png' %}"></div>
         <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level2.png' %}"></div>
         <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level1.png' %}"></div>
         <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level2.png' %}"></div>
         <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></div>
-        <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></div>
+        <div class="col-md-1 mx-auto" style=""><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></div> -->
       </div>
     </div>
   </div>

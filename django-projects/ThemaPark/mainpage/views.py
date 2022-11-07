@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from mainpage.forms import UserForm
+from mainpage.models import *
 
 
 # Create your views here.
@@ -57,8 +58,13 @@ def index(request):
 def aboutus(request):
     return render(request, "mainpage/aboutus.html")
 
+
 def seoulgrandpark(request):
-    return render(request, "mainpage/seoulgrandpark.html")
+    entrance = PreEntrance.objects.filter(theme_name='서울대공원')
+    context = {'entrance': entrance}
+    return render(request, "mainpage/seoulgrandpark.html", context)
+
+
 
 def childpark(request):
     return render(request, "mainpage/childpark.html")
