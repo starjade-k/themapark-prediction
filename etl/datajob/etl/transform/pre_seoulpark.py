@@ -59,6 +59,12 @@ class PreSeoulParkTransformer:
                             .where(col('STD_DATE') <= dt.datetime(2022, 6, 30)) \
                             .sort(col('STD_DATE').desc())
 
+        # 코로나 확진자 수 데이터 가져오기
+        df_corona = find_data(DataWarehouse, "SEOUL_CORONA")
+        df_corona = df_corona.select(col('STD_DATE'), col('PATIENT').alias('CORONA_PAT')) \
+                            .where(col('STD_DATE') <= dt.datetime(2022, 6, 30)) \
+                            .sort(col('STD_DATE').desc())
+
         # 날짜만 가져오기
         dates = [row['STD_DATE'] for row in df_weather.collect()]
 
@@ -74,6 +80,7 @@ class PreSeoulParkTransformer:
         df_fin = df_fin.join(df_subway, on='STD_DATE')
         df_fin = df_fin.join(df_event, on='STD_DATE')
         df_fin = df_fin.join(df_nav, on='STD_DATE')
+        df_fin = df_fin.join(df_corona, on='STD_DATE')
         df_fin = df_fin.join(df_holiday, on='STD_DATE')
         df_fin = df_fin.join(df_dates, on='STD_DATE')
 

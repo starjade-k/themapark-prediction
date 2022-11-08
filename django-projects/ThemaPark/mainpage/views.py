@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from mainpage.forms import UserForm
 from mainpage.models import *
+from datetime import datetime
 
 
 # Create your views here.
@@ -42,17 +43,24 @@ def everlandparking(request):
     return render(request, "mainpage/everland_parking.html")
 
 def everlandserviceoff(request):
-    return render(request, "mainpage/everland_serviceoff.html")
+    today = datetime.now().date()
+    holfac = ThemeparkHolfac.objects.filter(theme_name='에버랜드', std_date=today)
+    context = {'holfac': holfac}
+    print(context)
+    return render(request, "mainpage/everland_serviceoff.html", context)
 
 def everlandticket(request):
     return render(request, "mainpage/everland_ticket.html")
 
 def index(request):
-#사용자가 선택한 날짜가 찍히도록 print문 안에
-    #inlineFormInputGroup
-    #print(inlineFormInputGroup)
-    return render(request, "mainpage/index.html")
-
+    if request.method == 'GET':
+        try:
+            date = request.GET['date']
+            entrance = PreEntrance.objects.filter(std_date=date).order_by('std_date')
+            context = {'entrance': entrance}
+            return render(request, "mainpage/index.html", context)
+        except:
+            return render(request, "mainpage/index.html")
 
 
 def aboutus(request):
@@ -60,20 +68,26 @@ def aboutus(request):
 
 
 def seoulgrandpark(request):
-    entrance = PreEntrance.objects.filter(theme_name='서울대공원')
+    entrance = PreEntrance.objects.filter(theme_name='서울대공원').order_by('std_date')
     context = {'entrance': entrance}
     return render(request, "mainpage/seoulgrandpark.html", context)
 
 
-
 def childpark(request):
-    return render(request, "mainpage/childpark.html")
+    entrance = PreEntrance.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
+    context = {'entrance': entrance}
+    return render(request, "mainpage/childpark.html", context)
+    
 
 def everland(request):
-    return render(request, "mainpage/everland.html")
+    entrance = PreEntrance.objects.filter(theme_name='에버랜드').order_by('std_date')
+    context = {'entrance': entrance}
+    return render(request, "mainpage/everland.html", context)
 
 def lotteworld(request):
-    return render(request, "mainpage/lotteworld.html")
+    entrance = PreEntrance.objects.filter(theme_name='롯데월드').order_by('std_date')
+    context = {'entrance': entrance}
+    return render(request, "mainpage/lotteworld.html", context)
 
 #def login(request):
 #    return render(request, "mainpage/log-in.html")
@@ -146,3 +160,24 @@ def seoulgrandparkticket(request):
 
 def seoulgrandparkweather(request):
     return render(request, "mainpage/seoulgrandpark_weather.html")
+
+def childparkcongestion(request):
+    return render(request, "mainpage/childrenpark_congestion.html")
+
+def childparknavi(request):
+    return render(request, "mainpage/childrenpark_navi.html")
+
+def childparkparking(request):
+    return render(request, "mainpage/childrenpark_parking.html")
+
+def childparkfacility(request):
+    return render(request, "mainpage/childrenpark_facility.html")
+
+def childparkticket(request):
+    return render(request, "mainpage/childrenpark_ticket.html")
+
+def childparkserviceoff(request):
+    return render(request, "mainpage/childrenpark_serviceoff.html")
+
+def childparksubway(request):
+    return render(request, "mainpage/childrenpark_subway.html")

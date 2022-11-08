@@ -9,36 +9,49 @@
 
 </head>
 
-<body style="">
-  <div class="py-3" style="">
+<body>
+  <div class="py-3">
     <div class="container">
       <div class="row">
         <div class="col-md-6" style="">
           <div class="col-md-12">
             <ul class="nav">
               <li class="nav-item">
-                <a href="/" class="nav-link active" >Home</a>
+                <a href="/" class="nav-link active">Home</a>
               </li>
               <li class="nav-item">
-                <a href="/index/aboutus/" class="nav-link active">About Us</a>
+                <a href="#" class="nav-link active">About Us</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">YouTube</a>
                 <div class="dropdown-menu">테마파크 공식 채널<br>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a><a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단<br></a><a class="dropdown-item" href="https://www.youtube.com/user/happylotteworld">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단(어린이대공원)</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/withEverland">에버랜드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/EverlandLive">에버랜드 Live</a>
                 </div>
                 <div class="dropdown-menu">테마파크 공식 채널<br>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a><a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단<br></a><a class="dropdown-item" href="https://www.youtube.com/user/happylotteworld">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단(어린이대공원)</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/withEverland">에버랜드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/EverlandLive">에버랜드 Live</a>
                 </div>
                 <div class="dropdown-menu">테마파크 공식 채널<br>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a><a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단<br></a><a class="dropdown-item" href="https://www.youtube.com/user/happylotteworld">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단(어린이대공원)</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/withEverland">에버랜드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/EverlandLive">에버랜드 Live</a>
                 </div>
                 <div class="dropdown-menu">
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">서울대공원TV</a><a class="dropdown-item" href="#">서울시설공단(어린이대공원)<br></a><a class="dropdown-item" href="#">롯데월드</a><a class="dropdown-item" href="#">에버랜드</a><a class="dropdown-item" href="#">에버랜드 Live</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">서울시설공단(어린이대공원)</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul">롯데월드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/withEverland">에버랜드</a>
+                  <a class="dropdown-item" href="https://www.youtube.com/c/EverlandLive">에버랜드 Live</a>
                 </div>
               </li>
             </ul>
@@ -46,13 +59,14 @@
         </div>
         <div class="col-md-6 text-right" style=""><a class="btn btn-light mx-2" href="/index/registration">회원가입</a>
           {% if user.is_authenticated %}
-            <a class="btn btn-light mx-2" href="/index/logout">{{ user.username }} (로그아웃)</a>
+            <a class="btn btn-light mx-2" href="index/logout">{{ user.username }} (로그아웃)</a>
           {% else %}
-            <a class="btn btn-light mx-2" href="/index/log_in">로그인</a>
+            <a class="btn btn-light mx-2" href="index/log_in">로그인</a>
           {% endif %}
-        </div>
       </div>
     </div>
+    </div>
+  </div>
   </div>
   <div class="py-5" style=	"background-image: url(/static/images/everland.png);	background-position: left;	background-size: 100%;	background-repeat: repeat;">
     <div class="container">
@@ -73,11 +87,11 @@
         </div>
         <div class="p-4 col-md-4" style="">
           <h2 class="mb-2">에버랜드</h2>
-          <ul class="list-unstyled"> <a href="/index/everland/parking/" class="text-dark"><b>주차장</b></a> <br> <a href="/index/everland/facility/" class="text-dark">편의시설</a> <br> <a href="/index/everland/ticket/" class="text-dark">이용요금</a> <br> <a href="/index/everland/ticket/" class="text-dark">운휴시설</a> </ul>
+          <ul class="list-unstyled"> <a href="/index/everland/parking/" class="text-dark">주차장</a> <br> <a href="/index/everland/facility/" class="text-dark">편의시설</a> <br> <a href="/index/everland/ticket/" class="text-dark">이용요금</a> <br> <a href="/index/everland/serviceoff/" class="text-dark">운휴시설</a> </ul>
         </div>
         <div class="p-4 col-md-4" style="">
           <h2 class="mb-2">날씨 &amp; 교통</h2>
-          <ul class="list-unstyled"> <a href="#" class="text-dark">경기도 용인시 날씨</a><br><a href="#" class="text-dark">에버랜드로 가는 길</a><br> <br> </ul>
+          <ul class="list-unstyled"> <a href="#" class="text-dark">경기도 용인시 날씨</a><br><a href="https://map.naver.com/v5/directions/-/14159986.404403146,4480072.064895816,%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C,11574457,PLACE_POI/-/transit?c=14159520.6162623,4480072.0648955,15,0,0,0,dh" class="text-dark">에버랜드로 가는 길</a><br> <br> </ul>
         </div>
       </div>
     </div>
@@ -85,7 +99,7 @@
   <div class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="assets/images/parking_map_everland.png"></div>
+        <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="{% static '/images/parking_map_everland.png' %}"></div>
       </div>
       <div class="row">
         <div class="col-md-12" style="">
@@ -93,14 +107,64 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="assets/images/parking_kakao_everland.png"></div>
+        <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="{% static '/images/parking_kakao_everland.png' %}"></div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md col-md-4"><img class="img-fluid d-block" src="{% static '/images/logo.jpg' %}">
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="" style="">© 2022<br>눈치게임이기고싶조,&nbsp;<br>Inc All rights reserved.</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md col-md-4">
+          <h3>Official Website</h3>
+          <ul class="list-unstyled text-small">
+            <li>
+              <a class="text-muted" href="https://grandpark.seoul.go.kr/main/ko.do">서울대공원</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://www.sisul.or.kr/open_content/childrenpark/">어린이대공원</a>
+            </li>
+            <li>
+              <a class="text-muted" href="http://www.lotteworld.com/gate.html">Lotteworld</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://www.everland.com/web/everland/main.html">Everland</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-6 col-md col-md-4">
+          <h3>Youtube Channel</h3>
+          <ul class="list-unstyled text-small">
+            <li>
+              <a class="text-muted" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV></a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://www.youtube.com/user/seoulsisul">서울시설공단(어린이대공원)</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://www.youtube.com/user/happylotteworld"></a>롯데월드
+            </li>
+            <li>
+              <a class="text-muted" href="https://www.youtube.com/c/withEverland">에버랜드</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://www.youtube.com/c/EverlandLive">에버랜드 Live</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+
 </body>
 
 </html>

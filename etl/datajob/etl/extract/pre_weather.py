@@ -1,15 +1,9 @@
-from datetime import datetime
 import json
-from urllib import response
 import requests
 from bs4 import BeautifulSoup
-from infra.spark_session import get_spark_session
-from infra.util import cal_std_day, execute_rest_api
+from infra.util import cal_std_day
 from infra.hdfs_client import get_client
-from infra.logger import get_logger
-import time
 from pyspark.sql.types import *
-from pyspark.sql.functions import col
 
 class PreweatherExtractor:
     file_dir = '/themapark/weather/'
@@ -18,7 +12,7 @@ class PreweatherExtractor:
     @classmethod
     def extract_data(cls):
         data = []
-        cols =['지역','날짜','최고기온','최저기온','일교차','강수량','바람','최대풍속']
+        cols =['지역','날짜','최고기온','최저기온','일교차','강수량','바람','최대풍속','img']
         ld = ['0201010202','0203020106','0101010000','0101010000 ']
 
         for n in ld:
@@ -31,6 +25,8 @@ class PreweatherExtractor:
             temlow = soup.findAll('font',{'color':'blue'})
             rw = soup.findAll('font',{'color':'7F7F7F'})
             topwind = soup.findAll('font',{'color':'#7F7F7F'})
+            weather_img = soup.findAll('img',{'border':'0'})
+            
             #일자 별 풍속 리스트 생성
             wind_top1 =[]
             wind_top2 =[]
@@ -73,35 +69,49 @@ class PreweatherExtractor:
                 rows.append(float(temlow[i].text.replace('˚C','')))
                 #일교차
                 rows.append(float(temhigh[i].text.replace('˚C','')) - float(temlow[i].text.replace('˚C','')))
-                #풍속,강수량,일교차
+                #풍속,강수량,일교차,날씨이미지
                 if i==0:
+                    day1_img = 'http://www.weatheri.co.kr/' + weather_img[6].get('src').replace('../../','')
                     rows.append(float(rw[1].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[0].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top1)))
+                    rows.append(day1_img)
                 elif i==1:
+                    day2_img = 'http://www.weatheri.co.kr/' + weather_img[7].get('src').replace('../../','')
                     rows.append(float(rw[3].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[2].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top2)))
+                    rows.append(day2_img)
                 elif i==2:
+                    day3_img = 'http://www.weatheri.co.kr/' + weather_img[8].get('src').replace('../../','')
                     rows.append(float(rw[5].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[4].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top3)))
+                    rows.append(day3_img)
                 elif i==3:
+                    day4_img = 'http://www.weatheri.co.kr/' + weather_img[9].get('src').replace('../../','')
                     rows.append(float(rw[7].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[6].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top4)))
+                    rows.append(day4_img)
                 elif i==4:
+                    day5_img = 'http://www.weatheri.co.kr/' + weather_img[10].get('src').replace('../../','')
                     rows.append(float(rw[9].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[8].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top5)))
+                    rows.append(day5_img)
                 elif i==5:
+                    day6_img = 'http://www.weatheri.co.kr/' + weather_img[11].get('src').replace('../../','')
                     rows.append(float(rw[11].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[10].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top6)))
+                    rows.append(day6_img)
                 elif i==6:
+                    day7_img = 'http://www.weatheri.co.kr/' + weather_img[12].get('src').replace('../../','')
                     rows.append(float(rw[13].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[12].text.replace(' m/s','').replace('-','0')))
                     rows.append(float(max(wind_top7)))
+                    rows.append(day7_img)
                 elif i==7:
                     rows.append(float(rw[15].text.replace(' mm','').replace('-','0')))
                     rows.append(float(rw[14].text.replace(' m/s','').replace('-','0')))
@@ -129,7 +139,8 @@ class PreweatherExtractor:
                     '일교차':'일교차',
                     '강수량':'강수량',
                     '바람':'바람',
-                    '최대풍속':'최대풍속'
+                    '최대풍속':'최대풍속',
+                    'img' : 'img'
                 },
             },
         'data':data

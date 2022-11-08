@@ -7,7 +7,8 @@ from pyspark.sql.functions import col, lit
 from datajob.modeling.navi_predict import NaviPredict
 from datajob.modeling.sbw_out_predict import SbwOutPredict
 from infra.spark_session import get_spark_session
-from infra.jdbc import find_data, DataMart, DataWarehouse
+from infra.jdbc import find_data, save_data, DataMart, DataWarehouse, OperationDB, overwrite_trunc_data
+from infra.util import cal_std_day_after2
 from xgboost import XGBRegressor
 
 
@@ -16,6 +17,7 @@ class ChildParkModeling:
 
     @classmethod
     def exec(cls):
+        # ㅡㅡㅡㅡㅡㅡ train ㅡㅡㅡㅡㅡㅡ
         df = find_data(DataMart, "PRE_CHILDPARK")
         df = df.drop('PC_IDX', 'SBW_IN_NUM')
         df = df.toPandas()
@@ -24,7 +26,7 @@ class ChildParkModeling:
                         'PM10': 'int32', 'PM25': 'int32', 'SBW_OUT_NUM': 'int32',
                         'EVENT_OX': 'int32', 'NAVI_SRC_NUM': 'int32', 'CORONA_PAT': 'int32',})
         
-        df = cls.child_grand_park(df)
+        df = cls.child_grand_park(df, test=False)
         y_train = df['ENT_NUM']
         X_train = df.drop(['ENT_NUM'], axis=1, inplace=False)
         
@@ -78,19 +80,36 @@ class ChildParkModeling:
                         'PM10': 'int32', 'PM25': 'int32', 'SBW_OUT_NUM': 'int32',
                         'EVENT_OX': 'int32', 'NAVI_SRC_NUM': 'int32', 'CORONA_PAT': 'int32'})
         
-        print(df_test)
-        df_test = cls.child_grand_park(df_test)
-        print(df_test)
+        df_test = cls.child_grand_park(df_test, test=True)
+
 
         X_test = df_test.drop(['ENT_NUM'], axis=1, inplace=False)
         y_test = df_test['ENT_NUM']
 
+        X_train = X_train[['HOLIDAY_OX', 'HIGH_TEMP', 'LOW_TEMP', 'RAIN_AMOUNT', 'AVG_WIND', 'PM10', 'PM25', 'SBW_OUT_NUM', 'EVENT_OX', 'NAVI_SRC_NUM', 'CORONA_PAT', 'DAY_1', 'DAY_2', 'DAY_3', 'DAY_4', 'DAY_5', 'DAY_6', 'DAY_7']]
+        X_test = X_test[['HOLIDAY_OX', 'HIGH_TEMP', 'LOW_TEMP', 'RAIN_AMOUNT', 'AVG_WIND', 'PM10', 'PM25', 'SBW_OUT_NUM', 'EVENT_OX', 'NAVI_SRC_NUM', 'CORONA_PAT', 'DAY_1', 'DAY_2', 'DAY_3', 'DAY_4', 'DAY_5', 'DAY_6', 'DAY_7']]
+
+
         # ㅡㅡㅡㅡㅡㅡ train 함수 실행 ㅡㅡㅡㅡㅡㅡ
-        print(cls.train_by_xgbm(X_train, y_train, X_test))
+        res_ent = cls.train_by_xgbm(X_train, y_train, X_test)
+        print(res_ent)
+        data = []
+        for i in range(len(res_ent)):
+            tmp_dict = {}
+            tmp_dict['STD_DATE'] = cal_std_day_after2(i)
+            tmp_dict['THEME_NAME'] = '서울어린이대공원'
+            tmp_dict['ENT_NUM'] = int(res_ent[i])
+            data.append(tmp_dict)
+
+        # 운영 DB에 저장
+        df_fin = get_spark_session().createDataFrame(data) \
+                                    .select(col('STD_DATE').cast('date'), col('THEME_NAME'), col('ENT_NUM').cast('integer'))
+        overwrite_trunc_data(OperationDB, df_fin, "PRE_ENTRANCE")
+
 
 
     # 전처리함수
-    def child_grand_park(df):
+    def child_grand_park(df, test):
         # 날짜 index화
         df = df.set_index('STD_DATE')
         
@@ -105,13 +124,14 @@ class ChildParkModeling:
         df['ENT_NUM'] = np.log1p(df['ENT_NUM'])
         
         # 범주형 데이터 원핫인코딩
-        df = pd.get_dummies(df, columns=['DAY', 'HOLIDAY_OX', 'EVENT_OX'])
+        df = pd.get_dummies(df, columns=['DAY'])
         
-        # 타겟 값을 네비게이션 값과 비교해본 후 이상치 제거
-        cond1 = df['NAVI_SRC_NUM'] < 1000
-        cond2 = df['ENT_NUM'] < np.log1p(2)
-        outlier_index = df[cond1 & cond2].index
-        df.drop(outlier_index, axis=0, inplace=True)
+        if not test:
+            # 타겟 값을 네비게이션 값과 비교해본 후 이상치 제거
+            cond1 = df['NAVI_SRC_NUM'] < 1000
+            cond2 = df['ENT_NUM'] < np.log1p(2)
+            outlier_index = df[cond1 & cond2].index
+            df.drop(outlier_index, axis=0, inplace=True)
         
         # 왜곡이 심한 컬럼에 로그학습
         features_index = ['PM10', 'PM25', 'RAIN_AMOUNT', 'AVG_WIND', 'LOW_TEMP',
