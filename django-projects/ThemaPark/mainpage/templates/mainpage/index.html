@@ -62,123 +62,159 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
-    <div class="container-fluid">
-      <div class="row px-2" style="">
-        <div class="col mb-3 pt-4" style="">
-          <h2 class="mt-3 text-center" style="">롯데월드</h2>
-            <a href="index/lotteworld/">
-              <img class="img-fluid d-block mx-auto h-50 w-100" src="{% static '/images/Adventure.jpg' %}" width="" style="">
-            </a>
-        </div>
-        <div class="col mb-3 w-75 pt-4" style="">
-          <h2 class="mt-3" style="">서울대공원</h2>
-            <a href="index/seoulgrandpark/">
-              <img class="d-block shadow-none img-fluid mx-auto w-100 h-50" src="{% static '/images/seoulparkentrance.jpg' %}" style="">
-            </a>
-        </div>
-      </div>
-      <div class="row px-2" style="">
-        <div class="col mx-2 mb-3 pt-0">
-          <h2 class="mt-3" style=""><b>어린이대공원</b></h2>
-            <a href="index/childpark/">
-              <img class="img-fluid d-block shadow-none mx-auto w-100 h-50" src="{% static '/images/childparkentrance.jpg' %}" width="" style="">
-            </a>
-        </div>
-        <div class="col mx-2 mb-3 pt-0" style="">
-          <h2 class="mt-3"><b>에버랜드</b></h2>
-            <a href="index/everland/">
-              <img class="img-fluid d-block shadow-none mx-auto w-100 h-50" src="{% static '/images/everlandentrance.jpg' %}" width="">
-            </a>
+  <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 pt-2 mt-1" style="">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary">방문 날짜</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(128px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <a class="dropdown-item visit_date" href="javascript:void(0);"></a>
+              <a class="dropdown-item visit_date" href='javascript:void(0);'></a>
+              <a class="dropdown-item visit_date" href="javascript:void(0);"></a>
+              <a class="dropdown-item visit_date" href="javascript:void(0);"></a>
+              <a class="dropdown-item visit_date" href="javascript:void(0);"></a>
+              <a class="dropdown-item visit_date" href="javascript:void(0);"></a>
+              <a class="dropdown-item visit_date" href="javascript:void(0);"></a>
+            </div>
+          </div>
+        </div>        <div class="col-md-9" style="">
+          <h1 class="my-2 mx-4">How busy is your favorite theme park?<br></h1>
         </div>
       </div>
     </div>
   </div>
-  <footer>
+  <div class="" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-6"> <img class="img-fluid d-block cover" src="{% static '/images/seoulgrandpark_entrance.png' %}"> </div>
+        <div class="col-md-3 col-6"> <img class="img-fluid d-block cover" src="{% static '/images/childrenpark_entrance.png' %}"> </div>
+        <div class="col-md-3 col-6"> <img class="img-fluid d-block mx-auto cover" src="{% static '/images/everland_entrance.jpg' %}"> </div>
+        <div class="col-md-3 col-6"> <img class="img-fluid d-block cover" src="{% static '/images/lottecastle.jpg' %}"> </div>
+      </div>
+      <div class="row">
+        {% for item in entrance %}
+          {{ item.theme_name }}<br>
+          {{ item.ent_num }}<br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div>
+    <a href="index/seoulgrandpark/">
+    <div class="py-5 text-center" style="background-image: url(/static/images/seoulgrandpark_entrance.png); background-position: center top; background-size: 100%; background-repeat: repeat;">
+    <div class="container py-5 photo-overlay"></div>
+  </div>
+    </a>
+    <a href="index/childpark/">
+  <div class="py-5 text-center" style="	background-image: url(/static/images/childrenpark_entrance.png);	background-position: center center;	background-size: 100%;	background-repeat: repeat;	box-shadow: 0px 0px 300px  black;">
+    <div class="container py-5 photo-overlay"></div>
+  </div>
+    </a>
+    <a href="index/lotteworld/">
+  <div class="py-5 text-center" style="	background-image: url(/static/images/lottecastle.jpg);	background-position: center;	background-size: 100%;	background-repeat: repeat;	box-shadow: 0px 0px 400px  black;">
+    <div class="container py-5 photo-overlay"></div>
+  </div>
+    </a>
+    <a href="index/everland/">
+  <div class="py-5 text-center" style="	background-image: url(/static/images/everland_entrance.jpg);	background-position: center;	background-size: 100%;	background-repeat: repeat;	box-shadow: 0px 0px 100px  black;">
+    <div class="container py-5 photo-overlay"></div>
+  </div>
+    </a>
+  <footer></footer>
+  <div class="py-5">
     <div class="container py-5">
       <div class="row">
-        <div class="col-12 col-md"><img class="img-fluid d-block" src="{% static '/images/logo.jpg' %}">
+        <div class="col-12 col-md col-md-4"><img class="img-fluid d-block" src="{% static '/images/logo.jpg' %}">
           <div class="row">
             <div class="col-md-12">
-              <h5 class="" style="">© 2022<br>눈치게임이기고싶조, Inc All rights reserved.</h5>
+              <h5 class="" style="">© 2022<br>눈치게임이기고싶조,&nbsp;<br>Inc All rights reserved.</h5>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md">
-          <h5><b>Features</b></h5>
+        <div class="col-6 col-md col-md-4">
+          <h3>Official Website</h3>
           <ul class="list-unstyled text-small">
             <li>
-              <a class="text-muted" href="#">롯데월드</a>
+              <a class="text-muted" href="https://grandpark.seoul.go.kr/main/ko.do">서울대공원</a>
             </li>
             <li>
-              <a class="text-muted" href="#">서울대공원</a>
+              <a class="text-muted" href="https://www.sisul.or.kr/open_content/childrenpark/">어린이대공원</a>
             </li>
             <li>
-              <a class="text-muted" href="#">어린이대공원</a>
+              <a class="text-muted" href="http://www.lotteworld.com/gate.html">Lotteworld</a>
             </li>
             <li>
-              <a class="text-muted" href="#">에버랜드</a>
+              <a class="text-muted" href="https://www.everland.com/web/everland/main.html">Everland</a>
             </li>
           </ul>
         </div>
-        <div class="col-6 col-md">
-          <h5><b>Resources</b></h5>
+        <div class="col-6 col-md col-md-4">
+          <h3>Youtube Channel</h3>
           <ul class="list-unstyled text-small">
             <li>
-              <a class="text-muted" href="#">Resource</a>
+              <a class="text-muted" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA">서울대공원TV></a>
             </li>
             <li>
-              <a class="text-muted" href="#">Resource name</a>
+              <a class="text-muted" href="https://www.youtube.com/user/seoulsisul">서울시설공단(어린이대공원)</a>
             </li>
             <li>
-              <a class="text-muted" href="#">Another resource</a>
+              <a class="text-muted" href="https://www.youtube.com/user/happylotteworld"></a>롯데월드
             </li>
             <li>
-              <a class="text-muted" href="#">Final resource</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5><b>Resources</b></h5>
-          <ul class="list-unstyled text-small">
-            <li>
-              <a class="text-muted" href="#">Business</a>
+              <a class="text-muted" href="https://www.youtube.com/c/withEverland">에버랜드</a>
             </li>
             <li>
-              <a class="text-muted" href="#">Education</a>
-            </li>
-            <li>
-              <a class="text-muted" href="#">Government</a>
-            </li>
-            <li>
-              <a class="text-muted" href="#">Gaming</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5><b>About</b></h5>
-          <ul class="list-unstyled text-small">
-            <li>
-              <a class="text-muted" href="#">Team</a>
-            </li>
-            <li>
-              <a class="text-muted" href="#">Locations</a>
-            </li>
-            <li>
-              <a class="text-muted" href="#">Privacy</a>
-            </li>
-            <li>
-              <a class="text-muted" href="#">Terms</a>
+              <a class="text-muted" href="https://www.youtube.com/c/EverlandLive">에버랜드 Live</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </footer>
+  </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" style=""></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+
+  <script>
+    function stdDayToString(stdDay){
+        month = stdDay.getMonth()+1 >= 10 ? stdDay.getMonth()+1 : '0'+ stdDay.getMonth()+1
+        day = stdDay.getDate() >= 10 ? stdDay.getDate() : '0'+ stdDay.getDate()
+        return stdDay.getFullYear()+ '-' + month + '-' + day
+    }
+
+    data = []
+    today = new Date();
+
+    for(i = 1; i < 11; i++){
+      fmt = stdDayToString(today);
+      data.push(fmt)
+      today.setDate(today.getDate()+1)
+    }
+
+    // document.querySelector('.visit_date')  => element
+    //document.querySelectorAll => [elements]
+
+    console.dir(document.querySelectorAll('.visit_date'))
+    
+    document.querySelectorAll('.visit_date').forEach( (e, i) => {
+      e.textContent = data[i]
+      
+      e.addEventListener('click',()=>{
+        window.location = '/?date=' + e.textContent;
+      })
+    })
+  </script>
+
 </body>
 
 </html>

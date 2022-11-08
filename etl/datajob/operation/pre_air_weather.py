@@ -58,12 +58,13 @@ class PreairweatherOperation:
                     ,col('강수량').cast(FloatType()).alias('RAIN_AMOUNT')
                     ,col('바람').cast(FloatType()).alias('AVG_WIND')
                     ,col('최대풍속').cast(FloatType()).alias('HIGH_WIND')
+                    ,col('img').cast(StringType()).alias('WEATHER_IMG')
                 )
 
                 weather = weather_data
                 dust = dust_data
                 wd_data = weather.join(dust, (weather.STD_DATE == dust.STD_DATE) & (weather.THEME_NUM == dust.THEME_NUM) )\
-                                .select(weather.STD_DATE,weather.THEME_NUM,'HIGH_TEMP','LOW_TEMP','DIFF_TEMP','RAIN_AMOUNT','AVG_WIND','HIGH_WIND',dust.PM10,dust.PM25)
+                                .select(weather.STD_DATE,weather.THEME_NUM,weather.WEATHER_IMG,'HIGH_TEMP','LOW_TEMP','DIFF_TEMP','RAIN_AMOUNT','AVG_WIND','HIGH_WIND',dust.PM10,dust.PM25)
 
 
         res_data = wd_data.join(themepark, on='THEME_NUM').drop('THEME_NUM')

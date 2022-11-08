@@ -14,6 +14,9 @@ from datajob.etl.transform.subway_inout import SubwayInOutTransformer
 from datajob.etl.transform.today_dust import TodustTransformer
 from datajob.etl.transform.today_weather import ToweatherTransformer
 from datajob.datamart.pre_themepark_event import PreThemeParkEvent
+from datajob.modeling.childpark import ChildParkModeling
+from datajob.modeling.other_themepark import OtherThemeParkModeling
+from datajob.operation.pre_air_weather import PreairweatherOperation
 from datajob.operation.themepark_hol_fac import ThemeparkHolFac
 from datajob.operation.themepark_time import ThemeparkTime
 from datajob.etl.extract.event_childpark import EventChildParkExtractor
@@ -71,7 +74,11 @@ works = {
     ,'operation': {
         'themepark_time': ThemeparkTime.save
         ,'themepark_hol_fac': ThemeparkHolFac.save
-        ,'pre_air_weather': PreAirWeather.save
+        ,'pre_air_weather': PreairweatherOperation.save
+    }
+    ,'modeling':{
+        'childpark': ChildParkModeling.exec
+        ,'other_themepark': OtherThemeParkModeling.exec
     }
 }
 

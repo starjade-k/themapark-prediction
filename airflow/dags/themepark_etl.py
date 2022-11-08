@@ -161,7 +161,19 @@ with DAG(
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py operation pre_air_weather',
     )
-    
+
+    # ㅡㅡㅡㅡㅡㅡ MODELING ㅡㅡㅡㅡㅡㅡ    
+    t23 = BashOperator(
+        task_id='modeling_childpark',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py modeling childpark',
+    )
+
+    t24 = BashOperator(
+        task_id='modeling_other_themepark',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py modeling other_themepark',
+    )
 
     t1.doc_md = dedent(
         """\
@@ -190,16 +202,16 @@ with DAG(
     # 태스크 우선순위 설정
     # extract는 병렬로, transform과 datamart는 직렬로
     
-    t1 >> t10
-    t2 >> t11
-    t3 >> t4 >> t14 >> t22
-    t5 >> t13
-    t18 >> t19
-    [t6, t7] >> t12 >> t15
-    [t8, t9] >> t16 >> t17
-    t20 >> t21
+    t1 >> t10  # 오늘 날씨
+    t2 >> t11  # 오늘 미세먼지
+    [t8, t9] >> t16 >> t17  # 미래 운영시간, 운휴시설 정보
+    t3 >> t4 >> t14 >> t22  # 예보 날씨
+    t5 >> t13  # 2일전 네비게이션 검색건수
+    t18 >> t19  # 미래 공휴일정보
+    [t6, t7] >> t12 >> t15  # 오늘, 미래 행사정보
+    t20 >> t21  # 3일전 지하철 승하차 정보
+    [t22, t13, t19, t15, t21] >> t23 >> t24
     
-    # t9 >> t10
 
   
 
