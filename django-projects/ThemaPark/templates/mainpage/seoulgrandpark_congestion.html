@@ -1,0 +1,334 @@
+{% extends './base_seoulgrandpark.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+  <script type="text/javascript">
+    function lnbType(val) {
+        if(val != null && val != ''){
+            $(".lnbWrap").show();
+            $("#"+val+"").show();
+        }
+    }
+    </script>
+    
+    <div class="lnbWrap" style="">  
+        <div style="" id="facility">
+            <nav>
+                <h2 class="blind">서브메뉴</h2>
+                <ul class="depth">
+                    <li class="active"><h3><a href="/seoulgrandpark/congestion/">예측정보</a></h3></li>
+                    <li><h3><a href="/seoulgrandpark/parking/">시설안내</a></h3></li>
+                    <li><h3><a href="/seoulgrandpark/weather/">날씨 & 교통</a></h3></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <section id="UI-PC-SK-011" class="contents">
+    <script type="text/javascript">
+        function conTitWrap(url,title1,title2) {
+            $(".pageTit").text(title1);
+            if(title2 != null && title2 != ''){
+                $(".title2").text(title2);
+                $(".title2").attr("href", "/ko"+url);
+            }else{
+                $(".title2span").hide();
+            }
+            $(".title1").text(title1);
+        }
+        </script>
+        
+        
+        <header class="conTitWrap">
+            <h2 class="pageTit">어린이대공원</h2>
+        </header>
+        
+            <div class="defaultTab">
+                <ul>
+                    <li class="active"><a href="/seoulgrandpark/congestion/">어린이대공원 예상 혼잡도 안내</a></li>
+                    <li><a href="/seoulgrandpark/navi/">네비게이션 검색 건수</a></li>
+                </ul>
+            </div>
+    </section>
+<div class="py-0">
+  <div class="container">
+    <div class="row my-0">
+      <div class="col-md-12">
+        <h5 class="">* 테마파크 면적 대비 예상 방문객 수를 <i><b>혼잡도 단계</b></i>로 표현(25%, 50%, 75%)</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-18</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3"><img class="d-block img-fluid w-50 m-0 mx-auto my-0" src="{% static '/images/level4.png' %}"></div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-19</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3">
+        <p class="text-lowercase text-center mt-0 mb-0 mx-auto w-50"><img class="img-fluid d-block" src="assets/images/level1.png"></p>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-20</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3">
+        <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="assets/images/level2.png"></p>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-21</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3">
+        <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="assets/images/level2.png"></p>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-22</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3">
+        <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="assets/images/level2.png"></p>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-23</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3">
+        <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="assets/images/level4.png"></p>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">2022-11-24</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="" style="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h2 class="">운영시간<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center" style="">예상 방문객 수<br></h2>
+      </div>
+      <div class="col-md-3" style="">
+        <h2 class="text-center">혼잡도 단계<br></h2>
+      </div>
+      <div class="col-md-3">
+        <h2 class="text-center">행사 정보</h2>
+      </div>
+      <div class="col-md-3 text-center" style="">
+        <h4 class="">09:00 ~ 22:00</h4>
+      </div>
+      <div class="col-md-3 text-center">
+        <h4 class="text-center">00</h4>
+      </div>
+      <div class="col-md-3">
+        <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="assets/images/level4.png"></p>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 class="">빈칸</h3>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

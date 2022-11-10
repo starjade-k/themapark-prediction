@@ -1,0 +1,115 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet"  href="{% static 'css/sgp.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Sunflower&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <style>
+      * {
+        font-family: 'Jua', 'sans-serif'!important; font-size: 20px;
+      }
+    </style>
+
+    <div class="py-3" style="font-family: 'Jua', sans-serif;">
+      <div class="container" style="font-family: 'Jua', sans-serif;">
+        <div class="row">
+          <div class="col-md-6" style="">
+            <div class="col-md-12">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a href="/" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/index/aboutus/" class="nav-link active">About Us</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">YouTube</a>
+                  <div class="dropdown-menu" style="text-align: center">테마파크 공식 채널<br>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA" target="_blank">서울대공원TV</a>
+                    <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul" target="_blank">서울시설공단(어린이대공원)</a>
+                    <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul" target="_blank">롯데월드</a>
+                    <a class="dropdown-item" href="https://www.youtube.com/c/withEverland" target="_blank">에버랜드</a>
+                    <a class="dropdown-item" href="https://www.youtube.com/c/EverlandLive" target="_blank">에버랜드 Live</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 text-right" style=""><a class="btn btn-light mx-2" href="/index/registration">회원가입</a>
+            {% if user.is_authenticated %}
+              <a class="btn btn-light mx-2" href="/index/logout">{{ user.username }} (로그아웃)</a>
+            {% else %}
+              <a class="btn btn-light mx-2" href="/index/login">로그인</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    {% block content %}
+    {% endblock %}
+    
+    <div class="py-5">  
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-12 col-md col-md-4"><img class="img-fluid d-block" src="{% static '/images/logo.jpg' %}">
+            <div class="row">
+              <div class="col-md-12">
+                <h5 class="" style="font-family: 'Jua', sans-serif;">© 2022<br>눈치게임이기고싶조,&nbsp;<br>Inc All rights reserved.</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md col-md-4">
+            <h3 style="font-family: 'Jua', sans-serif;">Official Website</h3>
+            <ul class="list-unstyled text-small" style="font-family: 'Jua', sans-serif;">
+              <li>
+                <a class="text-muted" href="https://grandpark.seoul.go.kr/main/ko.do" target="_blank">서울대공원</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://www.sisul.or.kr/open_content/childrenpark/" target="_blank">어린이대공원</a>
+              </li>
+              <li>
+                <a class="text-muted" href="http://www.lotteworld.com/gate.html" target="_blank">롯데월드</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://www.everland.com/web/everland/main.html" target="_blank">에버랜드</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md col-md-4">
+            <h3 style="font-family: 'Jua', sans-serif;">Youtube Channel</h3>
+            <ul class="list-unstyled text-small" style="font-family: 'Jua', sans-serif;">
+              <li>
+                <a class="text-muted" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA" target="_blank">서울대공원TV></a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://www.youtube.com/user/seoulsisul" target="_blank">서울시설공단(어린이대공원)</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://www.youtube.com/user/happylotteworld" target="_blank">롯데월드</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://www.youtube.com/c/withEverland" target="_blank">에버랜드</a>
+              </li>
+              <li>
+                <a class="text-muted" href="https://www.youtube.com/c/EverlandLive" target="_blank">에버랜드 Live</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+  
+  </body>
+
+</html>

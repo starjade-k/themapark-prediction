@@ -1,0 +1,146 @@
+{% extends './base_childrenpark.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+  <script type="text/javascript">
+    function lnbType(val) {
+        if(val != null && val != ''){
+            $(".lnbWrap").show();
+            $("#"+val+"").show();
+        }
+    }
+    </script>
+    
+    <div class="lnbWrap" style="">  
+        <div style="" id="facility">
+            <nav>
+                <h2 class="blind">서브메뉴</h2>
+                <ul class="depth">
+                    <li><h3><a href="/childpark/congestion/">예측정보</a></h3></li>
+                    <li class="active"><h3><a href="/childpark/parking/">시설안내</a></h3></li>
+                    <li><h3><a href="/childpark/weather/">날씨 & 교통</a></h3></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <section id="UI-PC-SK-011" class="contents">
+      <script type="text/javascript">
+          function conTitWrap(url,title1,title2) {
+              $(".pageTit").text(title1);
+              if(title2 != null && title2 != ''){
+                  $(".title2").text(title2);
+                  $(".title2").attr("href", "/ko"+url);
+              }else{
+                  $(".title2span").hide();
+              }
+              $(".title1").text(title1);
+          }
+          </script>
+          
+          
+          <header class="conTitWrap">
+              <h2 class="pageTit">운휴시설</h2>
+          </header>
+          
+              <div class="defaultTab">
+                  <ul>
+                    <li><a href="/childpark/parking/">주차장</a></li>
+                    <li><a href="/childpark/facility/">편의시설</a></li>
+                    <li><a href="/childpark/ticket/">이용요금</a></li>
+                    <li class="active"><a href="/childpark/serviceoff/">운휴시설</a></li>
+                  </ul>
+              </div>
+      </section>     
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class=""><i class="fa fa-userExample of calendar-check-o d-inline-block fa-thermometer-empty"></i>&nbsp; 동물관람기준</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>동물사</th>
+                <th>해당동물</th>
+                <th>관람기준</th>
+              </tr>
+              <tr>
+                <th><span style="font-weight: normal;">꼬마동물마을</span></th>
+                <th><span style="font-weight: normal;">미어캣, 검은꼬리프레리독, 사막여우, 아프리카포큐파인</span></th>
+                <th><span style="font-weight: normal;">0℃ 이상 </span></th>
+              </tr>
+              <tr>
+                <th><br></th>
+                <th><span style="font-weight: normal;">왈라루, 작은발톱수달</span></th>
+                <th><span style="font-weight: normal;">5℃ 이상 </span></th>
+              </tr>
+              <tr>
+                <th><span style="font-weight: normal;">원숭이마을</span></th>
+                <th><span style="font-weight: normal;">일본원숭이, 돼지꼬리원숭이, 아누비스개코원숭이, 망토원숭이</span></th>
+                <th><span style="font-weight: normal;">0℃ 이상 </span></th>
+              </tr>
+              <tr>
+                <th><br></th>
+                <th><span style="font-weight: normal;">노랑뺨기번, 은색기번</span></th>
+                <th><span style="font-weight: normal;">10℃ 이상 </span></th>
+              </tr>
+              <tr>
+                <th><span style="font-weight: normal;">코끼리사</span></th>
+                <th><span style="font-weight: normal;">아시아코끼리</span></th>
+                <th><span style="font-weight: normal;">5℃ 이상 </span></th>
+              </tr>
+              <tr>
+                <th><br></th>
+                <th><span style="font-weight: normal;">점박이하이에나</span></th>
+                <th><span style="font-weight: normal;">0℃ 이상 </span></th>
+              </tr>
+              <tr>
+                <th><span style="font-weight: normal;">맹수마을</span></th>
+                <th><span style="font-weight: normal;">사자, 뱅갈호랑이, 표범, 재규어, 서발, 퓨마, 스라소니, 검은등쟈칼, 붉은여우 </span></th>
+                <th><span style="font-weight: normal;">0℃ 이상 </span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>초식동물마을</td>
+                <td>붉은캥거루, 그랜트얼룩말 </td>
+                <td>0℃ 이상 </td>
+              </tr>
+              <tr>
+                <td>물새장</td>
+                <td>쟈카스팽귄</td>
+                <td>0℃ 이상 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="">* 동물원은 오전 10시부터 오후5시까지 관람 가능합니다. (방역상황, 날씨 등에 따라 일부 변동될 수 있습니다.)</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="" style=""><i class="fa fa-userExample of calendar-check-o fa-calendar-check-o d-inline-block">&nbsp; 동물먹방LIVE 운영안내</i></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="">*&nbsp; 운영기간 : 4월~10월 (6~8월 혹서기 기간 미운영)<br>※&nbsp; 우천 시, 전염병(구제역,AI,코로나19 등) 방역기간 등 상황에 따라 탄력 운영<br>*&nbsp; 운영횟수 : 1회/일 운영내용 : 사육사 먹이 제공, 행동풍부화 및 긍정강화훈련 등 진행<br>※&nbsp; 코끼리, 맹수류, 원숭이류, 물개류, 초식동물류, 열대동물류 등 운영</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -24,7 +24,15 @@ class NaviPredict:
         df_navi = df_navi.astype({'SRC_NUM': 'int32'}) # 형변환
         
         # 모델 실행
-        model = load_model('./datajob/modeling/seoulgp_navi_model.h5')
+        if theme_name == '서울대공원':
+            model = load_model('./datajob/modeling/seoulgp_navi_model.h5')
+        elif theme_name == '서울어린이대공원':
+            model = load_model('./datajob/modeling/childrenpark_model.h5')
+        elif theme_name == '에버랜드':
+            model = load_model('./datajob/modeling/everland_model.h5')
+        elif theme_name == '롯데월드':
+            model = load_model('./datajob/modeling/lotteworld_model.h5')
+        
         df_fin = predict(df_navi, 8, model, 'SRC_NUM', 'NAVI_SRC_NUM')
         df_fin = rescaler(df_navi, df_fin, 'SRC_NUM', 'NAVI_SRC_NUM')
 

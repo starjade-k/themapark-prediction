@@ -101,10 +101,16 @@ class ChildParkModeling:
             tmp_dict['ENT_NUM'] = int(res_ent[i])
             data.append(tmp_dict)
 
-        # 운영 DB에 저장
+        # 입장객수 예측정보 운영 DB에 저장
         df_fin = get_spark_session().createDataFrame(data) \
                                     .select(col('STD_DATE').cast('date'), col('THEME_NAME'), col('ENT_NUM').cast('integer'))
         overwrite_trunc_data(OperationDB, df_fin, "PRE_ENTRANCE")
+
+        # 네비게이션 예측정보 운영 DB에 저장
+        df_navi = df_navi.withColumn('CONGESTION', (col('NAVI_SRC_NUM') / 979 * 100).cast('integer'))
+        df_navi = df_navi.withColumn('THEME_NAME', lit('서울어린이대공원'))
+        overwrite_trunc_data(OperationDB, df_navi, "PRE_NAVI")
+
 
 
 

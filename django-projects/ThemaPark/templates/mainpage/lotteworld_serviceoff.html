@@ -1,0 +1,91 @@
+{% extends './base_lotteworld.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+<script type="text/javascript">
+  function lnbType(val) {
+      if(val != null && val != ''){
+          $(".lnbWrap").show();
+          $("#"+val+"").show();
+      }
+  }
+</script>
+  
+<div class="lnbWrap" style="">  
+    <div style="" id="facility">
+        <nav>
+            <h2 class="blind">서브메뉴</h2>
+            <ul class="depth">
+                <li><h3><a href="/lotteworld/congestion/">예측 정보</a></h3></li>
+                <li class="active"><h3><a href="/lotteworld/parking/">시설 & 관람안내</a></h3></li>
+                <li><h3><a href="/lotteworld/weather/">날씨 & 교통</a></h3></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<section id="UI-PC-SK-011" class="contents">
+  <script type="text/javascript">
+      function conTitWrap(url,title1,title2) {
+          $(".pageTit").text(title1);
+          if(title2 != null && title2 != ''){
+              $(".title2").text(title2);
+              $(".title2").attr("href", "/ko"+url);
+          }else{
+              $(".title2span").hide();
+          }
+          $(".title1").text(title1);
+      }
+  </script>
+      
+      
+  <header class="conTitWrap">
+      <h2 class="pageTit">운휴시설</h2>
+  </header>
+  
+  <div class="defaultTab">
+      <ul>
+          <li><a href="/lotteworld/parking/">주차장</a></li>
+          <li><a href="/lotteworld/facility/">시설안내</a></li>
+          <li><a href="/lotteworld/ticket/">이용요금</a></li>
+          <li class="active"><a href="/lotteworld/serviceoff/">운휴시설</a></li>
+      </ul>
+  </div>
+</section> 
+
+<div class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">운휴시설 목록</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pb-0 pt-5" style="">
+  <div class="container text-center text-capitalize">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="mb-3">{{ holfac.0.std_date|date:"Y년 M j일" }}</h1>
+      </div>
+    </div>
+    <div class="row text-center text-capitalize">
+      {% for item in holfac %}
+        <div class="col-md-2 mx-auto" style="">
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="">어트랙션명</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="">{{ item.fac_name }}</h4>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

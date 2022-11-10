@@ -168,7 +168,7 @@ class LotteworldPrc(models.Model):
 
 class PreAirWeather(models.Model):
     paw_idx = models.BigAutoField(primary_key=True)
-    theme_name = models.BigIntegerField(blank=True, null=True)
+    theme_name = models.CharField(max_length=30, blank=True, null=True)
     std_date = models.DateField(blank=True, null=True)
     high_temp = models.FloatField(blank=True, null=True)
     low_temp = models.FloatField(blank=True, null=True)
@@ -178,6 +178,7 @@ class PreAirWeather(models.Model):
     high_wind = models.FloatField(blank=True, null=True)
     pm10 = models.BigIntegerField(blank=True, null=True)
     pm25 = models.BigIntegerField(blank=True, null=True)
+    weather_img = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         managed = False
