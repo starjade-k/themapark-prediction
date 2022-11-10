@@ -1,0 +1,146 @@
+{% extends './base_seoulgrandpark.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+  <script type="text/javascript">
+    function lnbType(val) {
+        if(val != null && val != ''){
+            $(".lnbWrap").show();
+            $("#"+val+"").show();
+        }
+    }
+    </script>
+    
+    <div class="lnbWrap" style="">  
+        <div style="" id="facility">
+            <nav>
+                <h2 class="blind">서브메뉴</h2>
+                <ul class="depth">
+                    <li class="active"><h3><a href="/seoulgrandpark/congestion/">예측정보</a></h3></li>
+                    <li><h3><a href="/seoulgrandpark/parking/">시설안내</a></h3></li>
+                    <li><h3><a href="/seoulgrandpark/weather/">날씨 & 교통</a></h3></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <section id="UI-PC-SK-011" class="contents">
+    <script type="text/javascript">
+        function conTitWrap(url,title1,title2) {
+            $(".pageTit").text(title1);
+            if(title2 != null && title2 != ''){
+                $(".title2").text(title2);
+                $(".title2").attr("href", "/ko"+url);
+            }else{
+                $(".title2span").hide();
+            }
+            $(".title1").text(title1);
+        }
+        </script>
+        
+        
+        <header class="conTitWrap">
+            <h2 class="pageTit">어린이대공원</h2>
+        </header>
+        
+            <div class="defaultTab">
+                <ul>
+                    <li><a href="/seoulgrandpark/congestion/">어린이대공원 예상 혼잡도 안내</a></li>
+                    <li class="active"><a href="/seoulgrandpark/navi/">네비게이션 검색 건수</a></li>
+                </ul>
+            </div>
+    </section>
+<div class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
+        <h3 class="">주차장 예상 혼잡도</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pb-0 pt-5" style="">
+  <div class="container text-center text-capitalize">
+    <div class="row text-center text-capitalize">
+      <div class="col-md-1 mx-auto" style="">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="">2022-11-18</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="">2022-11-19</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <h4 class="">2022-11-20</h4>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="">2022-11-21</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="">2022-11-22</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="">2022-11-23</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="">2022-11-24</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center text-capitalize">
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="d-block mx-auto img-fluid" src="{% static '/images/level3.png' %}"></p>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="img-fluid d-block" src="{% static '/images/level1.png' %}"></p>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="{% static '/images/level2.png' %}"></p>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="{% static '/images/level2.png' %}"></p>
+      </div>
+      <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="img-fluid d-block" src="{% static '/images/level1.png' %}"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-0">
+  <div class="container">
+    <div class="row my-0">
+      <div class="col-md-12">
+        <h5 class="">* 혼잡도를 전체 주차가능 대수 대비 예상이용대수(=네비게이션 검색건수)로 표현</h5>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

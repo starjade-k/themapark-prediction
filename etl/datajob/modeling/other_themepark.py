@@ -61,7 +61,7 @@ class OtherThemeParkModeling:
         df_weekday = get_spark_session().createDataFrame(dates_weekday)
 
         # 네비게이션 예측 정보
-        df_navi = NaviPredict.exec('서울대공원')
+        df_seoulpark_navi = NaviPredict.exec('서울대공원')
 
         # 지하철 하차 승객수 예측 정보
         df_sbwout = SbwOutPredict.exec('서울대공원')
@@ -70,7 +70,7 @@ class OtherThemeParkModeling:
         df_test = df_test.join(df_event, on=['STD_DATE'])
         df_test = df_test.join(df_weekday, on=['STD_DATE'])
         df_test = df_test.join(df_sbwout, on=['STD_DATE'])
-        df_test = df_test.join(df_navi, on=['STD_DATE'])
+        df_test = df_test.join(df_seoulpark_navi, on=['STD_DATE'])
         df_test = df_test.withColumn('CORONA_PAT', lit(0))
         df_test = df_test.withColumn('ENT_NUM', lit(0))
 
@@ -87,7 +87,7 @@ class OtherThemeParkModeling:
 
         X_train = X_train.sort_index()
 
-        # ㅡㅡㅡㅡㅡㅡ train 함수 실행 ㅡㅡㅡㅡㅡㅡ
+        # 서울대공원 train 함수 실행
         seoulpark_res_ent = cls.train_by_lgbm(X_train, y_train, X_test)
 
         # 서울대공원 데이터프레임 생성
@@ -99,23 +99,48 @@ class OtherThemeParkModeling:
             tmp_dict['ENT_NUM'] = int(seoulpark_res_ent[i])
             seoulpark_data.append(tmp_dict)
 
-        # 운영 DB에 저장
+        # ㅡㅡㅡㅡㅡ 입장객 수 예측정보 DB 저장 ㅡㅡㅡㅡㅡ
+        
+        # 서울대공원 입장객 예측정보 운영 DB에 저장
         df_seoulpark_fin = get_spark_session().createDataFrame(seoulpark_data) \
                                     .select(col('STD_DATE').cast('date'), col('THEME_NAME'), col('ENT_NUM').cast('integer'))
         df_seoulpark_fin.show()
         save_data(OperationDB, df_seoulpark_fin, "PRE_ENTRANCE")
 
-        # 롯데월드 데이터프레임 생성
-        df_lotte_fin = df_seoulpark_fin.withColumn('ENT_NUM', (col('ENT_NUM') / 81018 * 499730).cast('integer'))
+        # 롯데월드 입장객 예측정보 운영 DB에 저장
+        df_lotte_fin = df_seoulpark_fin.withColumn('ENT_NUM', (col('ENT_NUM') / 83764 * 499730).cast('integer'))
         df_lotte_fin = df_lotte_fin.withColumn('THEME_NAME', lit('롯데월드'))
         df_lotte_fin.show()
         save_data(OperationDB, df_lotte_fin, "PRE_ENTRANCE")
 
-        # 에버랜드 데이터프레임 생성
-        df_ever_fin = df_seoulpark_fin.withColumn('ENT_NUM', (col('ENT_NUM') / 81018 * 460780).cast('integer'))
+        # 에버랜드 입장객 예측정보 운영 DB에 저장
+        df_ever_fin = df_seoulpark_fin.withColumn('ENT_NUM', (col('ENT_NUM') / 83764 * 460780).cast('integer'))
         df_ever_fin = df_ever_fin.withColumn('THEME_NAME', lit('에버랜드'))
         df_ever_fin.show()
         save_data(OperationDB, df_ever_fin, "PRE_ENTRANCE")
+
+
+        # ㅡㅡㅡㅡㅡ 네비게이션 예측정보 DB 저장 ㅡㅡㅡㅡㅡ
+
+        # 서울대공원 네비게이션 예측정보 운영 DB에 저장
+        df_seoulpark_navi = df_seoulpark_navi.withColumn('CONGESTION', (col('NAVI_SRC_NUM') / 6616 * 100).cast('integer'))
+        df_seoulpark_navi = df_seoulpark_navi.withColumn('THEME_NAME', lit('서울대공원'))
+        df_seoulpark_navi.show()
+        save_data(OperationDB, df_seoulpark_navi, "PRE_NAVI")
+
+        # 롯데월드 네비게이션 예측 정보 구하고, 운영 DB에 저장
+        df_lotteworld_navi = NaviPredict.exec('롯데월드')
+        df_lotteworld_navi = df_lotteworld_navi.withColumn('CONGESTION', (col('NAVI_SRC_NUM') / 3290 * 100).cast('integer'))
+        df_lotteworld_navi = df_lotteworld_navi.withColumn('THEME_NAME', lit('롯데월드'))
+        df_lotteworld_navi.show()
+        save_data(OperationDB, df_lotteworld_navi, "PRE_NAVI")
+
+        # 에버랜드 네비게이션 예측 정보 구하고, 운영 DB에 저장
+        df_everland_navi = NaviPredict.exec('에버랜드')
+        df_everland_navi = df_everland_navi.withColumn('CONGESTION', (col('NAVI_SRC_NUM') / 9844 * 100).cast('integer'))
+        df_everland_navi = df_everland_navi.withColumn('THEME_NAME', lit('에버랜드'))
+        df_everland_navi.show()
+        save_data(OperationDB, df_everland_navi, "PRE_NAVI")
 
 
 

@@ -1,0 +1,171 @@
+{% extends './base_lotteworld.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+<script type="text/javascript">
+  function lnbType(val) {
+      if(val != null && val != ''){
+          $(".lnbWrap").show();
+          $("#"+val+"").show();
+      }
+  }
+</script>
+  
+<div class="lnbWrap" style="">  
+    <div style="" id="facility">
+        <nav>
+            <h2 class="blind">서브메뉴</h2>
+            <ul class="depth">
+                <li><h3><a href="/lotteworld/congestion/">예측 정보</a></h3></li>
+                <li class="active"><h3><a href="/lotteworld/parking/">시설 & 관람안내</a></h3></li>
+                <li><h3><a href="/lotteworld/weather/">날씨 & 교통</a></h3></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<section id="UI-PC-SK-011" class="contents">
+  <script type="text/javascript">
+      function conTitWrap(url,title1,title2) {
+          $(".pageTit").text(title1);
+          if(title2 != null && title2 != ''){
+              $(".title2").text(title2);
+              $(".title2").attr("href", "/ko"+url);
+          }else{
+              $(".title2span").hide();
+          }
+          $(".title1").text(title1);
+      }
+  </script>
+      
+      
+  <header class="conTitWrap">
+      <h2 class="pageTit">이용요금</h2>
+  </header>
+  
+  <div class="defaultTab">
+      <ul>
+          <li><a href="/lotteworld/parking/">주차장</a></li>
+          <li><a href="/lotteworld/facility/">시설안내</a></li>
+          <li class="active"><a href="/lotteworld/ticket/">이용요금</a></li>
+          <li><a href="/lotteworld/serviceoff/">운휴시설</a></li>
+      </ul>
+  </div>
+</section> 
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class=""><i class="fa fa-userExample of fa-home">&nbsp;제휴 카드 및 기타 프로모션, 우대 정보는 롯데월드 공식 웹사이트에 방문해 확인해주세요!&nbsp;</i><br>https://adventure.lotteworld.com/kor/price/benefit/information/list.do</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class=""><i class="fa fa-userExample fa-star">&nbsp;종합이용권: 롯데월드+민속박물관</i></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>어른</th>
+                <th>청소년</th>
+                <th>어린이</th>
+                <th>베이비</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1Day</td>
+                <td>62,000원</td>
+                <td>54,000원</td>
+                <td>47,000원</td>
+                <td>15,000원</td>
+              </tr>
+              <tr>
+                <td>After4(16시 이후 입장)</td>
+                <td>50,000원</td>
+                <td>43,000원</td>
+                <td>36,000원</td>
+                <td>15,000원</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="">- 어드벤처&amp;매직아일랜드 입장 및 놀이시설 이용(게임시설 등 유료시설 제외)<br>- 민속박물관 관림(오후 7시 이전 입장)<br>- 어드벤처&amp;매직아일랜드와 민속박물관은 미이용에 따른 분리 환불 불가능</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3><i class="fa fa-userExample fa-star">&nbsp;파크이용권: 롯데월드</i></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>어른</th>
+                <th>청소년</th>
+                <th>어린이</th>
+                <th>베이비</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1Day</td>
+                <td>59,000원</td>
+                <td>52,000원</td>
+                <td>46,000원</td>
+                <td>15,000원</td>
+              </tr>
+              <tr>
+                <td>After4(16시 이후 입장)</td>
+                <td>47,000원</td>
+                <td>41,000원</td>
+                <td>35,000원</td>
+                <td>15,000원</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="">- 어드벤처&amp;매직아일랜드 입장 및 놀이시설 이용(게임시설 등 유료시설 제외)</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="">
+          <font face="FontAwesome">연령에 따른 요금 적용 안내(나이 확인이 가능한 신분증 또는 서류 제시)</font><br><br>&nbsp; &nbsp;- 베이비<br>&nbsp; &nbsp; &nbsp;(1) 0~12개월 미만: 파크 입장 및 유아 놀이시설(키즈토리아 등) 무료 이용<br>&nbsp; &nbsp; &nbsp;(2) 12개월 이상~36개월 미만: 파크 입장 무료(단체입장객 제외), 유아 놀이시설 이용은 유료로 이용 가능<br>&nbsp; &nbsp;- 36개월 이상~만 12세: 어린이 요금 적용<br>&nbsp; &nbsp;- 만 13세 이상~만 18세: 청소년 요금 적용(학교 및 학년 무관)<br>&nbsp; &nbsp;- 만 65세 이상: 어린이 요금 적용(기타 우대 적용불가)<br><br>유아놀이시설<br><br>&nbsp; &nbsp;- 어드벤처: 매직붕붕카, 햇님달님, 어린이범퍼카, 로티트레인, 스윙팡팡, 유레카, 키즈토리아, 언더씨킹덤, 드림보트<br>&nbsp; &nbsp;- 매직아일랜드: 머킹의 회전목마, 쁘띠빵빵&nbsp;&nbsp;
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

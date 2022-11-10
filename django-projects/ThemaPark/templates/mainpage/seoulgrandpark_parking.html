@@ -1,0 +1,191 @@
+{% extends './base_seoulgrandpark.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+  <script type="text/javascript">
+    function lnbType(val) {
+        if(val != null && val != ''){
+            $(".lnbWrap").show();
+            $("#"+val+"").show();
+        }
+    }
+    </script>
+    
+    <div class="lnbWrap" style="">  
+        <div style="" id="facility">
+            <nav>
+                <h2 class="blind">서브메뉴</h2>
+                <ul class="depth">
+                    <li><h3><a href="/seoulgrandpark/congestion/">예측정보</a></h3></li>
+                    <li class="active"><h3><a href="/seoulgrandpark/parking/">시설안내</a></h3></li>
+                    <li><h3><a href="/seoulgrandpark/weather/">날씨 & 교통</a></h3></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <section id="UI-PC-SK-011" class="contents">
+      <script type="text/javascript">
+          function conTitWrap(url,title1,title2) {
+              $(".pageTit").text(title1);
+              if(title2 != null && title2 != ''){
+                  $(".title2").text(title2);
+                  $(".title2").attr("href", "/ko"+url);
+              }else{
+                  $(".title2span").hide();
+              }
+              $(".title1").text(title1);
+          }
+          </script>
+          
+          
+          <header class="conTitWrap">
+              <h2 class="pageTit">어린이대공원</h2>
+          </header>
+          
+              <div class="defaultTab">
+                  <ul>
+                    <li class="active"><a href="/seoulgrandpark/parking/">주차장</a></li>
+                    <li><a href="/seoulgrandpark/facility/">편의시설</a></li>
+                    <li><a href="/seoulgrandpark/ticket/">이용요금</a></li>
+                  </ul>
+              </div>
+      </section>
+<div class="pt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center">서울대공원 주차장 (카카오T 스마트 주차시스템)</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 py-2">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>대상</th>
+                <th></th>
+                <th>주차요금</th>
+                <th></th>
+                <th>감면 확인사항</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>기본 2시간</th>
+                <th>초과요금</th>
+                <th>1일 최대</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>일반차<br>(카카오T맵 모바일정산)</td>
+                <td>3,000원</td>
+                <td>30분당 1,000원</td>
+                <td>7,000원<br>→ 5,000원</td>
+                <td>회차 30분(무료)</td>
+              </tr>
+              <tr>
+                <td>일반차<br>(사전 및 출구정산)</td>
+                <td>4,000원</td>
+                <td>30분당 1,500원</td>
+                <td>10,000원<br>→ 6,000원</td>
+                <td>회차 30분(무료)<br>사전정산고객 출차유예시간 30분</td>
+              </tr>
+              <tr>
+                <td>대형차</td>
+                <td>6,000원</td>
+                <td>30분당 2,000원</td>
+                <td>14,000원</td>
+                <td>회차 30분(무료)<br></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h6 class="pb-5">※ 주차장 안정화 기간동안 특별할인 적용</h6>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-2">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>대상</th>
+                  <th>주차요금</th>
+                  <th>감면 확인사항</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>발레주차<br>(※ 4월부터 운영)</td>
+                  <td>15,000원(카카오T맵 모바일 정산)<br>20,000원(현장 카드결제)<br>※대형주차장 진입 후 50미터 전방 발레전용주차장에서 이용 가능</td>
+                  <td>회차 30분(무료)</td>
+                </tr>
+                <tr>
+                  <td>국가유공자차량</td>
+                  <td>정산금액의 80% 감면</td>
+                  <td>본인탑승,<br>국가유공자증 확인</td>
+                </tr>
+                <tr>
+                  <td>의사상자 차량</td>
+                  <td>정산금액의 80% 감면</td>
+                  <td>본인탑승,<br>의사상자증 확인</td>
+                </tr>
+                <tr>
+                  <td>고엽제후유증환자 차량</td>
+                  <td>정산금액의 80% 감면</td>
+                  <td>본인탑승,<br>고엽체후유증환자증 확인</td>
+                </tr>
+                <tr>
+                  <td>다둥이(두자녀) 차량</td>
+                  <td>정산금액의 30% 감면</td>
+                  <td>다둥이 행복카드 확인</td>
+                </tr>
+                <tr>
+                  <td>다둥이(세자녀이상) 차량</td>
+                  <td>정산금액의 50% 감면</td>
+                  <td>다둥이 행복카드 확인</td>
+                </tr>
+                <tr>
+                  <td>장애인</td>
+                  <td>정산금액의 80% 감면</td>
+                  <td>본인탑승,<br>장애인증 확인 및 표지 부착</td>
+                </tr>
+                <tr>
+                  <td>경차(1,000cc 이하)</td>
+                  <td>정산금액의 50% 감면</td>
+                  <td>차량등록증 또는 현장 확인</td>
+                </tr>
+                <tr>
+                  <td>환경친화적 자동차</td>
+                  <td>정산금액의 50% 감면</td>
+                  <td>환경친화적,&nbsp;<br>저공해차량 표시 현장 확인</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h6 class="pb-5">주차 가능 수요: 6,616여대<br>주차 문의: 주차장 현장 사무실 02-502-7636</h6>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

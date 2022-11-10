@@ -11,90 +11,24 @@ from datetime import datetime
 
 
 # Create your views here.
-
-def lotteworldcongestion(request):
-    return render(request, "mainpage/lotteworld_congestion.html")
-
-def lotteworldsubway(request):
-    return render(request, "mainpage/lotteworld_subway.html")
-
-def lotteworldnavi(request):
-    return render(request, "mainpage/lotteworld_navi.html")
-
-def lotteworldparking(request):
-    return render(request, "mainpage/lotteworld_parking.html")
-
-def lotteworldfacility(request):
-    return render(request, "mainpage/lotteworld_facility.html")
-
-def lotteworldticket(request):
-    return render(request, "mainpage/lotteworld_ticket.html")
-
-def everlandcongestion(request):
-    return render(request, "mainpage/everland_congestion.html")
-
-def everlandfacility(request):
-    return render(request, "mainpage/everland_facility.html")
-
-def everlandnavi(request):
-    return render(request, "mainpage/everland_navi.html")
-
-def everlandparking(request):
-    return render(request, "mainpage/everland_parking.html")
-
-def everlandserviceoff(request):
-    today = datetime.now().date()
-    holfac = ThemeparkHolfac.objects.filter(theme_name='에버랜드', std_date=today)
-    context = {'holfac': holfac}
-    print(context)
-    return render(request, "mainpage/everland_serviceoff.html", context)
-
-def everlandticket(request):
-    return render(request, "mainpage/everland_ticket.html")
-
 def index(request):
     if request.method == 'GET':
         try:
             date = request.GET['date']
-            entrance = PreEntrance.objects.filter(std_date=date).order_by('std_date')
+            entrance = PreEntrance.objects.filter(std_date=date).order_by('std_date', 'theme_name')
             context = {'entrance': entrance}
             return render(request, "mainpage/index.html", context)
         except:
-            return render(request, "mainpage/index.html")
-
+            date = datetime.today().strftime('%Y-%m-%d')
+            entrance = PreEntrance.objects.filter(std_date=date).order_by('std_date', 'theme_name')
+            context = {'entrance': entrance}
+            return render(request, "mainpage/index.html", context)
 
 def aboutus(request):
     return render(request, "mainpage/aboutus.html")
 
-
-def seoulgrandpark(request):
-    entrance = PreEntrance.objects.filter(theme_name='서울대공원').order_by('std_date')
-    context = {'entrance': entrance}
-    return render(request, "mainpage/seoulgrandpark.html", context)
-
-
-def childpark(request):
-    entrance = PreEntrance.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
-    context = {'entrance': entrance}
-    return render(request, "mainpage/childpark.html", context)
-    
-
-def everland(request):
-    entrance = PreEntrance.objects.filter(theme_name='에버랜드').order_by('std_date')
-    context = {'entrance': entrance}
-    return render(request, "mainpage/everland.html", context)
-
-def lotteworld(request):
-    entrance = PreEntrance.objects.filter(theme_name='롯데월드').order_by('std_date')
-    context = {'entrance': entrance}
-    return render(request, "mainpage/lotteworld.html", context)
-
-#def login(request):
-#    return render(request, "mainpage/log-in.html")
-
 def registration(request):
     return render(request, "mainpage/registration.html")
-
 
 # 회원 가입
 def signup(request):
@@ -140,11 +74,63 @@ def logout(request):
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, '/')
 
+# ㅡㅡㅡㅡㅡ 롯데월드 ㅡㅡㅡㅡㅡ
+def lotteworldcongestion(request):
+    return render(request, "mainpage/lotteworld_congestion.html")
+
+def lotteworldnavi(request):
+    return render(request, "mainpage/lotteworld_navi.html")
+
+def lotteworldparking(request):
+    return render(request, "mainpage/lotteworld_parking.html")
+
+def lotteworldfacility(request):
+    return render(request, "mainpage/lotteworld_facility.html")
+
+def lotteworldticket(request):
+    return render(request, "mainpage/lotteworld_ticket.html")
+
+def lotteworldserviceoff(request):
+    today = datetime.now().date()
+    holfac = ThemeparkHolfac.objects.filter(theme_name='롯데월드', std_date=today)
+    context = {'holfac': holfac}
+    return render(request, "mainpage/lotteworld_serviceoff.html", context)
+
+def lotteworldweather(request):
+    weather = PreAirWeather.objects.filter(theme_name=str('롯데월드')).order_by('std_date')
+    context = {'weather':weather}
+    return render(request, "mainpage/lotteworld_weather.html", context)
+
+# ㅡㅡㅡㅡㅡ 에버랜드 ㅡㅡㅡㅡㅡ
+def everlandcongestion(request):
+    return render(request, "mainpage/everland_congestion.html")
+
+def everlandfacility(request):
+    return render(request, "mainpage/everland_facility.html")
+
+def everlandnavi(request):
+    return render(request, "mainpage/everland_navi.html")
+
+def everlandparking(request):
+    return render(request, "mainpage/everland_parking.html")
+
+def everlandserviceoff(request):
+    today = datetime.now().date()
+    holfac = ThemeparkHolfac.objects.filter(theme_name='에버랜드', std_date=today)
+    context = {'holfac': holfac}
+    return render(request, "mainpage/everland_serviceoff.html", context)
+
+def everlandticket(request):
+    return render(request, "mainpage/everland_ticket.html")
+
+def everlandweather(request):
+    weather = PreAirWeather.objects.filter(theme_name=str('에버랜드')).order_by('std_date')
+    context = {'weather':weather}
+    return render(request, "mainpage/everland_weather.html", context)
+
+# ㅡㅡㅡㅡㅡ 서울대공원 ㅡㅡㅡㅡㅡ
 def seoulgrandparkcongestion(request):
     return render(request, "mainpage/seoulgrandpark_congestion.html")
-
-def seoulgrandparksubway(request):
-    return render(request, "mainpage/seoulgrandpark_subway.html")
 
 def seoulgrandparknavi(request):
     return render(request, "mainpage/seoulgrandpark_navi.html")
@@ -159,8 +145,12 @@ def seoulgrandparkticket(request):
     return render(request, "mainpage/seoulgrandpark_ticket.html")
 
 def seoulgrandparkweather(request):
-    return render(request, "mainpage/seoulgrandpark_weather.html")
+    weather = PreAirWeather.objects.filter(theme_name=str('서울대공원')).order_by('std_date')
+    context = {'weather':weather}
+    return render(request, "mainpage/seoulgrandpark_weather.html", context)
 
+
+# ㅡㅡㅡㅡㅡ 어린이대공원 ㅡㅡㅡㅡㅡ
 def childparkcongestion(request):
     return render(request, "mainpage/childrenpark_congestion.html")
 
@@ -179,5 +169,47 @@ def childparkticket(request):
 def childparkserviceoff(request):
     return render(request, "mainpage/childrenpark_serviceoff.html")
 
-def childparksubway(request):
-    return render(request, "mainpage/childrenpark_subway.html")
+def childparkweather(request):
+    weather = PreAirWeather.objects.filter(theme_name=str('서울어린이대공원')).order_by('std_date')
+    context = {'weather':weather}
+    return render(request, "mainpage/childrenpark_weather.html", context)
+
+
+# def seoulgrandpark(request):
+#     entrance = PreEntrance.objects.filter(theme_name='서울대공원').order_by('std_date')
+#     context = {'entrance': entrance}
+#     return render(request, "mainpage/base_seoulgrandpark.html", context)
+
+
+# def childpark(request):
+#     entrance = PreEntrance.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
+#     context = {'entrance': entrance}
+#     return render(request, "mainpage/base_childrenpark.html", context)
+    
+
+# def everland(request):
+#     entrance = PreEntrance.objects.filter(theme_name='에버랜드').order_by('std_date')
+#     context = {'entrance': entrance}
+#     return render(request, "mainpage/everland.html", context)
+
+# def lotteworld(request):
+#     entrance = PreEntrance.objects.filter(theme_name='롯데월드').order_by('std_date')
+#     context = {'entrance': entrance}
+#     return render(request, "mainpage/lotteworld.html", context)
+
+#def login(request):
+#    return render(request, "mainpage/log-in.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+

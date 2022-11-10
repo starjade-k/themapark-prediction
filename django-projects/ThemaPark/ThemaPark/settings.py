@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-i_rz_5wi@uz*q#+d_m-3l!6jx3&&zu64ck=86ueh6-!h_yay)$"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -131,16 +131,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRRS = [
-    BASE_DIR / "static"
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static"
+# ]
+
+STATICFILES_DIRS = []
 
 
 
-
-SASS_PROCESSOR_ENABLED = True
-SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, "mainpage",'static')
-SASS_PRECISION = 8
+# SASS_PROCESSOR_ENABLED = True
+# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, "mainpage",'static')
+# SASS_PRECISION = 8
 
 
 

@@ -1,0 +1,95 @@
+{% extends './base_seoulgrandpark.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+  <script type="text/javascript">
+    function lnbType(val) {
+        if(val != null && val != ''){
+            $(".lnbWrap").show();
+            $("#"+val+"").show();
+        }
+    }
+    </script>
+    
+    <div class="lnbWrap" style="">  
+        <div style="" id="facility">
+            <nav>
+                <h2 class="blind">서브메뉴</h2>
+                <ul class="depth">
+                    <li><h3><a href="/seoulgrandpark/congestion/">예측정보</a></h3></li>
+                    <li class="active"><h3><a href="/seoulgrandpark/parking/">시설안내</a></h3></li>
+                    <li><h3><a href="/seoulgrandpark/weather/">날씨 & 교통</a></h3></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <section id="UI-PC-SK-011" class="contents">
+      <script type="text/javascript">
+          function conTitWrap(url,title1,title2) {
+              $(".pageTit").text(title1);
+              if(title2 != null && title2 != ''){
+                  $(".title2").text(title2);
+                  $(".title2").attr("href", "/ko"+url);
+              }else{
+                  $(".title2span").hide();
+              }
+              $(".title1").text(title1);
+          }
+          </script>
+          
+          
+          <header class="conTitWrap">
+              <h2 class="pageTit">어린이대공원</h2>
+          </header>
+          
+              <div class="defaultTab">
+                  <ul>
+                      <li><a href="/seoulgrandpark/parking/">주차장</a></li>
+                      <li class="active"><a href="/seoulgrandpark/facility/">편의시설</a></li>
+                      <li><a href="/seoulgrandpark/ticket/">이용요금</a></li>
+                  </ul>
+              </div>
+      </section>
+<div class="py-2">
+  <div class="container">
+    <div class="row py-1 border-left border-right border-top border-bottom border-light" style="">
+      <div class="col-md-2" style=""><img class="img-fluid d-block mt-2" src="{% static '/images/sgp_facility_pic_helpdesk.png' %}"></div>
+      <div class="col-md-10" style="">
+        <h4 class=""><b>* 의무실/고객 도움터</b><br>&nbsp; &nbsp;-&nbsp;고객안내소, 미아보호소, 방송실, 의무실이 있으며, 분실물 접수 보관이 가능합니다.<br>&nbsp; &nbsp;- 문의전화: 02-500-7335, 7337, 7338 의무실 02-500-7829<br>&nbsp; &nbsp;@ 동물원 정문 앞</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 pb-5"><img class="img-fluid d-block" src="{% static '/images/sgp_facility_helpdesk.png' %}"></div>
+    </div>
+    <div class="row py-1 border-left border-right border-top border-bottom border-light">
+      <div class="col-md-2" style=""><img class="img-fluid d-block pt-2" src="{% static '/images/sgp_facility_pic_box.png' %}"></div>
+      <div class="col-md-10" style="">
+        <h4 class=""><b>* 물품보관함</b><br>&nbsp; &nbsp;- 동물원(무료), 테마가든(유료 소형 500원, 1,000원)<br>&nbsp; &nbsp;- 동물원 및 테마가든 운영시간으로 당일에 한함 *당일 초과시 사용료 추가 징수<br>&nbsp; &nbsp;- 문의전화: 02-500-7338<br></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 pb-5"><img class="img-fluid d-block" src="{% static '/images/sgp_facility_box.png' %}"></div>
+    </div>
+    <div class="row py-1 border border-light">
+      <div class="col-md-2 border-light" style=""><img class="img-fluid d-block" src="{% static '/images/sgp_facility_pic_baby.png' %}"></div>
+      <div class="col-md-10" style="">
+        <h4 class=""><b>* 아기 쉼터</b><br>&nbsp; &nbsp;- 기저귀 교환대, 아리수 음수대, 전자레인지 등<br>&nbsp; &nbsp;- 문의전화: 02-500-7335</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 pb-5"><img class="img-fluid d-block" src="{% static '/images/sgp_facility_baby.png' %}"></div>
+    </div>
+    <div class="row py-1 border border-light">
+      <div class="col-md-2 border-light" style=""><img class="img-fluid d-block mt-5" src="{% static '/images/sgp_facility_pic_babycar.png' %}"></div>
+      <div class="col-md-10" style="">
+        <h4 class=""><b>* 유모차 및 휠체어 대여소</b><br>&nbsp; &nbsp;- 유아차 대여요금: 유아차(1일/3,000원) / 보증물품: 신분증 또는 자동차키<br>&nbsp; &nbsp;- 유모차 이용가능연령: 6개월~36개월<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;- 휠체어 대여요금: 휠체어(1일/2,000원, 임산부, 노약자, 장애인)<br>&nbsp; &nbsp;- 신분증(복지카드) 확인, 복지카드 미지참 시 5,000원<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;- 문의전화: 02-500-7193&nbsp;</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 pb-5"><img class="img-fluid d-block" src="{% static '/images/sgp_facility_babycar.png' %}"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

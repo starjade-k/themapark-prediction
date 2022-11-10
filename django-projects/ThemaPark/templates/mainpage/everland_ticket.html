@@ -1,0 +1,113 @@
+{% extends './base_everland.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+<script type="text/javascript">
+  function lnbType(val) {
+      if(val != null && val != ''){
+          $(".lnbWrap").show();
+          $("#"+val+"").show();
+      }
+  }
+</script>
+  
+<div class="lnbWrap" style="">  
+    <div style="" id="facility">
+        <nav>
+            <h2 class="blind">서브메뉴</h2>
+            <ul class="depth">
+              <li><h3><a href="/everland/congestion/">예측정보</a></h3></li>
+              <li class="active"><h3><a href="/everland/parking/">시설 & 관람안내</a></h3></li>
+              <li><h3><a href="/everland/weather/">날씨 & 교통</a></h3></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<section id="UI-PC-SK-011" class="contents">
+  <script type="text/javascript">
+      function conTitWrap(url,title1,title2) {
+          $(".pageTit").text(title1);
+          if(title2 != null && title2 != ''){
+              $(".title2").text(title2);
+              $(".title2").attr("href", "/ko"+url);
+          }else{
+              $(".title2span").hide();
+          }
+          $(".title1").text(title1);
+      }
+  </script>
+      
+      
+  <header class="conTitWrap">
+      <h2 class="pageTit">이용요금</h2>
+  </header>
+  
+  <div class="defaultTab">
+      <ul>
+          <li><a href="/everland/parking/">주차장</a></li>
+          <li><a href="/everland/facility/">편의시설</a></li>
+          <li class="active"><a href="/everland/ticket/">이용요금</a></li>
+          <li><a href="/everland/serviceoff/">운휴시설</a></li>
+      </ul>
+  </div>
+</section> 
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class=""><i class="fa fa-userExample of fa-home">&nbsp;제휴 카드 및 기타 프로모션 정보는 에버랜드 공식 웹사이트에 방문해 확인해주세요!&nbsp;</i><br>https://www.everland.com/web/everland/how/partnership/card1/samsung.html</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="" contenteditable="true"><i class="fa fa-userExample of calendar-check-o fa-calendar-check-o d-inline-block"></i>&nbsp; 자유이용권(종일):&nbsp;https://www.everland.com/web/everland/how/charge/abc_calender.html&nbsp;</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>대인/청소년</td>
+                <td>58,000원</td>
+                <td>50,000원</td>
+                <td>46,000원</td>
+                <td>64,000원</td>
+              </tr>
+              <tr>
+                <td>소인/경로</td>
+                <td>46,000원</td>
+                <td>40,000원</td>
+                <td>36,000원</td>
+                <td>51,000원</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="">* 에버랜드 입장 및 놀이시설 이용 요금<br>(코인물/대여물/기획전 등 일부 시설 별도 요금 부과)</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

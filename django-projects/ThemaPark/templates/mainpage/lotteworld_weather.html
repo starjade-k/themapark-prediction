@@ -1,0 +1,80 @@
+{% extends './base_lotteworld.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+<script type="text/javascript">
+  function lnbType(val) {
+      if(val != null && val != ''){
+          $(".lnbWrap").show();
+          $("#"+val+"").show();
+      }
+  }
+</script>
+  
+<div class="lnbWrap" style="">  
+    <div style="" id="facility">
+        <nav>
+            <h2 class="blind">서브메뉴</h2>
+            <ul class="depth">
+                <li><h3><a href="/lotteworld/congestion/">예측 정보</a></h3></li>
+                <li><h3><a href="/lotteworld/parking/">시설 & 관람안내</a></h3></li>
+                <li class="active"><h3><a href="/lotteworld/weather/">날씨 & 교통</a></h3></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<section id="UI-PC-SK-011" class="contents">
+  <script type="text/javascript">
+      function conTitWrap(url,title1,title2) {
+          $(".pageTit").text(title1);
+          if(title2 != null && title2 != ''){
+              $(".title2").text(title2);
+              $(".title2").attr("href", "/ko"+url);
+          }else{
+              $(".title2span").hide();
+          }
+          $(".title1").text(title1);
+      }
+  </script>
+      
+      
+  <header class="conTitWrap">
+      <h2 class="pageTit">서울특별시 송파구 날씨</h2>
+  </header>
+  
+  <div class="defaultTab">
+      <ul>
+          <li class="active"><a href="/lotteworld/weather/">서울특별시 송파구 날씨</a></li>
+          <li><a href="https://map.naver.com/v5/directions/-/14148502.874976043,4510586.1160765905,%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%20%EC%96%B4%EB%93%9C%EB%B2%A4%EC%B2%98,11583235,PLACE_POI/-/transit?c=14148037.0919627,4510586.1160766,15,0,0,0,dh">롯데월드로 가는 길</a></li>
+      </ul>
+  </div>
+</section> 
+
+<div class="py-5" style="">
+  <div class="container text-center text-capitalize">
+    <div class="row text-center text-capitalize">
+      <div class="col-md-1 mx-auto">
+        <div class="row">
+          <div class="col-md-12">
+          </div>
+        </div>
+      </div>
+      <div class="row text-center text-capitalize" style="">
+        {% for item in weather %}
+          <div class="col-md-1 mx-auto" style="display:grid;">
+            <h4 class="">{{ item.std_date|date:"M j일 D" }}</h4>
+            <img class="img-fluid d-block mx-auto" src= "{{item.weather_img}}">
+            <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">최저기온: {{item.low_temp}}</p>
+            <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">최고기온: {{item.high_temp}}<br></p>
+            <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">강수량: {{item.rain_amount}}mm<br></p>
+            <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">풍속 : {{item.avg_wind}} m/s<br></p>
+            <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">미세먼지:{{item.pm10}}</p>
+            <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">초미세먼지:{{item.pm25}}</p> 
+          </div>  
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

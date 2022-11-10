@@ -1,0 +1,210 @@
+@charset "utf-8";
+
+/*******************************************************************************************************************************
+	시설안내 공통정의
+*******************************************************************************************************************************/
+
+/* 시설소개 */
+.defaultTab + .facilityArea {margin-top:0;}
+.facilityArea {margin-top:75px;line-height:1.8;}
+.facilityArea img {display:block;width:100%;height:462px;}
+.facilityArea .smallTit {display:block;padding:8px 0;font-weight:700;color:#2e7ba7;}
+.facilityArea .contTit {margin:25px 0 11px;font-family:'Roboto', 'NanumGothic', sans-serif;}
+.facilityArea .pointColor {font-weight:400;}
+
+.cafenloungeBtnWrap{margin-top:20px;}
+.cafenloungeBtnWrap .cafenloungeBtn{display: inline-block;background-color: #fff;margin-right:10px;padding: 2px 10px;font-size: 14px;border: 1px solid #396c89;font-weight: 700;color: #2e7ba7;}
+.cafenloungeImgWrap{margin-top:30px;font-size:0;}
+.cafenloungeImgWrap img{display:inline-block;width:auto;height:auto;}
+
+/* 어트랙션 소개 */
+.attractionArea {overflow:hidden;position:relative;height:670px;line-height:1.8;color:#fff;}
+.attractionArea img {display:block;position:absolute;left:50%;height:670px;margin-left:-960px;}
+.attractionArea .txt {width:1100px;margin:0 auto;}
+.attractionArea .contTit {width:1100px;margin:0 auto;padding-bottom:6px;font-family:'Roboto', 'NanumGothic', sans-serif;color:#fff;}
+.attractionArea .pointColor {font-weight:400;color:#ff661b;}
+.attractionArea .txtCon {position:absolute;bottom:0;left:0;z-index:5;width:100%;min-height:90px;padding:25px 0;background:url('/seoulsky/images/kor/contents/bg_black_dot.png') repeat 0 0;}
+
+
+
+/*******************************************************************************************************************************
+	컨텐츠 별 정의
+*******************************************************************************************************************************/
+
+/* 시설소개 */
+
+/* 시설소개 - 카페 & 라운지 */
+#UI-PC-SK-010 .facilityArea .contTit .small {font-size:19px;font-weight:400;color:#555;}
+
+
+
+/* 어트랙션 소개 - 매직스카이데크 */
+#UI-PC-SK-011 {width:100%;margin-bottom:0;}
+#UI-PC-SK-011 .conTitWrap, #UI-PC-SK-011 .defaultTab {width:1100px;margin-right:auto;margin-left:auto;}
+
+/* 어트랙션 소개 - 야외테라스 */
+#UI-PC-SK-012 {width:100%;margin-bottom:0;}
+#UI-PC-SK-012 .conTitWrap, #UI-PC-SK-012 .defaultTab {width:1100px;margin-right:auto;margin-left:auto;}
+
+/* 어트랙션 소개 - 더블데크 엘리베이터 */
+#UI-PC-SK-013 {width:100%;margin-bottom:0;}
+#UI-PC-SK-013 .conTitWrap, #UI-PC-SK-013 .defaultTab {width:1100px;margin-right:auto;margin-left:auto;}
+
+/* 어트랙션 소개 - 미디어 스탠드 */
+#UI-PC-SK-014 {width:100%;margin-bottom:0;}
+#UI-PC-SK-014 .conTitWrap, #UI-PC-SK-014 .defaultTab {width:1100px;margin-right:auto;margin-left:auto;}
+
+/* 어트랙션 소개 - 포토존 */
+#UI-PC-SK-015 {width:100%;margin-bottom:0;}
+#UI-PC-SK-015 .conTitWrap, #UI-PC-SK-015 .defaultTab {width:1100px;margin-right:auto;margin-left:auto;}
+#UI-PC-SK-015 .photoSlideWrap {height:670px;}
+#UI-PC-SK-015 .photoSlideWrap li img {height:670px;}
+#UI-PC-SK-015 .photoSlideWrap .page {margin-left:10px;font-family:"NanumGothic", sans-serif;font-weight:400;}
+#UI-PC-SK-015 .photoSlideWrap .btnSlideArea {position:absolute;bottom:0;left:50%;width:1100px;margin:0 0 0 -550px;}
+#UI-PC-SK-015 .photoSlideWrap .btnSlideArea button {top:-91px;}
+#UI-PC-SK-015 .photoSlideWrap .btnSlidePrev {left:0;}
+#UI-PC-SK-015 .photoSlideWrap .btnSlideNext {right:0;}
+#UI-PC-SK-015 .photoSlideWrap .txtCon {min-height:90px;padding:25px 0;}
+/* #UI-PC-SK-015 .txtCon .contTit {display:block;width:980px;margin:0 auto;padding-bottom:6px;font-family:'Roboto', 'NanumGothic', sans-serif;color:#fff;} */
+#UI-PC-SK-015 .txtCon .smallTit {float:left;width:70%;font-weight:700;color:#579ec6;}
+#UI-PC-SK-015 .txtCon .inner {width:980px;color:#579ec6;}
+/* #UI-PC-SK-015 .txtCon .txt {float:left;width:80%;} */
+#UI-PC-SK-015 .txtCon .place {display:block;float:left;margin:10px 20px 0 0;padding:3px 10px;background:#396c89;border-radius:31px;color:#fff;}
+
+/* 202007 스카이브릿지 추가 */
+.wideWrap {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.wideWrap .conTitWrap,
+.wideWrap .defaultTab {
+    width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.skyBridgeArea .contTit {
+    font-family: 'NanumGothic', sans-serif;
+}
+
+.skyBridgeArea .infoArea {
+    width: 1100px;
+    line-height: 1.8;
+    margin: 40px auto 75px;
+}
+
+.skyBridgeArea .infoArea:after {
+    content: '';
+    display: block;
+    clear: both
+}
+
+.skyBridgeArea .info-left {
+    float: left;
+}
+
+.skyBridgeArea .info-right {
+    float: right;
+}
+
+.skyBridgeArea .infoArea .star {
+    padding-left: 15px;
+}
+
+.skyBridgeArea .advance-btn {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 18px;
+    border: 1px solid #416c8a;
+    box-sizing: border-box
+}
+
+.skyBridgeArea .advance-btn span {
+    font-size: 16px;
+    color: #416c8a;
+    font-weight: 700;
+}
+
+.skyBridgeArea .slick-arrow {
+    width: 23px;
+    height: 41px;
+    text-indent: -9999px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+}
+
+.skyBridgeArea .slick-prev.slick-arrow {
+    left: 30px;
+    background: url('/seoulsky/images/kor/icon/slick_prev_btn.png');
+}
+
+.skyBridgeArea .slick-next.slick-arrow {
+    right: 30px;
+    background: url('/seoulsky/images/kor/icon/slick_next_btn.png');
+}
+
+.skyBridgeArea .slick-dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 170px;
+}
+
+.skyBridgeArea .slick-dots:after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.skyBridgeArea .slick-dots li {
+    float: left;
+    margin-right: 10px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #3a688c;
+    box-sizing: border-box;
+    border-radius: 6px;
+    text-indent: -9999px
+}
+
+.skyBridgeArea .slick-dots li.slick-active {
+    border: 0;
+    background: #fff;
+}
+
+.skyBridgeArea .slick-dots li:last-child {
+    margin-right: 0;
+}
+
+.skyBridgeArea .visualWrap {
+    position: relative
+}
+
+.skyBridgeArea .txt {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.skyBridgeArea .contTit {
+    width: 1100px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    font-family: 'Roboto', 'NanumGothic', sans-serif;
+    color: #fff;
+}
+
+.skyBridgeArea .txtCon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    min-height: 90px;
+    padding: 25px 0;
+    background: url('/seoulsky/images/kor/contents/bg_black_dot.png') repeat 0 0;
+    color: #fff
+}

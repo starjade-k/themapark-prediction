@@ -1,0 +1,72 @@
+{% extends './base_everland.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+<script type="text/javascript">
+  function lnbType(val) {
+      if(val != null && val != ''){
+          $(".lnbWrap").show();
+          $("#"+val+"").show();
+      }
+  }
+</script>
+  
+<div class="lnbWrap" style="">  
+    <div style="" id="facility">
+        <nav>
+            <h2 class="blind">서브메뉴</h2>
+            <ul class="depth">
+              <li><h3><a href="/everland/congestion/">예측정보</a></h3></li>
+              <li class="active"><h3><a href="/everland/parking/">시설 & 관람안내</a></h3></li>
+              <li><h3><a href="/everland/weather/">날씨 & 교통</a></h3></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<section id="UI-PC-SK-011" class="contents">
+  <script type="text/javascript">
+      function conTitWrap(url,title1,title2) {
+          $(".pageTit").text(title1);
+          if(title2 != null && title2 != ''){
+              $(".title2").text(title2);
+              $(".title2").attr("href", "/ko"+url);
+          }else{
+              $(".title2span").hide();
+          }
+          $(".title1").text(title1);
+      }
+  </script>
+      
+      
+  <header class="conTitWrap">
+      <h2 class="pageTit">주차장</h2>
+  </header>
+  
+  <div class="defaultTab">
+      <ul>
+          <li class="active"><a href="/everland/parking/">주차장</a></li>
+          <li><a href="/everland/facility/">편의시설</a></li>
+          <li><a href="/everland/ticket/">이용요금</a></li>
+          <li><a href="/everland/serviceoff/">운휴시설</a></li>
+      </ul>
+  </div>
+</section> 
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="{% static '/images/parking_map_everland.png' %}"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="">
+        <h4 class="text-left py-5"><b>&lt;자가용 이용&gt;&nbsp;<br></b>&nbsp;- 주차 안내 캐스트가 가까운 주차장으로 안내해 드립니다.&nbsp;<br>&nbsp;- 주차장–정문 간 셔틀버스(무료)가 운행됩니다. (유모차 탑승 가능)&nbsp;<br><br><b>&lt;자가용 주차 안내&gt;</b>&nbsp;<br>&nbsp;- 정문 주차장 만차 시 주차요원(안내판)이 운영중인 주차장 중 가장 가까운 곳으로 안내해 드립니다.&nbsp;<br>&nbsp;- 각 주차장과 정문 간 무료 셔틀버스가 운행됩니다. (유모차 탑승 가능)&nbsp;<br>&nbsp;- 정문 주차장은 캠핑카 및 카라반 입차 및 주차가 불가합니다.&nbsp;<br>&nbsp;- 캠핑카, 카라반은 외곽 4번 주차장에서 주차목적을 위해서만 허용되며, 취식 및 숙식은 불가합니다. (정문 및 외곽 1 ~ 3번 주차장 이용 불가)&nbsp;<br>&nbsp;- 정문 유료주차장은 카카오T앱 설치 후 차량 및 결제카드를 등록하신 후 이용하시면 편리합니다.<br><br><b>&lt;발레파킹 이용 안내&gt;</b>&nbsp;<br>&nbsp;- 정문 주차장에 오시면 안전하게 차량을 주차하였다가 귀가할 때 내린 곳으로 차량을 갖다 드리는 발레파킹 서비스를 이용하실 수 있습니다.&nbsp;<br><br>&nbsp; &nbsp; &nbsp;이용요금 : 대당 25,000원&nbsp;<br>&nbsp; &nbsp; &nbsp;이용시간 : 에버랜드 영업시간과 동일&nbsp;<br><br>&nbsp;- 사전 발레파킹 예약 차량은 주차장 만차 여부와 상관없이 발레파킹 라운지(정문 주차장)로 진입하시기 바랍니다.&nbsp;<br>&nbsp;- 발레파킹 이용객이 많을 시 입차 대기시간이 길어질 수 있습니다.</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="{% static '/images/parking_kakao_everland.png' %}"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

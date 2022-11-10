@@ -1,0 +1,235 @@
+{% extends './base_childrenpark.html' %}
+{% load static %}
+{% block text %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+  <script type="text/javascript">
+    function lnbType(val) {
+        if(val != null && val != ''){
+            $(".lnbWrap").show();
+            $("#"+val+"").show();
+        }
+    }
+    </script>
+    
+    <div class="lnbWrap" style="">  
+        <div style="" id="facility">
+            <nav>
+                <h2 class="blind">서브메뉴</h2>
+                <ul class="depth">
+                    <li><h3><a href="/childpark/congestion/">예측정보</a></h3></li>
+                    <li class="active"><h3><a href="/childpark/parking/">시설안내</a></h3></li>
+                    <li><h3><a href="/childpark/weather/">날씨 & 교통</a></h3></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <section id="UI-PC-SK-011" class="contents">
+      <script type="text/javascript">
+          function conTitWrap(url,title1,title2) {
+              $(".pageTit").text(title1);
+              if(title2 != null && title2 != ''){
+                  $(".title2").text(title2);
+                  $(".title2").attr("href", "/ko"+url);
+              }else{
+                  $(".title2span").hide();
+              }
+              $(".title1").text(title1);
+          }
+          </script>
+          
+          
+          <header class="conTitWrap">
+              <h2 class="pageTit">이용요금</h2>
+          </header>
+          
+              <div class="defaultTab">
+                  <ul>
+                    <li><a href="/childpark/parking/">주차장</a></li>
+                    <li><a href="/childpark/facility/">편의시설</a></li>
+                    <li class="active"><a href="/childpark/ticket/">이용요금</a></li>
+                    <li><a href="/childpark/serviceoff/">운휴시설</a></li>
+                  </ul>
+              </div>
+      </section>     
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class=""><i class="fa fa-userExample of fa-home"><b>&nbsp;</b>어린이 대공원은 시민여러분이 함게 가꾸고 즐기는 휴식공간이자 동식물이 행복하게 공존하는 생태공원으로 동물나라와 자연나라는 <b>무료입장</b>입니다.</i></h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="">재미나라 이용요금</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>어른(만 19세 이상)</th>
+                <th>청소년(만 12세 ~ 18세)</th>
+                <th>어린이(만 3세 ~ 11세)</th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th><span style="font-weight: normal;">자유이용권</span></th>
+                <th><span style="font-weight: normal;">28,000원</span></th>
+                <th><span style="font-weight: normal;">25,000원</span></th>
+                <th><span style="font-weight: normal;">25,000원</span></th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th><span style="font-weight: normal;">5회 이용권</span></th>
+                <th><span style="font-weight: normal;">19,000원</span></th>
+                <th><span style="font-weight: normal;">17,000원</span></th>
+                <th><span style="font-weight: normal;">16,000원</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3회 이용권</td>
+                <td>12,000원</td>
+                <td>11,000원</td>
+                <td>10,000원</td>
+              </tr>
+              <tr>
+                <td>1회 이용권</td>
+                <td>5,000원</td>
+                <td>4,000원</td>
+                <td>3,500원</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="" contenteditable="true">* 재미나라 이용시 공원주차장 별도 할인은 없습니다.<br>* 체험시설, 코인시설, 계절시설 기획전시/공연 등은 별도 요금입니다.</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="">&nbsp;재미나라 장애인 우대요금</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>어른(만 19세 이상)</th>
+                <th>청소년(만 12세 ~ 18세)</th>
+                <th>어린이(만 3세 ~ 11세)</th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th><span style="font-weight: normal;">자유이용권</span></th>
+                <th><span style="font-weight: normal;">22,000원</span></th>
+                <th><span style="font-weight: normal;">20,000원</span></th>
+                <th><span style="font-weight: normal;">18,000원</span></th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th><span style="font-weight: normal;">5회 이용권</span></th>
+                <th><span style="font-weight: normal;">15,000원</span></th>
+                <th><span style="font-weight: normal;">14,000원</span></th>
+                <th><span style="font-weight: normal;">11,000원</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3회 이용권</td>
+                <td>10,000원</td>
+                <td>9,000원</td>
+                <td>7,000원</td>
+              </tr>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="">* 복지카드제시해야 하며, 보호자 1명 동반할인(연령별 요금적용)</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="">&nbsp;재미나라 20명 이상 단체적용 요금</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>어른(만 19세 이상)</th>
+                <th>청소년(만 12세 ~ 18세)</th>
+                <th>어린이(만 3세 ~ 11세)</th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th><span style="font-weight: normal;">자유이용권</span></th>
+                <th><span style="font-weight: normal;">22,000원</span></th>
+                <th><span style="font-weight: normal;">20,000원</span></th>
+                <th><span style="font-weight: normal;">18,000원</span></th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th><span style="font-weight: normal;">5회 이용권</span></th>
+                <th><span style="font-weight: normal;">15,000원</span></th>
+                <th><span style="font-weight: normal;">14,000원</span></th>
+                <th><span style="font-weight: normal;">11,000원</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3회 이용권</td>
+                <td>10,500원</td>
+                <td>9,500원</td>
+                <td>8,500원</td>
+              </tr>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="">* <b>인솔자</b>(단체 10명당 1명 필요)</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
