@@ -162,6 +162,12 @@ with DAG(
         bash_command='python3 main.py operation pre_air_weather',
     )
 
+    t25 = BashOperator(
+        task_id='operation_pre_event',
+        cwd='/home/big/pj/ETL',
+        bash_command='python3 main.py operation pre_event',
+    )
+
     # ㅡㅡㅡㅡㅡㅡ MODELING ㅡㅡㅡㅡㅡㅡ    
     t23 = BashOperator(
         task_id='modeling_childpark',
@@ -174,6 +180,7 @@ with DAG(
         cwd='/home/big/pj/ETL',
         bash_command='python3 main.py modeling other_themepark',
     )
+
 
     t1.doc_md = dedent(
         """\
@@ -208,7 +215,7 @@ with DAG(
     t3 >> t4 >> t14 >> t22  # 예보 날씨
     t5 >> t13  # 2일전 네비게이션 검색건수
     t18 >> t19  # 미래 공휴일정보
-    [t6, t7] >> t12 >> t15  # 오늘, 미래 행사정보
+    [t6, t7] >> t12 >> t15 >> t25  # 오늘, 미래 행사정보
     t20 >> t21  # 3일전 지하철 승하차 정보
     [t22, t13, t19, t15, t21] >> t23 >> t24
     

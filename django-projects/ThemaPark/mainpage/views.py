@@ -76,10 +76,18 @@ def logout(request):
 
 # ㅡㅡㅡㅡㅡ 롯데월드 ㅡㅡㅡㅡㅡ
 def lotteworldcongestion(request):
-    return render(request, "mainpage/lotteworld_congestion.html")
+    if not request.user.is_authenticated:
+        return render(request,"mainpage/log-in.html")
+    time = ThemeparkTime.objects.filter(theme_name='롯데월드').order_by('std_date')
+    pre_ent = PreEntrance.objects.filter(theme_name='롯데월드').order_by('std_date')
+    data = zip(time, pre_ent)   
+    context = {'data': data}
+    return render(request, "mainpage/lotteworld_congestion.html", context)
 
 def lotteworldnavi(request):
-    return render(request, "mainpage/lotteworld_navi.html")
+    prenavi = PreNavi.objects.filter(theme_name='롯데월드').order_by('std_date')
+    context = {'prenavi': prenavi}
+    return render(request, "mainpage/lotteworld_navi.html", context)
 
 def lotteworldparking(request):
     return render(request, "mainpage/lotteworld_parking.html")
@@ -103,13 +111,21 @@ def lotteworldweather(request):
 
 # ㅡㅡㅡㅡㅡ 에버랜드 ㅡㅡㅡㅡㅡ
 def everlandcongestion(request):
-    return render(request, "mainpage/everland_congestion.html")
+    if not request.user.is_authenticated:
+        return render(request,"mainpage/log-in.html")
+    time = ThemeparkTime.objects.filter(theme_name='에버랜드').order_by('std_date')
+    pre_ent = PreEntrance.objects.filter(theme_name='에버랜드').order_by('std_date')
+    data = zip(time, pre_ent)   
+    context = {'data': data}
+    return render(request, "mainpage/everland_congestion.html", context)
 
 def everlandfacility(request):
     return render(request, "mainpage/everland_facility.html")
 
 def everlandnavi(request):
-    return render(request, "mainpage/everland_navi.html")
+    prenavi = PreNavi.objects.filter(theme_name='에버랜드').order_by('std_date')
+    context = {'prenavi': prenavi}
+    return render(request, "mainpage/everland_navi.html", context)
 
 def everlandparking(request):
     return render(request, "mainpage/everland_parking.html")
@@ -130,10 +146,19 @@ def everlandweather(request):
 
 # ㅡㅡㅡㅡㅡ 서울대공원 ㅡㅡㅡㅡㅡ
 def seoulgrandparkcongestion(request):
-    return render(request, "mainpage/seoulgrandpark_congestion.html")
+    if not request.user.is_authenticated:
+        return render(request,"mainpage/log-in.html")
+    time = ThemeparkTime.objects.filter(theme_name='서울대공원').order_by('std_date')
+    pre_ent = PreEntrance.objects.filter(theme_name='서울대공원').order_by('std_date')
+    pre_event = PreEvent.objects.filter(theme_name='서울대공원').order_by('std_date')
+    data = zip(time, pre_ent, pre_event)   
+    context = {'data': data}
+    return render(request, "mainpage/seoulgrandpark_congestion.html", context)
 
 def seoulgrandparknavi(request):
-    return render(request, "mainpage/seoulgrandpark_navi.html")
+    prenavi = PreNavi.objects.filter(theme_name='서울대공원').order_by('std_date')
+    context = {'prenavi': prenavi}
+    return render(request, "mainpage/seoulgrandpark_navi.html", context)
 
 def seoulgrandparkparking(request):
     return render(request, "mainpage/seoulgrandpark_parking.html")
@@ -152,10 +177,19 @@ def seoulgrandparkweather(request):
 
 # ㅡㅡㅡㅡㅡ 어린이대공원 ㅡㅡㅡㅡㅡ
 def childparkcongestion(request):
-    return render(request, "mainpage/childrenpark_congestion.html")
+    if not request.user.is_authenticated:
+        return render(request,"mainpage/log-in.html")
+    time = ThemeparkTime.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
+    pre_ent = PreEntrance.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
+    pre_event = PreEvent.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
+    data = zip(time, pre_ent, pre_event)   
+    context = {'data': data}
+    return render(request, "mainpage/childrenpark_congestion.html", context)
 
 def childparknavi(request):
-    return render(request, "mainpage/childrenpark_navi.html")
+    prenavi = PreNavi.objects.filter(theme_name='서울어린이대공원').order_by('std_date')
+    context = {'prenavi': prenavi}
+    return render(request, "mainpage/childrenpark_navi.html", context)
 
 def childparkparking(request):
     return render(request, "mainpage/childrenpark_parking.html")

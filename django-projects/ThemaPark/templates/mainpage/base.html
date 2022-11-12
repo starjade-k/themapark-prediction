@@ -8,10 +8,66 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Sunflower&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+
+    <style>
+      svg.radial-progress {
+        height: auto;
+        max-width: 160px;
+        padding: 1em;
+        transform: rotate(-90deg);
+        width: 100%;
+      }
+      
+      svg.radial-progress circle {
+        fill: rgba(0,0,0,0);
+        stroke: black;
+        stroke-dashoffset: 219.91148575129; 
+        stroke-width: 10;
+      }
+      
+      svg.radial-progress circle.incomplete { opacity: 0.25; }
+      
+      svg.radial-progress circle.complete { stroke-dasharray: 219.91148575129; }
+      
+      svg.radial-progress text {
+        fill: black;
+        text-anchor: middle;
+      }
+      
+      /*** COLORS ***/
+      /* Primary */
+      
+      svg.radial-progress:nth-of-type(6n+1) circle { stroke: #a2ed56; }
+      
+      /* Secondary */
+      
+      svg.radial-progress:nth-of-type(6n+2) circle { stroke: #83e4e2; }
+      
+      /* Tertiary */
+      
+      svg.radial-progress:nth-of-type(6n+3) circle { stroke: #fd6470; }
+      
+      /* Quaternary */
+      
+      svg.radial-progress:nth-of-type(6n+4) circle { stroke: #fca858; }
+      
+      /* Quinary */
+      
+      svg.radial-progress:nth-of-type(6n+5) circle { stroke: #fddc32; }
+    </style>
+      
+
+    {% block header_code %}
+
+    {% endblock %}
+
   </head>
   <body>
     <style>
-      * {
+      *:not(i){
         font-family: 'Jua', 'sans-serif'!important; font-size: 20px;
       }
     </style>
@@ -30,7 +86,7 @@
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">YouTube</a>
-                  <div class="dropdown-menu" style="text-align: center">테마파크 공식 채널<br>
+                  <div class="dropdown-menu" style="font-size:20px; text-align: center">테마파크 공식 채널<br>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA" target="_blank">서울대공원TV</a>
                     <a class="dropdown-item" href="https://www.youtube.com/user/seoulsisul" target="_blank">서울시설공단(어린이대공원)</a>
@@ -42,11 +98,11 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-6 text-right" style=""><a class="btn btn-light mx-2" href="/index/registration">회원가입</a>
+          <div class="col-md-6 text-right" style=""><a class="btn btn-light mx-2" href="/index/registration" style="font-size: 18px;">회원가입</a>
             {% if user.is_authenticated %}
-              <a class="btn btn-light mx-2" href="/index/logout">{{ user.username }} (로그아웃)</a>
+              <a class="btn btn-light mx-2" href="/index/logout" style="font-size: 18px;">{{ user.username }} (로그아웃)</a>
             {% else %}
-              <a class="btn btn-light mx-2" href="/index/login">로그인</a>
+              <a class="btn btn-light mx-2" href="/index/login" style="font-size: 18px;">로그인</a>
             {% endif %}
         </div>
       </div>
@@ -87,7 +143,7 @@
             <h3 style="font-family: 'Jua', sans-serif;">Youtube Channel</h3>
             <ul class="list-unstyled text-small" style="font-family: 'Jua', sans-serif;">
               <li>
-                <a class="text-muted" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA" target="_blank">서울대공원TV></a>
+                <a class="text-muted" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA" target="_blank">서울대공원TV</a>
               </li>
               <li>
                 <a class="text-muted" href="https://www.youtube.com/user/seoulsisul" target="_blank">서울시설공단(어린이대공원)</a>
@@ -106,10 +162,105 @@
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
-  
+    
+    <script type="text/javascript">
+      function lnbType(val) {
+          if(val != null && val != ''){
+              $(".lnbWrap").show();
+              $("#"+val+"").show();
+          }
+      }
+    </script>
+
+    <script type="text/javascript">
+      $(function(){
+          // Remove svg.radial-progress .complete inline styling
+          $('svg.radial-progress').each(function( index, value ) { 
+              $(this).find($('circle.complete')).removeAttr( 'style' );
+          });
+      
+          // Activate progress animation on scroll
+          $(window).scroll(function(){
+              $('svg.radial-progress').each(function( index, value ) { 
+                  // If svg.radial-progress is approximately 25% vertically into the window when scrolling from the top or the bottom
+                  if ( 
+                      $(window).scrollTop() > $(this).offset().top - ($(window).height() * 0.75) &&
+                      $(window).scrollTop() < $(this).offset().top + $(this).height() - ($(window).height() * 0.25)
+                  ) {
+                      // Get percentage of progress
+                      percent = $(value).data('percentage');
+                      if (percent >= 80){
+                        const collection1 = document.getElementsByClassName("incomplete");
+                        for (let i = 0; i < collection1.length; i++) {
+                          collection1[i].style.stroke = "#fd6470";
+                        }
+                        const collection2 = document.getElementsByClassName("complete");
+                        for (let i = 0; i < collection2.length; i++) {
+                          collection2[i].style.stroke = "#fd6470";
+                        }
+                      }
+                      else if (percent >= 60){
+                        const collection1 = document.getElementsByClassName("incomplete");
+                        for (let i = 0; i < collection1.length; i++) {
+                          collection1[i].style.stroke = "#fca858";
+                        }
+                        const collection2 = document.getElementsByClassName("complete");
+                        for (let i = 0; i < collection2.length; i++) {
+                          collection2[i].style.stroke = "#fca858";
+                        }
+                      }
+                      else if (percent >= 40){
+                        const collection1 = document.getElementsByClassName("incomplete");
+                        for (let i = 0; i < collection1.length; i++) {
+                          collection1[i].style.stroke = "#fddc32";
+                        }
+                        const collection2 = document.getElementsByClassName("complete");
+                        for (let i = 0; i < collection2.length; i++) {
+                          collection2[i].style.stroke = "#fddc32";
+                        }
+                      }
+                      else if (percent >= 20){
+                        const collection1 = document.getElementsByClassName("incomplete");
+                        for (let i = 0; i < collection1.length; i++) {
+                          collection1[i].style.stroke = "#a2ed56";
+                        }
+                        const collection2 = document.getElementsByClassName("complete");
+                        for (let i = 0; i < collection2.length; i++) {
+                          collection2[i].style.stroke = "#a2ed56";
+                        }
+                      }
+                      else{
+                        const collection1 = document.getElementsByClassName("incomplete");
+                        for (let i = 0; i < collection1.length; i++) {
+                          collection1[i].style.stroke = "#83e4e2";
+                        }
+                        const collection2 = document.getElementsByClassName("complete");
+                        for (let i = 0; i < collection2.length; i++) {
+                          collection2[i].style.stroke = "#83e4e2";
+                        }
+                      }
+                      // Get radius of the svg's circle.complete
+                      radius = $(this).find($('circle.complete')).attr('r');
+                      // Get circumference (2πr)
+                      circumference = 2 * Math.PI * radius;
+                      // Get stroke-dashoffset value based on the percentage of the circumference
+                      strokeDashOffset = circumference - ((percent * circumference) / 100);
+                      // Transition progress for 1.25 seconds
+                      $(this).find($('circle.complete')).animate({'stroke-dashoffset': strokeDashOffset}, 1500);
+                  }
+              });
+          }).trigger('scroll');
+      
+      });
+      </script>
   </body>
 
 </html>

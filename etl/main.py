@@ -26,6 +26,7 @@ from datajob.etl.extract.lotteworld_info import LotteworldInfoExtractor
 from datajob.etl.extract.navi_search import NaviSearchExtractor
 from datajob.etl.transform.navi_search import NaviSearchTransformer
 from datajob.etl.transform.transform_event import ThemeParkEventTransformer
+from datajob.operation.pre_event import PreEvent
 
 
 def transfrom_execute():
@@ -75,6 +76,7 @@ works = {
         'themepark_time': ThemeparkTime.save
         ,'themepark_hol_fac': ThemeparkHolFac.save
         ,'pre_air_weather': PreairweatherOperation.save
+        ,'pre_event': PreEvent.save
     }
     ,'modeling':{
         'childpark': ChildParkModeling.exec

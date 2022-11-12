@@ -1,5 +1,4 @@
 from infra.jdbc import DataMart, overwrite_trunc_data
-from pyspark.sql import Row
 from infra.spark_session import get_spark_session
 from infra.util import cal_std_day
 from pyspark.sql.functions import col

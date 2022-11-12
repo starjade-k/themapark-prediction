@@ -1,9 +1,6 @@
 {% extends './base_lotteworld.html' %}
 {% load static %}
 {% block text %}
-<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
-<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
-<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
 <script type="text/javascript">
   function lnbType(val) {
       if(val != null && val != ''){
@@ -52,19 +49,14 @@
   </div>
 </section> 
 
-<div class="py-5" style="">
+<!-- <div class="py-5" style=""> -->
   <div class="container text-center text-capitalize">
     <div class="row text-center text-capitalize">
-      <div class="col-md-1 mx-auto">
-        <div class="row">
-          <div class="col-md-12">
-          </div>
-        </div>
-      </div>
       <div class="row text-center text-capitalize" style="">
         {% for item in weather %}
           <div class="col-md-1 mx-auto" style="display:grid;">
-            <h4 class="">{{ item.std_date|date:"M j일 D" }}</h4>
+            <p class="">{{ item.std_date|date:"M j일" }}</p>
+            <p class="">{{ item.std_date|date:"D" }}</p>
             <img class="img-fluid d-block mx-auto" src= "{{item.weather_img}}">
             <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">최저기온: {{item.low_temp}}</p>
             <p class="text-lowercase mt-0 mb-0 mx-auto text-nowrap">최고기온: {{item.high_temp}}<br></p>
@@ -76,5 +68,5 @@
         {% endfor %}
       </div>
     </div>
-  </div>
+</div>
 {% endblock %}
