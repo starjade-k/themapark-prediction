@@ -190,10 +190,35 @@ class PreEntrance(models.Model):
     theme_name = models.CharField(max_length=30, blank=True, null=True)
     std_date = models.DateField(blank=True, null=True)
     ent_num = models.BigIntegerField(blank=True, null=True)
+    congestion = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'pre_entrance'
+
+
+class PreEvent(models.Model):
+    pe_idx = models.BigAutoField(primary_key=True)
+    theme_name = models.CharField(max_length=50, blank=True, null=True)
+    std_date = models.DateField(blank=True, null=True)
+    event_ox = models.BigIntegerField(blank=True, null=True)
+    event_name = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pre_event'
+
+
+class PreNavi(models.Model):
+    pn_idx = models.BigAutoField(primary_key=True)
+    theme_name = models.CharField(max_length=50, blank=True, null=True)
+    navi_src_num = models.BigIntegerField(blank=True, null=True)
+    congestion = models.BigIntegerField(blank=True, null=True)
+    std_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pre_navi'
 
 
 class SeoulparkParking(models.Model):

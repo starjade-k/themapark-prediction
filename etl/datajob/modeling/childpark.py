@@ -104,6 +104,7 @@ class ChildParkModeling:
         # 입장객수 예측정보 운영 DB에 저장
         df_fin = get_spark_session().createDataFrame(data) \
                                     .select(col('STD_DATE').cast('date'), col('THEME_NAME'), col('ENT_NUM').cast('integer'))
+        df_fin = df_fin.withColumn("CONGESTION", (df_fin.ENT_NUM * 100 / 50000).cast('integer'))
         overwrite_trunc_data(OperationDB, df_fin, "PRE_ENTRANCE")
 
         # 네비게이션 예측정보 운영 DB에 저장

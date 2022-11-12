@@ -1,9 +1,7 @@
 {% extends './base_lotteworld.html' %}
 {% load static %}
 {% block text %}
-<link type="text/css" rel="stylesheet" href="{% static 'css/default.css' %}">
-<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
-<link id="css1" type="text/css" rel="stylesheet" href="{% static 'css/facility.css' %}">
+
 <script type="text/javascript">
   function lnbType(val) {
       if(val != null && val != ''){
@@ -58,7 +56,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 bg-info py-1" style="magin-bottom:0px;">
-        <h3 class="">장애인 고객 지원 서비스</h3>
+        <h3 class="" style="font-size: 24px;">장애인 고객 지원 서비스</h3>
       </div>
     </div>
     <div class="row py-1 border-left border-right border-top border-bottom border-light" style="">
@@ -83,6 +81,7 @@
     </div>
   </div>
 </div>
+
 <div class="py-1">
   <div class="container">
     <div class="row">
@@ -96,7 +95,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 bg-info py-1" style="magin-bottom:0px;">
-        <h3 class="">어린이/영유아 동반 고객</h3>
+        <h3 class="" style="font-size: 24px; ">어린이/영유아 동반 고객</h3>
       </div>
     </div>
     <div class="row py-1 border border-light">
@@ -120,7 +119,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 bg-info py-1" style="magin-bottom:0px;">
-        <h3 class="">일반 고객 지원</h3>
+        <h3 class="" style="font-size: 24px; ">일반 고객 지원</h3>
       </div>
     </div>
     <div class="row py-1 border border-light">
@@ -139,7 +138,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 bg-info py-1" style="magin-bottom:0px;">
-        <h3 class="">일반 편의시설</h3>
+        <h3 class="" style="font-size: 24px; ">일반 편의시설</h3>
       </div>
     </div>
     <div class="row py-1 border border-light">
@@ -181,7 +180,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="" contenteditable="true"><i class="fa fa-userExample of  fa-home"></i>&nbsp; 분실물 게시판:&nbsp;https://adventure.lotteworld.com/kor/communication/lost-property/list.do</h4>
+        <a href="https://adventure.lotteworld.com/kor/communication/lost-property/list.do"><h4 class="" contenteditable="true"><i class="fa fa-userExample of  fa-home"></i>&nbsp; 분실물 게시판&nbsp;</h4></a>
       </div>
     </div>
   </div>

@@ -101,21 +101,24 @@ class OtherThemeParkModeling:
 
         # ㅡㅡㅡㅡㅡ 입장객 수 예측정보 DB 저장 ㅡㅡㅡㅡㅡ
         
-        # 서울대공원 입장객 예측정보 운영 DB에 저장
+        # 서울대공원 입장객, 혼잡도 예측정보 운영 DB에 저장
         df_seoulpark_fin = get_spark_session().createDataFrame(seoulpark_data) \
                                     .select(col('STD_DATE').cast('date'), col('THEME_NAME'), col('ENT_NUM').cast('integer'))
+        df_seoulpark_fin = df_seoulpark_fin.withColumn("CONGESTION", (df_seoulpark_fin.ENT_NUM * 100 / 96000).cast('integer'))
         df_seoulpark_fin.show()
         save_data(OperationDB, df_seoulpark_fin, "PRE_ENTRANCE")
 
-        # 롯데월드 입장객 예측정보 운영 DB에 저장
+        # 롯데월드 입장객, 혼잡도 예측정보 운영 DB에 저장
         df_lotte_fin = df_seoulpark_fin.withColumn('ENT_NUM', (col('ENT_NUM') / 83764 * 499730).cast('integer'))
         df_lotte_fin = df_lotte_fin.withColumn('THEME_NAME', lit('롯데월드'))
+        df_lotte_fin = df_lotte_fin.withColumn("CONGESTION", (df_lotte_fin.ENT_NUM * 100 / 20000).cast('integer'))
         df_lotte_fin.show()
         save_data(OperationDB, df_lotte_fin, "PRE_ENTRANCE")
 
-        # 에버랜드 입장객 예측정보 운영 DB에 저장
+        # 에버랜드 입장객, 혼잡도 예측정보 운영 DB에 저장
         df_ever_fin = df_seoulpark_fin.withColumn('ENT_NUM', (col('ENT_NUM') / 83764 * 460780).cast('integer'))
         df_ever_fin = df_ever_fin.withColumn('THEME_NAME', lit('에버랜드'))
+        df_ever_fin = df_ever_fin.withColumn("CONGESTION", (df_ever_fin.ENT_NUM * 100 / 28000).cast('integer'))
         df_ever_fin.show()
         save_data(OperationDB, df_ever_fin, "PRE_ENTRANCE")
 

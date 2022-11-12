@@ -1,7 +1,77 @@
 {% extends './base.html' %}
-{% block content %}
+
 {% load static %}
 
+{% block header_code %}
+
+<style>
+
+.wrap_park {
+  cursor: pointer;
+  position: relative; 
+ 
+}
+
+
+.wrap_park:after {
+  top:0;
+  left:0;
+  position:absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity:0.5!important;
+  filter:alpha(opacity=50);
+  z-index:-1;
+  content:"";
+  width:100%;
+  height:100%;
+}
+
+/* 서울어린이대공원 */
+#seoulChPark:after{
+  background-image: url({% static '/images/childrenpark_entrance.png' %});
+}
+/* 서울대공원 */
+#seoulBig:after{
+  background-image: url({% static '/images/seoulgrandpark_entrance.png' %});
+}
+/* 롯데월드 */
+#lottewd:after{
+  background-image:url({% static '/images/lottecastle.jpg' %}); 
+} 
+/* 에버랜드 */
+#everld:after{
+  background-image: url({% static '/images/everland_entrance.jpg' %});
+}
+
+.wrap_park a {
+  display: block; 
+  width: 100%; 
+  height:260px; 
+  opacity: 0.5"
+
+}
+
+.wrap_park a:after {
+  top:0;
+  left:0;
+  position:absolute;
+  z-index:-1;
+  content:"";
+  width:100%;
+  height:100%;
+}
+
+
+
+</style>
+
+
+
+{% endblock %}
+
+
+{% block content %}
   <div class="py-5" style="">
     <div class="container">
       <div class="row">
@@ -21,7 +91,7 @@
           </div>
         </div>
         <div class="col-md-9" style="">
-          <h1 class="my-2 mx-4" style="font-family: 'Jua', sans-serif;">눈치게임 이기고 싶죠??<br></h1>
+          <h1 class="my-2 mx-4" style="font-family: 'Jua', sans-serif; font-size: 50px;">눈치게임 이기고 싶죠??<br></h1>
         </div>
       </div>
     </div>
@@ -31,31 +101,27 @@
       <div class="row">
         {% for item in entrance %}
           {% if item.theme_name == '서울대공원' %}
-          <div class="col-6 col-md-3 p-0" style="cursor: pointer; position: relative; background: none;" onmouseover="this.style.background='LemonChiffon'" onmouseout="this.style.background='none'">
-            <a href="/seoulgrandpark/congestion/">
-            <img class="img-fluid d-block cover img-thumbnail cover" src="{% static '/images/seoulgrandpark_entrance.png' %}" style="opacity: 0.5">
-            <div style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">서울대공원<br>입장객수: {{ item.ent_num }}</div>
+          <div class="col-6 col-md-3 p-0 wrap_park" id="seoulBig" data-id="lin_seoulBig" >
+            <a href="/seoulgrandpark/congestion/" id="lin_seoulBig" data-id="lin_seoulBig" >
+            <div class="wrap_park" data-id="lin_seoulBig" style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">서울대공원<br>혼잡도: {{ item.congestion }}%</div>
             </a>
           </div>
           {% elif item.theme_name == '서울어린이대공원' %}
-          <div class="col-6 col-md-3 p-0" style="cursor: pointer; position: relative; background: none;" onmouseover="this.style.background='LemonChiffon'" onmouseout="this.style.background='none'">
-            <a href="/childpark/congestion/">
-            <img class="img-fluid d-block cover img-thumbnail cover" src="{% static '/images/childrenpark_entrance.png' %}" style="opacity: 0.5">
-            <div style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">어린이대공원<br>입장객수: {{ item.ent_num }}</div>
+          <div class="col-6 col-md-3 p-0 wrap_park" id="seoulChPark" data-id="lin_seoulChPark" >
+            <a href="/childpark/congestion/"  id="lin_seoulChPark" data-id="lin_seoulChPark" >
+            <div class="wrap_park" data-id="lin_seoulChPark" style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center"><span style="opacity: 1; font-size: 24px;" data-id="lin_seoulChPark">어린이대공원<br>혼잡도: {{ item.congestion }}%</span></div>
             </a>
           </div>
           {% elif item.theme_name == '롯데월드' %}
-          <div class="col-6 col-md-3 p-0" style="cursor: pointer; position: relative;" onmouseover="this.style.background='LemonChiffon'" onmouseout="this.style.background='none'">
-            <a href="/lotteworld/congestion/">
-            <img class="img-fluid d-block img-thumbnail cover" src="{% static '/images/lottecastle.jpg' %}" style="opacity: 0.5">
-            <div style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">롯데월드<br>입장객수: {{ item.ent_num }}</div>
+          <div class="col-6 col-md-3 p-0 wrap_park" id="lottewd" data-id="lin_lottewd" >
+            <a href="/lotteworld/congestion/" id="lin_lottewd"  data-id="lin_lottewd">
+            <div class="wrap_park" data-id="lin_lottewd"   style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">롯데월드<br>혼잡도: {{ item.congestion }}%</div>
             </a>
           </div>
           {% elif item.theme_name == '에버랜드' %}
-          <div class="col-6 col-md-3 p-0" style="cursor: pointer; position: relative;" onmouseover="this.style.background='LemonChiffon'" onmouseout="this.style.background='none'">
-            <a href="/everland/congestion/">
-            <img class="img-fluid d-block cover img-thumbnail cover" src="{% static '/images/everland_entrance.jpg' %}" style="opacity: 0.5">
-            <div style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">에버랜드<br>입장객수: {{ item.ent_num }}</div>
+          <div class="col-6 col-md-3 p-0 wrap_park" id="everld" data-id="lin_everld" >
+            <a href="/everland/congestion/" id="lin_everld" data-id="lin_everld">
+            <div class="wrap_park" data-id="lin_everld"  style="font-family: 'Jua', sans-serif; font-size: 24px; color: black;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center">에버랜드<br>혼잡도: {{ item.congestion }}%</div>
             </a>
           </div>
           {% endif %}
@@ -130,5 +196,28 @@
         end: '2018-11-29'
       }, ]
     });
+
+
+  </script>
+
+  <script>
+
+    document.querySelectorAll('.wrap_park').forEach(e => {
+     
+
+      e.addEventListener('mouseover', ev => {
+        console.dir(ev.target.dataset.id)
+        document.styleSheets[0].addRule('#'+ev.target.dataset.id+':after','background-color:LemonChiffon')
+     })
+
+     e.addEventListener('mouseout', ev => {
+      console.dir(ev.target.dataset.id)
+        document.styleSheets[0].addRule('#'+ev.target.dataset.id+':after','background:none')
+     })
+
+    })
+
+
+
   </script>
   {% endblock %}

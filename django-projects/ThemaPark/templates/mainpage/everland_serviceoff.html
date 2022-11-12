@@ -54,46 +54,41 @@
   </div>
 </section> 
 
-<div class="">
+<!-- <div class="">
   <div class="container">
     <div class="row">
       <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-        <h3 class="">운휴시설 목록</h3>
+        <h3 class="" style="font-size: 24px">운휴시설 목록</h3>
       </div>
     </div>
   </div>
-</div>
-<div class="pb-0 pt-5" style="">
-  <div class="container text-center text-capitalize">
-    <div class="row">
-      <div class="col-md-12">
-        <h1 class="mb-3">{{ holfac.0.std_date|date:"Y년 M j일" }}</h1>
-      </div>
+</div> -->
+<!-- <div class="pb-0 pt-5" style=""> -->
+<div class="container text-center text-capitalize">
+  <div class="row">
+    <div class="col-md-12" style="padding:20px;">
+      <h1 class="mb-3" style="font-size: 40px;">{{ holfac.0.std_date|date:"Y년 M j일" }}</h1>
     </div>
-    <div class="row text-center text-capitalize">
-      {% for item in holfac %}
-        <div class="col-md-2 mx-auto" style="">
-          <div class="row">
-            <div class="col-md-12">
-              <h4 class="">어트랙션명</h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <h5 class="">{{ item.fac_name }}</h4>
-            </div>
+  </div>
+  <div style="padding:20px;"></div>
+  <div class="row text-center text-capitalize">
+    {% for item in holfac %}
+      <div class="col-md-2 mx-auto" style="">
+        
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class=""  style="font-size: 30px;">어트랙션명</h4>
           </div>
         </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-<div class="py-5 text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+        <div style="padding:20px;"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="" style="font-size: 25px;">{{ item.fac_name }}</h4>
+          </div>
+        </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
+<!-- </div> -->
 {% endblock %}
