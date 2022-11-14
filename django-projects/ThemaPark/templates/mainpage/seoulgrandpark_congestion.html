@@ -80,7 +80,7 @@
           <h2 class="text-center" style="">예상 방문객 수<br></h2>
         </div>
         <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
+          <h2 class="text-center">혼잡도<br></h2>
         </div>
         <div class="col-md-3">
           <h2 class="text-center">행사 정보</h2>
@@ -96,14 +96,14 @@
         <div class="col-md-3 text-center" style="">
         {% if pre_ent.congestion > 100 %}
           <svg class="radial-progress" data-percentage="100" viewBox="0 0 80 80">
-            <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-            <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+            <circle class="incomplete" id="circle-incomplete-{{ forloop.counter0 }}" cx="40" cy="40" r="35"></circle>
+            <circle class="complete" id="circle-complete-{{ forloop.counter0 }}" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
             <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ pre_ent.congestion }}%</text>
           </svg>
         {% else %}
           <svg class="radial-progress" data-percentage="{{ pre_ent.congestion }}" viewBox="0 0 80 80">
-            <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-            <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+            <circle class="incomplete" id="circle-incomplete-{{ forloop.counter0 }}" cx="40" cy="40" r="35"></circle>
+            <circle class="complete" id="circle-complete-{{ forloop.counter0 }}" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
             <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ pre_ent.congestion }}%</text>
           </svg>
         </div>

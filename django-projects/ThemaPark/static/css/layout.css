@@ -696,7 +696,7 @@ body.m99 {background-image:url("/seoulsky/images/kor/common/bg_body_m05.jpg");} 
 #contentsWrap {position:relative;min-height:100%;margin:-401px 0 -340px;}
 #contentsWrap > .container {padding:401px 0 340px;}
 
-.lnbWrap {overflow:hidden;min-height:51px;margin-bottom:54px;background:#fff url('/seoulsky/images/kor/common/bg_gray_line.png') repeat-x 0 100%;font-family:'knockout', 'YoonVGothicStd', sans-serif;}
+.lnbWrap {overflow:hidden;min-height:51px;margin-bottom:54px;background:#fff url('') repeat-x 0 100%;font-family:'knockout', 'YoonVGothicStd', sans-serif;}
 .lnbWrap nav {width:1100px;margin:0 auto;}
 .lnbWrap ul {display:table;width:100%;table-layout:fixed;}
 .lnbWrap li {display:table-cell;width:auto;vertical-align:middle;text-align:center;}

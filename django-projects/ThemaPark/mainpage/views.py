@@ -37,10 +37,11 @@ def signup(request):
         form = UserForm(request.POST)
         # password와 confirm에 입력된 값이 같다면
         if form.is_valid():
-            form.save()
-            raw_username = form.cleaned_data.get('email')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=raw_username, password=raw_password)  # 사용자 인증
+            user = form.save()
+            print(form.cleaned_data)
+            #raw_username = form.cleaned_data.get('email')
+            #raw_password = form.cleaned_data.get('password1')
+            #user = authenticate(username=raw_username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
             return redirect('/')
     else:
@@ -53,7 +54,7 @@ def log_in(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username=username, password=password1)
+        user = authenticate(username=username, password=password)
         if user is not None:
             auth_login(request, user)
             return render(request, '/',)
@@ -73,6 +74,9 @@ def logout(request):
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, '/')
+
+def terms(request):
+    return render(request, 'mainpage/terms.html')
 
 # ㅡㅡㅡㅡㅡ 롯데월드 ㅡㅡㅡㅡㅡ
 def lotteworldcongestion(request):

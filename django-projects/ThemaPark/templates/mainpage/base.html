@@ -123,7 +123,7 @@
             </div>
           </div>
           <div class="col-6 col-md col-md-4">
-            <h3 style="font-family: 'Jua', sans-serif;">Official Website</h3>
+            <h3 style="font-size: 24px;">Official Website</h3>
             <ul class="list-unstyled text-small" style="font-family: 'Jua', sans-serif;">
               <li>
                 <a class="text-muted" href="https://grandpark.seoul.go.kr/main/ko.do" target="_blank">서울대공원</a>
@@ -137,10 +137,13 @@
               <li>
                 <a class="text-muted" href="https://www.everland.com/web/everland/main.html" target="_blank">에버랜드</a>
               </li>
+              <li>
+                <a href="/index/terms/" style="font-size: 24px; color: black;">개인정보처리방침</a>
+              </li>
             </ul>
           </div>
           <div class="col-6 col-md col-md-4">
-            <h3 style="font-family: 'Jua', sans-serif;">Youtube Channel</h3>
+            <h3 style="font-size: 24px;">Youtube Channel</h3>
             <ul class="list-unstyled text-small" style="font-family: 'Jua', sans-serif;">
               <li>
                 <a class="text-muted" href="https://www.youtube.com/channel/UC9bnNOTaSx9rQZiuf_ML5qA" target="_blank">서울대공원TV</a>
@@ -192,60 +195,36 @@
               $('svg.radial-progress').each(function( index, value ) { 
                   // If svg.radial-progress is approximately 25% vertically into the window when scrolling from the top or the bottom
                   if ( 
-                      $(window).scrollTop() > $(this).offset().top - ($(window).height() * 0.75) &&
-                      $(window).scrollTop() < $(this).offset().top + $(this).height() - ($(window).height() * 0.25)
+                      $(window).scrollTop() > $(this).offset().top - ($(window).height() * 0.99) &&
+                      $(window).scrollTop() < $(this).offset().top + $(this).height() - ($(window).height() * 0.01)
                   ) {
                       // Get percentage of progress
                       percent = $(value).data('percentage');
+                      circleIncompleteId = "circle-incomplete-" + index;
+                      circleCompleteId = "circle-complete-" + index;
+                      
+                      const circleElemIncomplete = document.getElementById(circleIncompleteId);
+                      const circleElemComplete = document.getElementById(circleCompleteId);
+
                       if (percent >= 80){
-                        const collection1 = document.getElementsByClassName("incomplete");
-                        for (let i = 0; i < collection1.length; i++) {
-                          collection1[i].style.stroke = "#fd6470";
-                        }
-                        const collection2 = document.getElementsByClassName("complete");
-                        for (let i = 0; i < collection2.length; i++) {
-                          collection2[i].style.stroke = "#fd6470";
-                        }
+                        circleElemIncomplete.style.stroke = "#fd6470";
+                        circleElemComplete.style.stroke = "#fd6470";
                       }
                       else if (percent >= 60){
-                        const collection1 = document.getElementsByClassName("incomplete");
-                        for (let i = 0; i < collection1.length; i++) {
-                          collection1[i].style.stroke = "#fca858";
-                        }
-                        const collection2 = document.getElementsByClassName("complete");
-                        for (let i = 0; i < collection2.length; i++) {
-                          collection2[i].style.stroke = "#fca858";
-                        }
+                        circleElemIncomplete.style.stroke = "#fca858";
+                        circleElemComplete.style.stroke = "#fca858";
                       }
                       else if (percent >= 40){
-                        const collection1 = document.getElementsByClassName("incomplete");
-                        for (let i = 0; i < collection1.length; i++) {
-                          collection1[i].style.stroke = "#fddc32";
-                        }
-                        const collection2 = document.getElementsByClassName("complete");
-                        for (let i = 0; i < collection2.length; i++) {
-                          collection2[i].style.stroke = "#fddc32";
-                        }
+                        circleElemIncomplete.style.stroke = "#fddc32";
+                        circleElemComplete.style.stroke = "#fddc32";
                       }
                       else if (percent >= 20){
-                        const collection1 = document.getElementsByClassName("incomplete");
-                        for (let i = 0; i < collection1.length; i++) {
-                          collection1[i].style.stroke = "#a2ed56";
-                        }
-                        const collection2 = document.getElementsByClassName("complete");
-                        for (let i = 0; i < collection2.length; i++) {
-                          collection2[i].style.stroke = "#a2ed56";
-                        }
+                        circleElemIncomplete.style.stroke = "#a2ed56";
+                        circleElemComplete.style.stroke = "#a2ed56";
                       }
                       else{
-                        const collection1 = document.getElementsByClassName("incomplete");
-                        for (let i = 0; i < collection1.length; i++) {
-                          collection1[i].style.stroke = "#83e4e2";
-                        }
-                        const collection2 = document.getElementsByClassName("complete");
-                        for (let i = 0; i < collection2.length; i++) {
-                          collection2[i].style.stroke = "#83e4e2";
-                        }
+                        circleElemIncomplete.style.stroke = "#83e4e2";
+                        circleElemComplete.style.stroke = "#83e4e2";
                       }
                       // Get radius of the svg's circle.complete
                       radius = $(this).find($('circle.complete')).attr('r');
@@ -254,10 +233,10 @@
                       // Get stroke-dashoffset value based on the percentage of the circumference
                       strokeDashOffset = circumference - ((percent * circumference) / 100);
                       // Transition progress for 1.25 seconds
-                      $(this).find($('circle.complete')).animate({'stroke-dashoffset': strokeDashOffset}, 1500);
+                      $(this).find($('circle.complete')).animate({'stroke-dashoffset': strokeDashOffset}, 1000);
                   }
               });
-          }).trigger('scroll');
+          }).trigger('scroll'); 
       
       });
       </script>
