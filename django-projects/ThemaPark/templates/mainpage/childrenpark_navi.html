@@ -55,7 +55,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-        <h3 class="">주차장 예상 혼잡도</h3>
+        <h3 class="" style="font-size: 30px;">주차장 예상 혼잡도</h3>
       </div>
     </div>
   </div>
@@ -63,74 +63,35 @@
 <!-- <div class="pb-0 pt-5" style=""> -->
   <div class="container text-center text-capitalize">
     <div class="row text-center text-capitalize">
-      <div class="col-md-1 mx-auto" style="">
+      {% for item in prenavi %}
+      <div class="col-md-1 mx-auto text-center" style="">
         <div class="row">
-          <div class="col-md-12">
-            <h4 class="">2022-11-18</h4>
+          <div class="col-md-13">
+            <h4>{{ item.std_date|date:"M j일" }}</h4>
           </div>
         </div>
       </div>
-      <div class="col-md-1 mx-auto" style="">
-        <div class="row">
-          <div class="col-md-12">
-            <h4 class="">2022-11-19</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <h4 class="">2022-11-20</h4>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <div class="row">
-          <div class="col-md-12">
-            <h4 class="">2022-11-21</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <div class="row">
-          <div class="col-md-12">
-            <h4 class="">2022-11-22</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <div class="row">
-          <div class="col-md-12">
-            <h4 class="">2022-11-23</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <div class="row">
-          <div class="col-md-12">
-            <h4 class="">2022-11-24</h4>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
     <div class="row text-center text-capitalize">
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="d-block mx-auto img-fluid" src="{% static '/images/level3.png' %}"></p>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="img-fluid d-block" src="assets/images/level1.png"></p>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="assets/images/level2.png"></p>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="assets/images/level4.png"></p>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="assets/images/level4.png"></p>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center"><img class="img-fluid d-block" src="assets/images/level2.png"></p>
-      </div>
-      <div class="col-md-1 mx-auto" style="">
-        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="img-fluid d-block" src="assets/images/level1.png"></p>
-      </div>
+      {% for item in prenavi %}
+      <!-- <div class="col-md-1 mx-auto" style="">
+        <p class="text-lowercase text-center mt-0 mb-0 mx-auto"><img class="d-block mx-auto img-fluid" src="{% static '/images/level2.png' %}"></p>
+      </div> -->
+      {% if item.congestion > 100 %}
+      <svg class="radial-progress" data-percentage="100" viewBox="0 0 80 80">
+        <circle class="incomplete" id="circle-incomplete-{{ forloop.counter0 }}" cx="40" cy="40" r="35"></circle>
+        <circle class="complete" id="circle-complete-{{ forloop.counter0 }}" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+        <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ item.congestion }}%</text>
+      </svg>
+      {% else %}
+      <svg class="radial-progress" data-percentage="{{ item.congestion }}" viewBox="0 0 80 80">
+        <circle class="incomplete" id="circle-incomplete-{{ forloop.counter0 }}" cx="40" cy="40" r="35"></circle>
+        <circle class="complete" id="circle-complete-{{ forloop.counter0 }}" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+        <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ item.congestion }}%</text>
+      </svg>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
 <!-- </div> -->

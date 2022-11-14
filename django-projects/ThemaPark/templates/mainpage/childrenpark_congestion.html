@@ -60,11 +60,12 @@
       </div>
     </div>
   </div>
+  {% for time, pre_ent, pre_event in data %}
   <div class="py-2">
     <div class="container">
       <div class="row">
         <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-18</h3>
+          <h3 class="">{{ time.std_date|date:"Y년 M j일" }}</h3>
         </div>
       </div>
     </div>
@@ -73,264 +74,52 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
+          <h2 class="" style="font-family: 'Jua', sans-serif;">운영시간<br></h2>
         </div>
         <div class="col-md-3">
           <h2 class="text-center" style="">예상 방문객 수<br></h2>
         </div>
         <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
+          <h2 class="text-center">혼잡도<br></h2>
         </div>
         <div class="col-md-3">
           <h2 class="text-center">행사 정보</h2>
         </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3"><img class="d-block img-fluid w-50 m-0 mx-auto my-0" src="{% static '/images/level4.png' %}"></div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-19</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center" style="">예상 방문객 수<br></h2>
-        </div>
-        <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center">행사 정보</h2>
-        </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3">
-          <p class="text-lowercase text-center mt-0 mb-0 mx-auto w-50"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
-        </div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-20</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center" style="">예상 방문객 수<br></h2>
-        </div>
-        <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center">행사 정보</h2>
-        </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3">
-          <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
-        </div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-21</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center" style="">예상 방문객 수<br></h2>
-        </div>
-        <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center">행사 정보</h2>
-        </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3">
-          <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
-        </div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-22</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center" style="">예상 방문객 수<br></h2>
-        </div>
-        <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center">행사 정보</h2>
-        </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3">
-          <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
-        </div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-23</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center" style="">예상 방문객 수<br></h2>
-        </div>
-        <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center">행사 정보</h2>
-        </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3">
-          <p class="text-lowercase text-center w-50 mx-auto"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
-        </div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 py-1 bg-light" style="magin-bottom:0px;">
-          <h3 class="">2022-11-24</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <h2 class="">운영시간<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center" style="">예상 방문객 수<br></h2>
-        </div>
-        <div class="col-md-3" style="">
-          <h2 class="text-center">혼잡도 단계<br></h2>
-        </div>
-        <div class="col-md-3">
-          <h2 class="text-center">행사 정보</h2>
-        </div>
-        <div class="col-md-3 text-center" style="">
-          <h4 class="">09:00 ~ 22:00</h4>
-        </div>
-        <div class="col-md-3 text-center">
-          <h4 class="text-center">00</h4>
-        </div>
-        <div class="col-md-3">
-          <p class="text-lowercase text-center mt-0 mb-0 mx-auto w-50"><img class="img-fluid d-block" src="{% static '/images/level4.png' %}"></p>
-        </div>
-        <div class="col-md-3 text-center">
-          <h3 class="">빈칸</h3>
-        </div>
-      </div>
-    </div>
-  </div>
 
+        <div class="col-md-3 text-center" style="padding-top:30px"  >
+          <h4 class="" style="font-family: 'Jua', sans-serif;">{{ time.start_time }} ~ {{ time.end_time }}</h4>
+        </div>
+        <div class="col-md-3 text-center" style="padding-top:30px">
+          <h4 class="text-center">{{ pre_ent.ent_num }}</h4>
+        </div>
+        <!-- <div class="col-md-4"><img class="d-block img-fluid w-50 m-0 mx-auto my-0" src="{% static '/images/level1.png' %}"></div> -->
+        <div class="col-md-3 text-center" style="">
+        {% if pre_ent.congestion > 100 %}
+          <svg class="radial-progress" data-percentage="100" viewBox="0 0 80 80">
+            <circle class="incomplete" id="circle-incomplete-{{ forloop.counter0 }}" cx="40" cy="40" r="35"></circle>
+            <circle class="complete" id="circle-complete-{{ forloop.counter0 }}" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+            <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ pre_ent.congestion }}%</text>
+          </svg>
+        {% else %}
+          <svg class="radial-progress" data-percentage="{{ pre_ent.congestion }}" viewBox="0 0 80 80">
+            <circle class="incomplete" id="circle-incomplete-{{ forloop.counter0 }}" cx="40" cy="40" r="35"></circle>
+            <circle class="complete" id="circle-complete-{{ forloop.counter0 }}" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+            <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ pre_ent.congestion }}%</text>
+          </svg>
+        </div>
+        {% endif %}
+        {% if pre_event.event_name %}
+        <div class="col-md-3 text-center" style="padding-top:30px">
+          <h3 class="">{{ pre_event.event_name }}</h3>
+        </div>
+        {% else %}
+        <div class="col-md-3 text-center" style="padding-top:30px">
+          <h3 class="">없음</h3>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {%endfor%}
 {% endblock %}
 

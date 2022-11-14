@@ -13,6 +13,7 @@ urlpatterns = [
     path("index/registration/", views.signup, name="registration"),
     path('index/login/',  auth_views.LoginView.as_view(template_name='mainpage/log-in.html'), name='login'),
     path('index/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('index/terms/', views.terms, name='terms'),
 
     # path("seoulgrandpark/", views.seoulgrandpark, name="seoulgrandpark"),
     # path("childpark/", views.childpark, name="childpark"),
