@@ -8,11 +8,22 @@ class HolidayTransformer:
     FILE_DIR = '/theme_park/holiday/'
     @classmethod
     def transform(cls):
-        df_hol = get_spark_session().read.csv(cls.FILE_DIR + 'holiday_201801_202206.csv', encoding='CP949', header=True)
-        holidays = df_hol.collect()
+        holidays = cls.__get_data_from_hdfs()
 
         data = []
 
+        cls.__create_df_data(holidays, data)
+        
+        cls.__save_to_DW(data)
+
+    @classmethod
+    def __save_to_DW(cls, data):
+        df_fin = get_spark_session().createDataFrame(data)
+        df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
+        save_data(DataWarehouse, df_fin, 'HOLIDAY')
+
+    @classmethod
+    def __create_df_data(cls, holidays, data):
         for i in range(1765, 123, -1):  # 1765 , 123, -1
             tmp_dict = {}
             tmp_dict['STD_DATE'] = cal_std_day(i)
@@ -34,10 +45,12 @@ class HolidayTransformer:
                     tmp_dict['HOLIDAY_OX'] = 0
 
             data.append(tmp_dict)
-        
-        df_fin = get_spark_session().createDataFrame(data)
-        df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
-        save_data(DataWarehouse, df_fin, 'HOLIDAY')
+
+    @classmethod
+    def __get_data_from_hdfs(cls):
+        df_hol = get_spark_session().read.csv(cls.FILE_DIR + 'holiday_201801_202206.csv', encoding='CP949', header=True)
+        holidays = df_hol.collect()
+        return holidays
 
             
             

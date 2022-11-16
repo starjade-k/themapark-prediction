@@ -9,11 +9,7 @@ class ThemeParkEventTransformer:
     FILE_DIR = '/theme_park/event/'
     @classmethod
     def transform(cls, after_cnt=7):
-        df_themepark = find_data(DataWarehouse, "THEMEPARK")
-
-        # db에서 테마파크 번호 가져오기
-        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
-        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
+        childpark_num, seoulpark_num = cls.__get_theme_num()
 
         themeparks = [('childpark', childpark_num), 
                         ('seoulpark', seoulpark_num)]
@@ -22,6 +18,15 @@ class ThemeParkEventTransformer:
             df_fin = cls.__parse_and_get_df(themepark[0], themepark[1], after_cnt)
             df_fin.show()
             save_data(DataWarehouse, df_fin, "THEME_EVENT")
+
+    @classmethod
+    def __get_theme_num(cls):
+        df_themepark = find_data(DataWarehouse, "THEMEPARK")
+
+        # db에서 테마파크 번호 가져오기
+        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
+        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
+        return childpark_num,seoulpark_num
 
     @classmethod
     def __parse_and_get_df(cls, themepark, themepark_num, after_cnt):
