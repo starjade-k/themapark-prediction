@@ -9,17 +9,23 @@ class SubwayInOutTransformer:
 
     @classmethod
     def transform(cls):
-        df_themepark = find_data(DataWarehouse, "THEMEPARK")
-        #df_themepark.show()
+        seoulpark_num, childpark_num = cls.__get_theme_num()
 
-        # db에서 테마파크 번호 가져오기
-        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
-        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
+        sbw_list = cls.__get_data_from_hdfs()
 
-        file_name = cls.FILE_DIR + 'subway_inout_' + cal_std_day2(4) + '.csv'
-        df_sbw = get_spark_session().read.csv(file_name, header=True, encoding='cp949')
-        sbw_list = df_sbw.collect()
+        data = cls.__create_df_data(seoulpark_num, childpark_num, sbw_list)
 
+        # DW에 쓰기
+        cls.__save_to_hdfs(data)
+
+    @classmethod
+    def __save_to_hdfs(cls, data):
+        df_fin = get_spark_session().createDataFrame(data)
+        df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
+        save_data(DataWarehouse, df_fin, 'SUBWAY_INOUT')
+
+    @classmethod
+    def __create_df_data(cls, seoulpark_num, childpark_num, sbw_list):
         data = []
         for row in sbw_list:
             tmp_dict = {}
@@ -42,8 +48,21 @@ class SubwayInOutTransformer:
                 tmp_dict['IN_NUM'] = int(row['승차 승객수'])
                 tmp_dict['OUT_NUM'] = int(row['하차 승객수'])
                 data.append(tmp_dict)
+        return data
 
-        df_fin = get_spark_session().createDataFrame(data)
-        df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
-        save_data(DataWarehouse, df_fin, 'SUBWAY_INOUT')
+    @classmethod
+    def __get_data_from_hdfs(cls):
+        file_name = cls.FILE_DIR + 'subway_inout_' + cal_std_day2(4) + '.csv'
+        df_sbw = get_spark_session().read.csv(file_name, header=True, encoding='cp949')
+        sbw_list = df_sbw.collect()
+        return sbw_list
+
+    @classmethod
+    def __get_theme_num(cls):
+        df_themepark = find_data(DataWarehouse, "THEMEPARK")
+
+        # db에서 테마파크 번호 가져오기
+        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
+        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
+        return seoulpark_num,childpark_num
 

@@ -8,21 +8,12 @@ class PastAirDataTransformer:
 
     @classmethod
     def transform(cls):
-        df_themepark = find_data(DataWarehouse, "THEMEPARK")
-        df_themepark.show()
-
-        # db에서 테마파크 번호 가져오기
-        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
-        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
-        lotteworld_num = df_themepark.where(col('THEME_NAME') == '롯데월드').first()[0]
-        everland_num = df_themepark.where(col('THEME_NAME') == '에버랜드').first()[0]
-        #legoland_num = df_themepark.where(col('THEME_NAME') == '레고랜드').first()[0]
+        seoulpark_num, childpark_num, lotteworld_num, everland_num = cls.__get_theme_num()
 
         seoulpark_filename = 'gwacheon_air_2017_202206.csv'
         childpark_filename = 'gwangjin_air_2017_202206.csv'
         lotteworld_filename = 'songpa_air_2017_202206.csv'
         everland_filename = 'yongin_air_2017_202206.csv'
-        #legoland_filename = 'chuncheon_air_2017_202206.csv'
 
         df_seoulpark = get_spark_session().read.csv(cls.FILE_DIR + seoulpark_filename, encoding='CP949', header=True)
         df_seoulpark = df_seoulpark.select(lit(seoulpark_num).cast(IntegerType()).alias('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'), 
@@ -51,3 +42,15 @@ class PastAirDataTransformer:
         df_everland.show()
         print(df_everland.dtypes)
         save_data(DataWarehouse, df_everland, "DAILY_AIR")
+
+    @classmethod
+    def __get_theme_num(cls):
+        df_themepark = find_data(DataWarehouse, "THEMEPARK")
+        df_themepark.show()
+
+        # db에서 테마파크 번호 가져오기
+        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
+        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
+        lotteworld_num = df_themepark.where(col('THEME_NAME') == '롯데월드').first()[0]
+        everland_num = df_themepark.where(col('THEME_NAME') == '에버랜드').first()[0]
+        return seoulpark_num,childpark_num,lotteworld_num,everland_num

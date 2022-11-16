@@ -8,12 +8,22 @@ class Holiday:
     FILE_DIR = '/theme_park/holiday/'
     @classmethod
     def save(cls, after_cnt=7):
-        file_name = cls.FILE_DIR + 'holiday_' + cal_std_day_after(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
-        df_hol = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
-        holidays = df_hol.collect()
+        holidays = cls.__get_data_from_hdfs(after_cnt)
 
         data = []
 
+        cls.__create_df_data(after_cnt, holidays, data)
+        
+        cls.__save_to_DM(data)
+
+    @classmethod
+    def __save_to_DM(cls, data):
+        df_fin = get_spark_session().createDataFrame(data)
+        df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
+        overwrite_trunc_data(DataMart, df_fin, 'PRE_HOLIDAY')
+
+    @classmethod
+    def __create_df_data(cls, after_cnt, holidays, data):
         for i in range(after_cnt):
             tmp_dict = {}
             tmp_dict['STD_DATE'] = cal_std_day_after2(i)
@@ -35,7 +45,10 @@ class Holiday:
                     tmp_dict['HOLIDAY_OX'] = 0
 
             data.append(tmp_dict)
-        
-        df_fin = get_spark_session().createDataFrame(data)
-        df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
-        overwrite_trunc_data(DataMart, df_fin, 'PRE_HOLIDAY')
+
+    @classmethod
+    def __get_data_from_hdfs(cls, after_cnt):
+        file_name = cls.FILE_DIR + 'holiday_' + cal_std_day_after(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+        df_hol = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
+        holidays = df_hol.collect()
+        return holidays

@@ -10,14 +10,7 @@ class PastThemeParkEventTransformer:
 
     @classmethod
     def transform(cls):
-        df_themepark = find_data(DataWarehouse, "THEMEPARK")
-        df_themepark.show()
-
-        # db에서 테마파크 번호 가져오기
-        everland_num = df_themepark.where(col('THEME_NAME') == '에버랜드').first()[0]
-        lotteworld_num = df_themepark.where(col('THEME_NAME') == '롯데월드').first()[0]
-        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
-        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
+        cls.__get_theme_num()
 
         #ㅡㅡㅡㅡㅡㅡㅡ에버랜드 과거 데이터ㅡㅡㅡㅡㅡㅡㅡ
         # everland_file_name = cls.FILE_DIR + 'everland/' + 'everland_event_2018_2022.csv'
@@ -54,6 +47,18 @@ class PastThemeParkEventTransformer:
         # df_seoulpark_fin = df_seoulpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
         #                                         col('EVENT_OX'), col('EVENT_NAME'))                                          
         # save_data(DataWarehouse, df_seoulpark_fin, 'THEME_EVENT')
+
+
+    @classmethod
+    def __get_theme_num(cls):
+        df_themepark = find_data(DataWarehouse, "THEMEPARK")
+        df_themepark.show()
+
+        # db에서 테마파크 번호 가져오기
+        everland_num = df_themepark.where(col('THEME_NAME') == '에버랜드').first()[0]
+        lotteworld_num = df_themepark.where(col('THEME_NAME') == '롯데월드').first()[0]
+        seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
+        childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
 
 
     @classmethod
