@@ -31,3 +31,8 @@ ModuleNotFoundError: No module named 'app'
 [2022-11-08 17:11:35 +0900] [900] [INFO] Worker exiting (pid: 900)
 [2022-11-08 17:11:35 +0900] [898] [INFO] Shutting down: Master
 [2022-11-08 17:11:35 +0900] [898] [INFO] Reason: Worker failed to boot.
+[2022-11-17 14:24:39 +0900] [22332] [INFO] Starting gunicorn 20.1.0
+[2022-11-17 14:24:39 +0900] [22332] [INFO] Listening at: http://0.0.0.0:8000 (22332)
+[2022-11-17 14:24:39 +0900] [22332] [INFO] Using worker: sync
+[2022-11-17 14:24:39 +0900] [22334] [INFO] Booting worker with pid: 22334
+{'ip': '172.17.0.1', 'user': 'AnonymousUser', 'http_method': 'GET', 'url': '/', 'parameter': {}, 'timestamp': 1668662687, 'session_id': 'None'}

@@ -19,8 +19,9 @@ with DAG(
         'retry_delay': timedelta(minutes=3),  # 재시도 딜레이 - 3분
     },
     description='Themapark ETL Project',
-    schedule=timedelta(days=1), # 반복날짜 - 1일마다
-    start_date=datetime(2022, 10, 29, 2, 20),  # 시작날짜
+    #schedule=timedelta(days=1), # 반복날짜 - 1일마다
+    start_date=datetime(2022, 10, 29, 0, 0),  # 시작날짜
+    schedule_interval = '0 20 * * *', # 반복 - 매일 미국시간 20시에
     catchup=False,
     tags=['themapark_etl'],
 ) as dag:
