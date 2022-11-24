@@ -15,15 +15,17 @@ class SubwayInOutTransformer:
 
         data = cls.__create_df_data(seoulpark_num, childpark_num, sbw_list)
 
-        # DW에 쓰기
-        cls.__save_to_hdfs(data)
+        
+        cls.__save_to_dw(data)
 
+    # DW에 저장
     @classmethod
-    def __save_to_hdfs(cls, data):
+    def __save_to_dw(cls, data):
         df_fin = get_spark_session().createDataFrame(data)
         df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
         save_data(DataWarehouse, df_fin, 'SUBWAY_INOUT')
 
+    # 데이터 가공
     @classmethod
     def __create_df_data(cls, seoulpark_num, childpark_num, sbw_list):
         data = []
@@ -50,6 +52,7 @@ class SubwayInOutTransformer:
                 data.append(tmp_dict)
         return data
 
+    # HDFS에서 데이터 가져와 데이터프레임으로 생성
     @classmethod
     def __get_data_from_hdfs(cls):
         file_name = cls.FILE_DIR + 'subway_inout_' + cal_std_day2(4) + '.csv'
@@ -57,11 +60,11 @@ class SubwayInOutTransformer:
         sbw_list = df_sbw.collect()
         return sbw_list
 
+    # DW에서 테마파크 번호 가져오기
     @classmethod
     def __get_theme_num(cls):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
 
-        # db에서 테마파크 번호 가져오기
         seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
         childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
         return seoulpark_num,childpark_num

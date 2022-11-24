@@ -42,7 +42,8 @@ class PastAirDataExtractor:
             df = pd.DataFrame(list(set(data)), columns=['STD_DATE', 'PM10', 'PM25'])
             df = df.sort_values(by=['STD_DATE'])  # 날짜순으로 정렬
             print(df)
-            # hdfs에 쓰기
+
+            # 데이터프레임 데이터를 CSV파일로 HDFS에 저장
             file_name = cls.FILE_DIR + cls.STATION_NAME[i] + '_air_2017_202206.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['STD_DATE', 'PM10', 'PM25'], index=False)
@@ -84,9 +85,12 @@ class PastAirDataExtractor:
         data = []
 
         for i in range(70, 4, -1):   # 201701 ~ 202205
+            # 크롤링 위한 파라미터 설정 후 데이터 크롤링
             params['period'] = cal_std_month(i)
             params['stationCode'] = station
             response = execute_rest_api('get', cls.URL, {}, params)
+
+            # 데이터 가공
             res = response.json()
             charts = res['charts']
             for i, chart in enumerate(charts):
@@ -102,7 +106,7 @@ class PastAirDataExtractor:
                 data.append(tmp_data)
         return data
 
-    # 날짜데이터를 2022-10-06 형태로 변환
+    # 날짜데이터를 YYYY-MM-dd 형태로 변환
     @classmethod
     def __create_date(cls, year, month, day):
         if len(month) < 2:

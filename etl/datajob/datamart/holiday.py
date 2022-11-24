@@ -8,12 +8,15 @@ class Holiday:
     FILE_DIR = '/theme_park/holiday/'
     @classmethod
     def save(cls, after_cnt=7):
+        # HDFS에서 데이터 가져오기
         holidays = cls.__get_data_from_hdfs(after_cnt)
 
         data = []
 
+        # 데이터프레임 이용해 데이터 가공
         cls.__create_df_data(after_cnt, holidays, data)
         
+        # DM에 저장
         cls.__save_to_DM(data)
 
     @classmethod

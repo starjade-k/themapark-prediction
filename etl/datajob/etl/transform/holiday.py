@@ -16,15 +16,17 @@ class HolidayTransformer:
         
         cls.__save_to_DW(data)
 
+    # DW에 저장
     @classmethod
     def __save_to_DW(cls, data):
         df_fin = get_spark_session().createDataFrame(data)
         df_fin = df_fin.withColumn('STD_DATE', col('STD_DATE').cast('date'))
         save_data(DataWarehouse, df_fin, 'HOLIDAY')
 
+    # 데이터프레임 -> 최종 데이터 형태로 데이터 가공
     @classmethod
     def __create_df_data(cls, holidays, data):
-        for i in range(1765, 123, -1):  # 1765 , 123, -1
+        for i in range(1765, 123, -1): 
             tmp_dict = {}
             tmp_dict['STD_DATE'] = cal_std_day(i)
 
@@ -46,11 +48,9 @@ class HolidayTransformer:
 
             data.append(tmp_dict)
 
+    # HDFS에서 데이터 가져와 데이터프레임으로 생성
     @classmethod
     def __get_data_from_hdfs(cls):
         df_hol = get_spark_session().read.csv(cls.FILE_DIR + 'holiday_201801_202206.csv', encoding='CP949', header=True)
         holidays = df_hol.collect()
         return holidays
-
-            
-            

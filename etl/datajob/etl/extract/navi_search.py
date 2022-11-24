@@ -12,6 +12,7 @@ class NaviSearchExtractor:
 
     @classmethod
     def extract_data(cls, before_cnt=2):
+        # 크롤링 위한 파라미터 설정
         params = {
             'txtSGG_CD': '1',
             'txtSIDO_ARR': '',
@@ -29,23 +30,28 @@ class NaviSearchExtractor:
         try:
             df = cls.__get_nav_data(params, data, before_cnt)
             print(df)
+
+            # 데이터프레임 데이터를 CSV파일로 HDFS에 저장
             file_name = cls.FILE_DIR + 'navi_search_' + params['BASE_YM1'] + '.csv'
-            #file_name = cls.FILE_DIR + 'navi_search_202207_20221025.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['날짜', '에버랜드', '서울대공원',  '서울어린이대공원', '롯데월드'], index=False)
         except Exception as e:
             cls.__dump_log(log_dict, e)
 
+    # 네비게이션 데이터 크롤링
     @classmethod
     def __get_nav_data(cls, params, data, before_cnt):
-        for i in range(before_cnt, before_cnt + 1):  # 1752, 110, -1
+        # 데이터 가져온 후 가공 후, 데이터프레임 생성
+        for i in range(before_cnt, before_cnt + 1):
+            # 크롤링 위한 파라미터 설정 후 데이터 크롤링
             day = cal_std_day2(i)
             revised_day = cls.__create_date(day[:4], day[4:6], day[6:8])
             data['날짜'].append(revised_day)
             params['BASE_YM1'] = day
             params['BASE_YM2'] = day
             response = execute_rest_api('post', cls.URL, {}, params)
-                #print(response)
+
+            # 데이터 가공
             res = response.json()
             for tmp in res['list']:
                 if tmp['ITS_BRO_NM'] == '에버랜드':
@@ -78,6 +84,7 @@ class NaviSearchExtractor:
             }
         return log_dict
 
+    # 날짜 변환 함수
     @classmethod
     def __create_date(cls, year, month, day):
         if len(month) < 2:

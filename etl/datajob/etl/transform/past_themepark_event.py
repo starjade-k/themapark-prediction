@@ -12,55 +12,79 @@ class PastThemeParkEventTransformer:
     def transform(cls):
         cls.__get_theme_num()
 
-        #ㅡㅡㅡㅡㅡㅡㅡ에버랜드 과거 데이터ㅡㅡㅡㅡㅡㅡㅡ
-        # everland_file_name = cls.FILE_DIR + 'everland/' + 'everland_event_2018_2022.csv'
-        # df_everland = get_spark_session().read.csv(everland_file_name, encoding='CP949', header=True)
-        # everland_list = df_everland.collect()
-        # df_everland_fin = cls.__create_df_with_eventdata(everland_num, everland_list)
-        # df_everland_fin = df_everland_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
-        #                                         col('EVENT_OX'), col('EVENT_NAME'))
-        # save_data(DataWarehouse, df_everland_fin, 'THEME_EVENT')
+        df_everland, df_seoulpark, df_lotteworld, df_childpark = cls.__get_data_from_hdfs()
 
-        #ㅡㅡㅡㅡㅡㅡㅡ롯데월드 과거 데이터ㅡㅡㅡㅡㅡㅡㅡ
-        # lotteworld_file_name = cls.FILE_DIR + 'lotteworld/' + 'lotteworld_event_2018_2022.csv'
-        # df_lotteworld = get_spark_session().read.csv(lotteworld_file_name, encoding='CP949', header=True)
-        # lotteworld_list = df_lotteworld.collect()
-        # df_lotteworld_fin = cls.__create_df_with_eventdata(lotteworld_num, lotteworld_list)
-        # df_lotteworld_fin = df_lotteworld_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
-        #                                         col('EVENT_OX'), col('EVENT_NAME'))
-        # save_data(DataWarehouse, df_lotteworld_fin, 'THEME_EVENT')
+        cls.__save_everland_data(df_everland)
 
-        #ㅡㅡㅡㅡㅡㅡㅡ어린이대공원 과거 데이터ㅡㅡㅡㅡㅡㅡㅡ
-        # childpark_file_name = cls.FILE_DIR + 'childpark/' + 'event_childpark_2017_202206.csv'
-        # df_childpark = get_spark_session().read.csv(childpark_file_name, encoding='CP949', header=True)
-        # childpark_list = df_childpark.collect()
-        # df_childpark_fin = cls.__create_df_with_eventdata(childpark_num, childpark_list)
-        # df_childpark_fin = df_childpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
-        #                                         col('EVENT_OX'), col('EVENT_NAME'))                                             
-        # save_data(DataWarehouse, df_childpark_fin, 'THEME_EVENT')
+        cls.__save_lotteworld_data(df_lotteworld)
 
-        #ㅡㅡㅡㅡㅡㅡㅡ서울대공원 과거 데이터ㅡㅡㅡㅡㅡㅡㅡ
-        # seoulpark_file_name = cls.FILE_DIR + 'seoulpark/' + 'event_seoulpark_2017_202206.csv'
-        # df_seoulpark = get_spark_session().read.csv(seoulpark_file_name, encoding='CP949', header=True)
-        # seoulpark_list = df_seoulpark.collect()
-        # df_seoulpark_fin = cls.__create_df_with_eventdata(seoulpark_num, seoulpark_list)
-        # df_seoulpark_fin = df_seoulpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
-        #                                         col('EVENT_OX'), col('EVENT_NAME'))                                          
-        # save_data(DataWarehouse, df_seoulpark_fin, 'THEME_EVENT')
+        cls.__save_childpark_data(df_childpark)
+
+        cls.__save_seoulpark_data(df_seoulpark)
+
+    # 서울대공원 데이터 DW에 저장
+    @classmethod
+    def __save_seoulpark_data(cls, df_seoulpark):
+        seoulpark_list = df_seoulpark.collect()
+        df_seoulpark_fin = cls.__create_df_with_eventdata(seoulpark_num, seoulpark_list)
+        df_seoulpark_fin = df_seoulpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
+                                                col('EVENT_OX'), col('EVENT_NAME'))                                          
+        save_data(DataWarehouse, df_seoulpark_fin, 'THEME_EVENT')
+
+    # 어린이대공원 데이터 DW에 저장
+    @classmethod
+    def __save_childpark_data(cls, df_childpark):
+        childpark_list = df_childpark.collect()
+        df_childpark_fin = cls.__create_df_with_eventdata(childpark_num, childpark_list)
+        df_childpark_fin = df_childpark_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
+                                                col('EVENT_OX'), col('EVENT_NAME'))                                             
+        save_data(DataWarehouse, df_childpark_fin, 'THEME_EVENT')
+
+    # 롯데월드 데이터 DW에 저장
+    @classmethod
+    def __save_lotteworld_data(cls, df_lotteworld):
+        lotteworld_list = df_lotteworld.collect()
+        df_lotteworld_fin = cls.__create_df_with_eventdata(lotteworld_num, lotteworld_list)
+        df_lotteworld_fin = df_lotteworld_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
+                                                col('EVENT_OX'), col('EVENT_NAME'))
+        save_data(DataWarehouse, df_lotteworld_fin, 'THEME_EVENT')
+
+    # 에버랜드 데이터 DW에 저장
+    @classmethod
+    def __save_everland_data(cls, df_everland):
+        everland_list = df_everland.collect()
+        df_everland_fin = cls.__create_df_with_eventdata(everland_num, everland_list)
+        df_everland_fin = df_everland_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
+                                                col('EVENT_OX'), col('EVENT_NAME'))
+        save_data(DataWarehouse, df_everland_fin, 'THEME_EVENT')
+
+    # HDFS에서 데이터 가져와 데이터프레임으로 생성
+    @classmethod
+    def __get_data_from_hdfs(cls):
+        everland_file_name = cls.FILE_DIR + 'everland/' + 'everland_event_2018_2022.csv'
+        seoulpark_file_name = cls.FILE_DIR + 'seoulpark/' + 'event_seoulpark_2017_202206.csv'
+        lotteworld_file_name = cls.FILE_DIR + 'lotteworld/' + 'lotteworld_event_2018_2022.csv'
+        childpark_file_name = cls.FILE_DIR + 'childpark/' + 'event_childpark_2017_202206.csv'
+
+        df_everland = get_spark_session().read.csv(everland_file_name, encoding='CP949', header=True)
+        df_seoulpark = get_spark_session().read.csv(seoulpark_file_name, encoding='CP949', header=True)
+        df_lotteworld = get_spark_session().read.csv(lotteworld_file_name, encoding='CP949', header=True)
+        df_childpark = get_spark_session().read.csv(childpark_file_name, encoding='CP949', header=True)
+        return df_everland,df_seoulpark,df_lotteworld,df_childpark
 
 
+    # db에서 테마파크 번호 가져오기
     @classmethod
     def __get_theme_num(cls):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
         df_themepark.show()
 
-        # db에서 테마파크 번호 가져오기
         everland_num = df_themepark.where(col('THEME_NAME') == '에버랜드').first()[0]
         lotteworld_num = df_themepark.where(col('THEME_NAME') == '롯데월드').first()[0]
         seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
         childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
 
-
+    # 데이터 가공
     @classmethod
     def __create_df_with_eventdata(cls, theme_num, events_data):
         data = []
@@ -90,6 +114,7 @@ class PastThemeParkEventTransformer:
         df_fin = get_spark_session().createDataFrame(data)
         return df_fin
 
+    # 날짜 형식 변환(YYYY-MM-dd 형태)
     @classmethod
     def __create_date(cls, year, month, day):
         if len(month) < 2:

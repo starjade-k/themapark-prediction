@@ -17,27 +17,36 @@ class ThemeParkEventTransformer:
         for themepark in themeparks:
             df_fin = cls.__parse_and_get_df(themepark[0], themepark[1], after_cnt)
             df_fin.show()
+            # DW에 저장
             save_data(DataWarehouse, df_fin, "THEME_EVENT")
 
+    # DW에서 테마파크 번호 가져오기
     @classmethod
     def __get_theme_num(cls):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
 
-        # db에서 테마파크 번호 가져오기
         childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
         seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
         return childpark_num,seoulpark_num
 
+    # 데이터 가져온 후, 데이터 가공해 데이터 프레임 생성
     @classmethod
     def __parse_and_get_df(cls, themepark, themepark_num, after_cnt):
-        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
-        df_event = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
+        df_event = cls.__get_data_from_hdfs(themepark, after_cnt)
         event_list = df_event.collect()
         df_fin = cls.__create_df_with_eventdata(themepark_num, event_list)
         df_fin = df_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
                                 col('EVENT_OX'), col('EVENT_NAME'))          
         return df_fin
 
+    # HDFS에서 데이터 가져와 데이터프레임으로 생성
+    @classmethod
+    def __get_data_from_hdfs(cls, themepark, after_cnt):
+        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+        df_event = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
+        return df_event
+
+    # 데이터 가공
     @classmethod
     def __create_df_with_eventdata(cls, theme_num, events_data):
         data = []
@@ -67,6 +76,7 @@ class ThemeParkEventTransformer:
         df_fin = get_spark_session().createDataFrame(data)
         return df_fin
 
+    # 날짜 형식 변환(YYYY-MM-dd 형태)
     @classmethod
     def __create_date(cls, year, month, day):
         if len(month) < 2:
