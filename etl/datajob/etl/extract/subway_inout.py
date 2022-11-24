@@ -11,11 +11,12 @@ class SubwayInOutExtractor:
 
     @classmethod
     def extract_data(cls):
+        # 크롤링 위한 파라미터 설정 후 데이터 크롤링
         url = cls.BASE_URL + cls.SERVICE_KEY + cls.DETAIL_URL + cal_std_day2(4)
-        print(url)
         response = execute_rest_api('get', url, {}, {})
-        bs_obj = bs4.BeautifulSoup(response.text, "html.parser")
 
+        # bs이용해 데이터 가공 후, 데이터프레임 생성
+        bs_obj = bs4.BeautifulSoup(response.text, "html.parser")
         data = []
         rows = list(bs_obj.findAll("row"))
         for row in rows:
@@ -27,6 +28,7 @@ class SubwayInOutExtractor:
                 tmp_dict = {'날짜': dt, '역명': station_nm, '승차 승객수': in_num, '하차 승객수': out_num}
                 data.append(tmp_dict)
 
+        # 데이터프레임 데이터를 CSV파일로 HDFS에 저장
         df = pd.DataFrame(data)
         print(df)
         file_name = cls.FILE_DIR + 'subway_inout_' + cal_std_day2(4) + '.csv'

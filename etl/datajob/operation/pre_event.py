@@ -21,17 +21,26 @@ class PreEvent:
                                 col('EVENT_OX'), col('EVENT_NAME'))
         df_fin.show()
 
-        # DM에 쓰기
+        # DM에 저장
         overwrite_trunc_data(OperationDB, df_fin, "PRE_EVENT")
 
+
+    # 데이터 가져온 후, 데이터 가공해 데이터 프레임 생성
     @classmethod
     def __parse_and_get_df(cls, themepark, themepark_num, after_cnt):
-        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
-        df_event = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
+        df_event = cls.__get_data_from_hdfs(themepark, after_cnt)
         event_list = df_event.collect()
         df_fin = cls.__create_df_with_eventdata(themepark_num, event_list, after_cnt)
         return df_fin
 
+    # HDFS에서 데이터 가져와 데이터프레임으로 생성
+    @classmethod
+    def __get_data_from_hdfs(cls, themepark, after_cnt):
+        file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
+        df_event = get_spark_session().read.csv(file_name, encoding='CP949', header=True)
+        return df_event
+
+    # 데이터 가공
     @classmethod
     def __create_df_with_eventdata(cls, theme_name, events_data, after_cnt):
         data = []
@@ -61,6 +70,7 @@ class PreEvent:
         df_fin = get_spark_session().createDataFrame(data)
         return df_fin
 
+    # 날짜 형식 변환(YYYY-MM-dd 형태)
     @classmethod
     def __create_date(cls, year, month, day):
         if len(month) < 2:

@@ -14,11 +14,14 @@ class PreThemeParkEvent:
         themeparks = [('childpark', childpark_num), 
                         ('seoulpark', seoulpark_num)]
 
+        # HDFS에서 데이터를 가져와 가공 후 데이터프레임 생성
         df_childpark = cls.__parse_and_get_df(themeparks[0][0], themeparks[0][1], after_cnt)
         df_seoulpark = cls.__parse_and_get_df(themeparks[1][0], themeparks[1][1], after_cnt)
 
-        # 서울대공원, 어린이대공원 union
+        # 서울대공원, 어린이대공원 데이터프레임 union
         df_fin = df_childpark.union(df_seoulpark)
+
+        # 컬럼 선택 및 형변환
         df_fin = df_fin.select(col('THEME_NUM'), to_date(col('STD_DATE'), 'yyyy-MM-dd').alias('STD_DATE'),
                                 col('EVENT_OX'), col('EVENT_NAME'))
         df_fin.show()
@@ -26,15 +29,16 @@ class PreThemeParkEvent:
         # DM에 쓰기
         overwrite_trunc_data(DataMart, df_fin, "PRE_THEMEPARK_EVENT")
 
+    # DW에서 테마파크 번호 가져오기
     @classmethod
     def __get_theme_num(cls):
         df_themepark = find_data(DataWarehouse, "THEMEPARK")
 
-        # db에서 테마파크 번호 가져오기
         childpark_num = df_themepark.where(col('THEME_NAME') == '서울어린이대공원').first()[0]
         seoulpark_num = df_themepark.where(col('THEME_NAME') == '서울대공원').first()[0]
         return childpark_num,seoulpark_num
 
+    # HDFS에서 데이터 가져온다음 데이터프레임 만들기
     @classmethod
     def __parse_and_get_df(cls, themepark, themepark_num, after_cnt):
         file_name = cls.FILE_DIR + themepark + '/event_' + themepark + '_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
@@ -43,6 +47,7 @@ class PreThemeParkEvent:
         df_fin = cls.__create_df_with_eventdata(themepark_num, event_list, after_cnt)
         return df_fin
 
+    # 이벤트정보를 가공해 최종 데이터프레임 생성
     @classmethod
     def __create_df_with_eventdata(cls, theme_num, events_data, after_cnt):
         data = []
@@ -72,6 +77,7 @@ class PreThemeParkEvent:
         df_fin = get_spark_session().createDataFrame(data)
         return df_fin
 
+    # 날짜 변환하는 함수
     @classmethod
     def __create_date(cls, year, month, day):
         if len(month) < 2:

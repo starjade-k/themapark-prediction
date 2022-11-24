@@ -13,11 +13,13 @@ class EventSeoulParkExtractor:
 
     @classmethod
     def extract_data(cls, after_cnt=7):
+        # 기본페이지 파라미터
         base_params = {
             'pageIndex': '1',
             'searchgubun': '',
             'searchWord': ''
         }
+        # 상세페이지 파라미터
         detail_params = {
             'pageIndex': '1',
             'mh_no': '46121',
@@ -31,8 +33,9 @@ class EventSeoulParkExtractor:
         try:
             df = cls.__get_event_data(detail_params, page_nums)
             print(df)
+
+            # 데이터프레임 데이터를 CSV파일로 HDFS에 저장
             file_name = cls.FILE_DIR + 'event_seoulpark_' + cal_std_day2(0) + '_' + cal_std_day_after(after_cnt-1) + '.csv'
-            #file_name = cls.FILE_DIR + 'event_seoulpark_2017_202206.csv'
             with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                 df.to_csv(writer, header=['행사명', '시작날짜', '종료날짜'], index=False)
         except Exception as e:
@@ -42,9 +45,13 @@ class EventSeoulParkExtractor:
     @classmethod
     def __get_event_data(cls, detail_params, page_nums):
         seoulpark = set()
+        # bs이용해 데이터 가져온 후 가공 후, 데이터프레임 생성
         for i in range(len(page_nums)):
+            # 크롤링 위한 파라미터 설정 후 데이터 크롤링
             detail_params['mh_no'] = page_nums[i]
             response = execute_rest_api('get', cls.DETAIL_URL, {}, detail_params)
+
+            # bs이용해 데이터 가공 후, 데이터프레임 생성
             bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
             title = bs_obj.find('div', {'class': 'view-header'}).find('h5').text.replace('\t', '').replace('\r\n', '')
             tmp_date = bs_obj.find('div', {'class': 'view-header'}).find('li').text.replace('\t', '').replace('\r\n', '')
@@ -63,8 +70,11 @@ class EventSeoulParkExtractor:
         mh_nos = []
         try:
             for i in range(1, 2):
+                # 크롤링 위한 파라미터 설정 후 데이터 크롤링
                 base_params['pageIndex'] = str(i)
                 response = execute_rest_api('get', cls.BASE_URL, {}, base_params)
+
+                # bs이용해 데이터 가공 후, 데이터프레임 생성
                 bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
                 mores += bs_obj.findAll('a', {'class': 'more-button'})
             for more in mores:

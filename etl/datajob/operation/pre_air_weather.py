@@ -47,7 +47,6 @@ class PreairweatherOperation:
                 data.append(temp)
                     
                 dw = get_spark_session().createDataFrame(data)
-                #dw.show(3)
         
                 weather_data = dw.select(
                     dw.지역.cast(IntegerType()).alias('THEME_NUM')

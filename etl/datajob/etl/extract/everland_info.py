@@ -12,43 +12,31 @@ class EverlandInfoExtractor:
 
     @classmethod
     def extract_data(cls, after_cnt=7):
-        # ㅡㅡㅡㅡㅡㅡ 에버랜드 운영시간 ㅡㅡㅡㅡㅡㅡ
-        params_time = {
-            'method': 'operTimeRslt',
-            'siteCode': 'CT00101',
-            'baseDate': '20221026'
-        }
+        cls.__get_operation_time(after_cnt)
 
-        for i in range(0, after_cnt):
-            try:
-                params_time['baseDate'] = cal_std_day_after(i)
-                log_dict = cls.__create_log_dict(params_time)
-                response = execute_rest_api('get', cls.URL, {}, params=params_time)
-                bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
-                op_time = bs_obj.find('p', {'class': 'usetime'}).find('strong').text.split(' ~ ')
-                df = pd.DataFrame(dict({'시작시간': [op_time[0]], '종료시간': [op_time[1]]}))
-                print(df)
-                file_name = cls.FILE_DIR + 'time_everland_' + params_time['baseDate'] + '.csv'
-                with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
-                    df.to_csv(writer, header=['시작시간', '종료시간'], index=False)
-            except Exception as e:
-                cls.__dump_log(log_dict, e)
+        cls.__get_holiday_facility(after_cnt)
 
 
-        # ㅡㅡㅡㅡㅡㅡ 에버랜드 운휴시설 ㅡㅡㅡㅡㅡㅡ
+    # 에버랜드 운휴시설 크롤링
+    @classmethod
+    def __get_holiday_facility(cls, after_cnt):
+        # 운휴시설 파라미터
         params_hol = {
             'method': 'holidayRslt',
             'siteCode': 'CT00101',
             'baseDate': '20221026'
         }
+        # bs이용해 데이터 가져온 후 가공 후, 데이터프레임 생성
         for i in range(0, after_cnt):
             try:
+                # 크롤링 위한 파라미터 설정 후 데이터 크롤링
                 params_hol['baseDate'] = cal_std_day_after(i)
                 log_dict = cls.__create_log_dict(params_hol)
                 response = execute_rest_api('post', cls.URL, {}, params=params_hol)
+
+                # bs이용해 데이터 가공 후, 데이터프레임 생성
                 bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
                 land_names = ['매직랜드', '주토피아', '유러피언 어드벤처', '아메리칸 어드벤처 / 글로벌 페어']
-
                 data = []
                 for i, land_name in enumerate(land_names):
                     table = bs_obj.find('table', {'summary': land_name})
@@ -58,9 +46,42 @@ class EverlandInfoExtractor:
                             data.append(attr_info[k].text)
                 df = pd.DataFrame(data)
                 print(df)
+
+                # 데이터프레임 데이터를 CSV파일로 HDFS에 저장
                 file_name = cls.FILE_DIR + 'holiday_area_everland_' + params_hol['baseDate'] + '.csv'
                 with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
                     df.to_csv(writer, header=['운휴시설'], index=False)
+            except Exception as e:
+                cls.__dump_log(log_dict, e)
+
+    # 에버랜드 운영시간 크롤링
+    @classmethod
+    def __get_operation_time(cls, after_cnt):
+        # 파라미터 설정
+        params_time = {
+            'method': 'operTimeRslt',
+            'siteCode': 'CT00101',
+            'baseDate': '20221026'
+        }
+
+        # bs이용해 데이터 가져온 후 가공 후, 데이터프레임 생성
+        for i in range(0, after_cnt):
+            try:
+                # 크롤링 위한 파라미터 설정 후 데이터 크롤링
+                params_time['baseDate'] = cal_std_day_after(i)
+                log_dict = cls.__create_log_dict(params_time)
+                response = execute_rest_api('get', cls.URL, {}, params=params_time)
+
+                # bs이용해 데이터 가공
+                bs_obj = bs4.BeautifulSoup(response.text, 'html.parser')
+                op_time = bs_obj.find('p', {'class': 'usetime'}).find('strong').text.split(' ~ ')
+                df = pd.DataFrame(dict({'시작시간': [op_time[0]], '종료시간': [op_time[1]]}))
+                print(df)
+
+                # 데이터프레임 데이터를 CSV파일로 HDFS에 저장
+                file_name = cls.FILE_DIR + 'time_everland_' + params_time['baseDate'] + '.csv'
+                with get_client().write(file_name, overwrite=True, encoding='cp949') as writer:
+                    df.to_csv(writer, header=['시작시간', '종료시간'], index=False)
             except Exception as e:
                 cls.__dump_log(log_dict, e)
 
